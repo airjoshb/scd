@@ -22,6 +22,7 @@ default: &default
   pool: 5
   username: josh
   password:
+  host: localhost
 
 development:
   <<: *default
