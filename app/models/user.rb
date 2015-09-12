@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :omniauthable,
         :recoverable, :rememberable, :trackable, :validatable
+
   attr_accessor :login
   attr_accessor :stripe_token
   attr_accessor :locations
@@ -26,6 +27,15 @@ class User < ActiveRecord::Base
   acts_as_taggable_on
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+
+  validates_confirmation_of :password
+  def password_required?
+    if !persisted?
+      !(password != "")
+    else
+      !password.nil? || !password_confirmation.nil?
+    end
+  end
 
   def role?(role)
    return !!self.roles.find_by_name(role.to_s)
@@ -47,7 +57,6 @@ class User < ActiveRecord::Base
     self.role ||= role
     self.save
   end
-
 
   #->Prelang (user_login:devise/username_login_support)
   def self.find_first_by_auth_conditions(warden_conditions)
