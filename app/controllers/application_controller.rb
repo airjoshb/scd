@@ -16,11 +16,12 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     stored_location_for(resource) ||
       if resource.admin?
-        upmin_path
+        edit_user_registration_path || root_path
       else
         edit_user_registration_path || root_path
       end
   end
+
 
   def date_of_next(day)
     date  = Date.parse(day)

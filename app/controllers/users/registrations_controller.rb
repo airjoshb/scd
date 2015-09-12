@@ -1,5 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   include ApplicationHelper
+  respond_to :json
 
   def create
     super
@@ -16,6 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
   def build_resource(*args)
     super
+
     if params[:plan]
       resource.add_role(params[:plan])
     end
@@ -23,6 +25,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update_resource(resource, params)
     resource.update_without_password(params)
+  end
+
+  def after_sign_up_path_for(resource)
+    root_path
+  end
+
+  def sign_up(resource_name, resource)
+    false
   end
 
   def sign_up_params
