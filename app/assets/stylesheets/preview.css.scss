@@ -1,6 +1,6 @@
 @import "variables";
 @import "font-awesome";
-body { font-family: $sansFontFamily; margin: 0;}
+body { font-family: $sansFontFamily; margin: 0; font-size: 16px;}
 a { text-decoration: none; }
 .logo { width: 150px; height: 150px; margin: 0 auto 20px; img {width: 100%; }}
 
@@ -48,10 +48,9 @@ a { text-decoration: none; }
   width: 100%;
   left: 0;
   top: 100px;
-  font-size: 1.2vw;
   text-align: center;
   strong { color: $grayDarker; }
-  h1, h2 { font-size: 4vw; font-family: 'Comfortaa'; color: white; margin: 10px;  display: block; }
+  h1, h2 { font-size: 3.5em; font-family: 'Comfortaa'; color: white; margin: 10px;  display: block; }
 }
 
 .slide-coa {
@@ -110,4 +109,5 @@ input { font-size: 1.5em; padding: 10px; margin-bottom: 20px;}
     height: 100vh;
     width: auto;
   }
+  #simplemodal-container {width: 90%;}
 }
