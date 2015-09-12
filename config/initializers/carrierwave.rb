@@ -3,7 +3,7 @@ CarrierWave.configure do |config|
   config.storage    = :aws
   config.aws_bucket = 'stepone-scd'
   config.aws_acl    = :'public-read'
-  config.asset_host = "https://d30gbhxlvcb3ti.cloudfront.net"
+  config.asset_host = "https://d2hpyijb4a66bq.cloudfront.net"
   config.aws_authenticated_url_expiration = 60 * 60 * 24 * 365
 
   config.aws_credentials = {
