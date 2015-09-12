@@ -1,0 +1,41 @@
+- content_for :html do
+  http://schema.org/Article
+- content_for :head do
+  %meta{property: "og:title", content: @article.title}
+  %meta{property: "og:site_name", content: "Santa Cruz Daily"}
+  %meta{property: "og:description", content: Nokogiri::HTML.parse(markdown(@article.body)).css('p').first.text }
+  %meta{property: "og:type", content: "article"}
+  %meta{property: "og:url", content: article_url}
+  %meta{property: "og:image", content: @article.image.hero.url}
+  %meta{property: "article:published_time", content: @article.publish_date.to_time.iso8601}
+  %meta{property: "article:section", content: @article.tags.first}
+  %meta{property: "article:tag", content: @article.tag_list}
+  %meta{property: "fb:admins", content: "750702877"}
+  %meta{name: "twitter:title", content: @article.title}
+  %meta{name: "twitter:description", content: Nokogiri::HTML.parse(markdown(@article.body)).css('p').first.text }
+  %meta{name: "twitter:image", content: @article.image.hero.url}
+  %meta{name: "twitter:card", content: "summary_large_image"}
+  %meta{name: "twitter:url", content: article_url}
+  %meta{name: "twitter:creator", content: "@airjoshb"}
+  %meta{itemprop: "headline", content: @article.title}
+  %meta{itemprop: "description", content: Nokogiri::HTML.parse(markdown(@article.body)).css('p').first.text }
+  %meta{itemprop: "image", content: @article.image.hero.url}
+  %meta{itemprop: "datePublished", content: @article.publish_date.to_time.iso8601}
+- content_for :title do
+  #{@article.title} | Santa Cruz Daily
+- content_for :description do
+  = Nokogiri::HTML.parse(markdown(@article.body)).css('p').first.text
+.flex
+  .main
+    = render @article
+  - if @article.next.present?
+    %h4= "Read Next" unless @article.next.blank?
+    .well
+      = link_to @article.next.title, article_path(@article.next)
+      %small
+        •
+      %p= Nokogiri::HTML.parse(markdown(@article.next.body)).css('p').first.text
+      .readnext
+        = link_to @article.next do
+          continue reading
+          %i.fa.fa-arrow-right

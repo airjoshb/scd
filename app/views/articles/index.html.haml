@@ -1,0 +1,24 @@
+- content_for :head do
+  %meta{property: "og:title", content: "Santa Cruz Daily"}
+  %meta{property: "og:site_name", content: "Santa Cruz Daily"}
+  %meta{property: "og:description", content: "Get in-depth insights into topics and resources designed to make a difference for the early stage startups, entrepreneur and solopreneur."}
+  %meta{property: "og:type", content: "website"}
+  %meta{property: "og:url", content: root_url}
+  %meta{property: "fb:admins", content: "750702877"}
+  %meta{name: "twitter:title", content: "Santa Cruz Daily"}
+  %meta{name: "twitter:description", content: "Get in-depth insights into topics and resources designed to make a difference for the early stage startups, entrepreneur and solopreneur."}
+  %meta{name: "twitter:card", content: "summary"}
+  %meta{name: "twitter:domain", content: "santacruzdaily.com"}
+  %meta{name: "twitter:creator", content: "@airjoshb"}
+  %meta{itemprop: "headline", content: "Santa Cruz Daily"}
+  %meta{itemprop: "description", content: "Get in-depth insights into topics and resources designed to make a difference for the early stage startups, entrepreneur and solopreneur."}
+- content_for :title do
+  Santa Cruz Daily
+- content_for :description do
+  What's happening in Santa Cruz
+.flex
+  .main.summary
+    - for article in @articles
+      = render article, index: true
+      - unless article == @articles.last
+        %hr

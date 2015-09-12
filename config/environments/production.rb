@@ -20,17 +20,21 @@ Rails.application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  config.serve_static_assets = true
+  config.static_cache_control = "public, max-age=31536000"
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
+  config.assets.css_compressor = :sass
+  config.assets.compress = true
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs.
   config.assets.digest = true
+
+  config.action_controller.asset_host = "d30gbhxlvcb3ti.cloudfront.net"
 
   # `config.assets.precompile` has moved to config/initializers/assets.rb
 
@@ -73,6 +77,20 @@ Rails.application.configure do
 
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
+
+  config.action_mailer.smtp_settings = {
+    :address   => "smtp.mandrillapp.com",
+    :port      => 25,
+    :user_name => Rails.application.secrets.MANDRILL_USERNAME,
+    :password  => Rails.application.secrets.MANDRILL_API_KEY
+  }
+
+  # ActionMailer Config
+  config.action_mailer.default_url_options = { :host => 'gotostepone.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  # Send email in development mode?
+  config.action_mailer.perform_deliveries = true
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new

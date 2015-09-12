@@ -1,0 +1,44 @@
+#slideshow
+  =image_tag image_url('santa-cruz-1.jpg')
+  =image_tag image_url('santa-cruz-7.jpg')
+  =image_tag image_url('santa-cruz-3.jpg')
+  =image_tag image_url('santa-cruz-4.jpg')
+  =image_tag image_url('santa-cruz-5.jpg')
+  =image_tag image_url('santa-cruz-6.jpg')
+  =image_tag image_url('santa-cruz-8.jpg')
+  =image_tag image_url('santa-cruz-2.jpg')
+  =image_tag image_url('santa-cruz-9.jpg')
+  .slide-text
+    .logo= image_tag image_url('santa-cruz-daily-octopus.png')
+    %h1
+      Santa Cruz Daily
+      %span.small : what you want to do
+    %a.coa.btn.first
+      I want an invite!
+    .social
+      = link_to "http://twitter.com/santacruzdaily", target: '_blank' do
+        %i.fa.fa-twitter.fa-stack-2x.large.white
+      = link_to "http://instagram.com/thesantacruzdaily", target: '_blank' do
+        %i.fa.fa-instagram.fa-stack-2x.large.white
+      = link_to "http://facebook.com/santacruzdaily", target: '_blank' do
+        %i.fa.fa-facebook.fa-stack-2x.large.white
+    #modal
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = f.error_notification
+        .form-inputs
+          = f.input :email, required: true, autofocus: true, placeholder: "Enter your email", label: false
+        %a.coa{ onclick: "$('#new_user').submit()"} Get your invite
+        %a.simplemodal-close.text thanks, but I don't do cool stuff
+
+
+:javascript
+  /**
+  * author: Thierry Koblentz
+  * Copyright 2011 - css-101.org
+  * http://www.css-101.org/articles/ken-burns_effect/css-transition.php
+  */
+  !function(){function e(){m==a&&(m=0),s[m].className="fx",0===m&&(s[a-2].className=""),1===m&&(s[a-1].className=""),m>1&&(s[m-2].className=""),m++}document.getElementById("slideshow").getElementsByTagName("img")[0].className="fx",window.setInterval(e,12e3);var s=document.getElementById("slideshow").getElementsByTagName("img"),a=s.length,m=1}();
+  $('.btn').click(function (e) {
+    $('#modal').modal();
+    return false;
+  });

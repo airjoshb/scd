@@ -1,2 +1,36 @@
 module ApplicationHelper
+
+  def display_base_errors resource
+    return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
+    messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join
+    html = <<-HTML
+    <div class="alert alert-error alert-block">
+      <button type="button" class="close" data-dismiss="alert">&#215;</button>
+      #{messages}
+    </div>
+    HTML
+    html.html_safe
+  end
+
+  def markdown(text)
+    options = {
+      hard_wrap:       true,
+      link_attributes: { target: "_blank" },
+      space_after_headers: true,
+      fenced_code_blocks: true
+    }
+
+    extensions = {
+      autolink:           true,
+      superscript:        true,
+      highlight:          true,
+      disable_indented_code_blocks: true
+    }
+
+    renderer = Redcarpet::Render::HTML.new(options)
+    markdown = Redcarpet::Markdown.new(renderer, extensions)
+
+    markdown.render(text).html_safe
+  end
+
 end
