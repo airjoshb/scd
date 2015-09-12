@@ -1,0 +1,34 @@
+%h2
+  Edit #{resource_name.to_s.humanize}
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :username, required: true, autofocus: true
+    = f.input :email, required: true, autofocus: true
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      %p
+        Currently waiting confirmation for: #{resource.unconfirmed_email}
+    = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
+    = f.input :password_confirmation, required: false
+    = f.input :tag_list
+  .form-actions
+    = f.button :submit, "Update"
+
+Connect Account
+- ['facebook', 'twitter'].each do |provider|
+  - if current_user.identities.pluck(:provider).include?(provider.to_s)
+    = provider.to_s.titleize
+    Connected
+  - else
+    = link_to "Sign in with #{provider.to_s.titleize}",  user_omniauth_authorize_path(provider)
+-if current_user.identities.present?
+  - for identity in current_user.identities
+    - if identity.provider == "facebook"
+      = link_to identity.provider, identity.url
+    - else
+      = link_to identity.provider, identity.url
+  %br
+%h3 Cancel my account
+%p
+  Unhappy? #{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
+= link_to "Back", :back

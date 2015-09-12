@@ -1,0 +1,57 @@
+%article
+  - if defined?(index) && index
+    - for tag in article.tags
+      - if @tags.include?(tag)
+        .tag.center
+          = tag
+      - unless params[:tag].present? or article.tags.blank? or @tags.present?
+        .tag
+          = link_to article.tags.first, articles_path(:tag => article.tags.first)
+    %h1= link_to article.title, article
+  - else
+    %h1= article.title
+  %p.subtitle= article.subhead
+  %small.info
+    = time_ago_in_words(article.publish_date)
+    ago •
+    - if defined?(index) && index
+      - if article.recommended_users.present?
+        recommended by
+        = article.recommended_users.count
+        - if article.recommended_users.count > 1
+          people •
+        - else
+          person •
+    - if @tags.present?
+      found in:
+      - for tag in article.tags
+        = link_to tag, articles_path(:tag => tag.name), :class => "tag-button"
+  .hero= image_tag article.image.hero
+  - if defined?(index) && index
+    %p= Nokogiri::HTML.parse(markdown(article.body)).css('p').first.text
+  - else
+    %p= markdown(article.body)
+.readnext
+  - if defined?(index) && index
+    = link_to article do
+      continue reading
+      %i.fa.fa-arrow-right
+      %span.pull-right
+        %i.fa.fa-bullhorn
+        %span.recommend-count{'data-id' => '#{@article.id}'}
+          = article.recommended_users.count
+  - else
+    - if current_user.present?
+      -if current_user.recommended?(article)
+        = link_to unrecommend_article_path(article), class: 'vote recommended', method: :put, remote: true, data: { toggle_href: recommend_article_path(article), id: article.id, toggle_class: 'recommend' } do
+          %i.fa.fa-bullhorn
+      - else
+        = link_to recommend_article_path(article), class: 'vote recommend', method: :put, remote: true, data: { toggle_href: unrecommend_article_path(article), id: article.id, toggle_class: 'recommended'  } do
+          %i.fa.fa-bullhorn
+    - else
+      %i.fa.fa-bullhorn
+    %span.recommend-count
+      = article.recommended_users.count
+    %div.recommend-users
+      - for user in article.recommended_users[0,10]
+        = image_tag user.identities.first.avatar.thumb, :class => "circle"

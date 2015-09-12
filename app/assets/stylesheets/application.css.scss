@@ -1,0 +1,89 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "variables";
+.logo { width: 70px; margin: 0 auto 10px; img {width: 100%; }}
+
+#nav {
+  width: 220px;
+  top: 0;
+  height: 100%;
+  overflow-y: auto;
+  padding: 12px 0;
+  border-right-color: $veryLight;
+  border-right-width: 1px;
+  position: fixed;
+  z-index: 21;
+  border-right-style: solid;
+  overflow-x: hidden;
+  background: $white;
+  left: 0;
+  a { border: none; }
+  .nav-group {
+    border-top-color: $veryLight;
+    border-top-style: solid;
+    border-top-width: 1px;
+    vertical-align: middle;
+    .nav-title {
+      font-weight: 400;
+      font-size: 14px;
+      text-transform: uppercase;
+      padding: 16px 16px 12px;
+      color: darken($veryLight, 5%);
+    }
+    .nav-element {
+      width: 100%;
+      height: 100%;
+      padding: 8px 16px;
+      text-align: left;
+      * {color: $grayLighter;}
+      line-height: 32px;
+      cursor: hand;
+      &:hover { background: $veryLight; transition: all .7s ease; }
+      .nav-icon {  float: left; }
+      .nav-text {
+        font-weight: 500;
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .nav-group:first-child { border-top: 0; }
+
+}
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: -2px;
+  margin-right: 10px;
+  opacity: .75;
+}
+.logotype {font-size: 2.4rem;}
+
+#container {  margin-left: 220px; }
+.flex {
+  height: auto;
+  -webkit-flex-display: flex;
+  display: flex;
+  -webkit-flex-direction: column;
+   flex-direction: column;
+
+}
+.center { text-align: center;}
+.pull-right {float: right; }
+.circle { border-radius: 50px; vertical-align: middle; }
+.well { background: $veryLight; width: 75%; padding: 2rem; * {font-size: .9rem;}  p { width: 100%; }}

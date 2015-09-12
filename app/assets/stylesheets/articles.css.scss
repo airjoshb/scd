@@ -1,0 +1,53 @@
+@import "variables";
+
+.logotype { font-family: $logotypeFontFamily; margin: 20px 0; img {width: 100%; } }
+article img { padding: 1rem 0; }
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  width: 75%;
+  border-top: 1px solid $grayLighter;
+  margin: 1em 0;
+  padding: 0;
+}
+.readnext {
+  font-size: 1.3em;
+  line-height: 1.8em;
+  color: $gray;
+
+  a {
+    border: none; color: $gray;
+    &:hover { color: $orange !important; }
+  }
+}
+.tag, .tag-button {
+  font-family: $sansFontFamily;
+  line-height: normal;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 15px;
+  border: thin $grayLighter solid;
+  font-weight: $baseFontWeight;
+  display: inline-block;
+  padding: 5px 8px;
+  background: lighten($veryLight, 5%);
+}
+.tag-button {
+    background: $grayLight;
+    color: #fff !important;
+    padding: 2px 4px;
+    font-size: 10px;
+    border: none;
+    margin: 0 3px;
+    &:hover { background: $orange}
+  }
+.recommended { color: $orange !important; }
+.recommend { color: $gray;  }
+.recommend-count { font-size: .8em; }
+.recommend-users {
+  width: 20px;
+  height: 20px;
+  opacity: .75;
+  display: inline-block;
+}
