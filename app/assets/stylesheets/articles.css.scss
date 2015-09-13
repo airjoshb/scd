@@ -2,6 +2,7 @@
 
 .logotype { font-family: $logotypeFontFamily; margin: 20px 0; img {width: 100%; } }
 article img { padding: 1rem 0; }
+.follow a { &:hover { color: $orange; .tag{border-color: $orange;} }}
 hr {
   display: block;
   height: 1px;

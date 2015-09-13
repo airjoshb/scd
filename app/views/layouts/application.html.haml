@@ -21,6 +21,7 @@
     %meta{:content => content_for?(:description) ? yield(:description) : "What's Happening in Santa Cruz", :name => "description"}
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
+    = analytics_init if Rails.env.production?
     = csrf_meta_tags
     = yield(:head)
   %body
@@ -45,7 +46,7 @@
             Interests
           - for tag in @tags
             .nav-element
-              .nav-text= link_to tag, articles_path(:tag => tag)
+              .nav-text= link_to tag, articles_path(:tag => tag.name)
       .nav-group
         .nav-title
           Santa Cruz Daily ©2015

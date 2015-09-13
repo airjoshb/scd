@@ -18,6 +18,16 @@
   What's happening in Santa Cruz
 .flex
   .main.summary
+    - if @tag.present?
+      - if !@tags.include?(@tag)
+        .follow
+          = link_to add_tag_user_path(current_user, @tag.name), remote: true, method: :put do
+            .tag.center
+              = @tag
+            %i.fa.fa-plus
+      - else
+        .tag.center
+          = @tag
     - for article in @articles
       = render article, index: true
       - unless article == @articles.last

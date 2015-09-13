@@ -6,7 +6,6 @@
 // Global values
 // --------------------------------------------------
 
-
 // Grays
 // -------------------------
 $black:                 #000;
@@ -158,3 +157,7 @@ $popoverTitleBackground:  darken($popoverBackground, 3%);
 // Special enhancement for popovers
 $popoverArrowOuterWidth:  $popoverArrowWidth + 1;
 $popoverArrowOuterColor:  rgba(0,0,0,.25);
+
+
+.orange { color: $orange; }
+

@@ -1,6 +1,5 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :recommend, :unrecommend]
-  add_breadcrumb 'lineup', 'articles_path'
 
   # GET /articles
   # GET /articles.json
@@ -8,7 +7,6 @@ class ArticlesController < ApplicationController
     if params[:tag].present?
        @tag = ActsAsTaggableOn::Tag.find_by_name(params[:tag])
        @articles = Article.active.tagged_with(@tag).popular
-       set_breadcrumb_tag_for @tag
     elsif current_user.present?
        @user = current_user
        @tags = @user.tags
@@ -22,7 +20,6 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @related_articles = @article.find_related_tags.active.limit(5)
-    set_breadcrumb_for @article
   end
 
   # GET /articles/new
@@ -115,11 +112,4 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:title, :subhead, :body, :slug, :origin, :image, :publish_date, :user_id, :tag_list)
     end
 
-    def set_breadcrumb_tag_for tag
-      add_breadcrumb tag, "articles_path(:tag => #{tag.id})"
-    end
-
-    def set_breadcrumb_for cat
-      add_breadcrumb cat.title, "article_path(#{cat.id})"
-    end
 end
