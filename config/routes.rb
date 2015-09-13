@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   get 'visitors/index'
 
+  resources :users do
+    put 'add_tag/:tag', to: 'users#add_tag', as: :add_tag, on: :member
+  end
+
   resources :articles, :path => "/lineup" do
     resources :events
     put :recommend, on: :member

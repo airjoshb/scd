@@ -24,6 +24,10 @@ class UserPolicy
     @current_user.admin?
   end
 
+  def add_tag?
+    @current_user.admin? or @current_user == @user
+  end
+
   class Scope < Struct.new(:user, :scope)
     def resolve
       scope

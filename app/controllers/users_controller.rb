@@ -48,6 +48,14 @@ class UsersController < ApplicationController
     redirect_to users_path, :notice => "User deleted."
   end
 
+
+  def add_tag
+    current_user.tag_list.add(:tag)
+    render :nothing => true
+
+  end
+
+
   private
 
   def secure_params

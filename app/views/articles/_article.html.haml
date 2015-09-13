@@ -1,12 +1,13 @@
 %article
   - if defined?(index) && index
-    - for tag in article.tags
-      - if @tags.include?(tag)
-        .tag.center
-          = tag
-      - unless params[:tag].present? or article.tags.blank? or @tags.present?
-        .tag
-          = link_to article.tags.first, articles_path(:tag => article.tags.first)
+    - unless params[:tag].present?
+      - for tag in article.tags
+        - if @tags.include?(tag)
+          .tag.center
+            = tag
+        - unless params[:tag].present? or article.tags.blank? or @tags.present?
+          .tag
+            = link_to article.tags.first, articles_path(:tag => article.tags.first)
     %h1= link_to article.title, article
   - else
     %h1= article.title
