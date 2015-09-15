@@ -48,7 +48,7 @@ $linkColorHover:        darken($linkColor, 15%);
 // -------------------------
 
 $sansFontFamily:        'Open Sans','Source Sans Pro', sans-serif;
-$serifFontFamily:       Arapey, Georgia, "Times New Roman", Times, serif;
+$serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 $monoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace;
 $logotypeFontFamily:    'Comfortaa', 'Open Sans', sans-serif;
 
@@ -160,4 +160,16 @@ $popoverArrowOuterColor:  rgba(0,0,0,.25);
 
 
 .orange { color: $orange; }
+@mixin vertical-align {
+  top: -50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 
+@mixin horiz-align {
+  left: -50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
