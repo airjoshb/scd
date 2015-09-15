@@ -52,8 +52,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  #->Prelang
-  GA.tracker = "(UA-41484403-2"
+
 
 end
 

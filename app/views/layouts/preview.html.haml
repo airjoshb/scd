@@ -14,13 +14,12 @@
     %link{href: "ico/apple-icon-144x144.png", rel: "apple-touch-icon", sizes: "144x144"}
     %link{href: "ico/apple-icon-152x152.png", rel: "apple-touch-icon", sizes: "152x152"}
     %link{href: "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,700,600,300,800", rel: "stylesheet", type: "text/css"}
-    %link{href: "http://fonts.googleapis.com/css?family=Arapey:400italic,400", rel: "stylesheet", type: "text/css"}
     %link{href: "http://fonts.googleapis.com/css?family=Comfortaa", rel: "stylesheet", type: "text/css"}
     %meta{content: "yes", name: "apple-mobile-web-app-capable"}
     %meta{content: "black", name: "apple-mobile-web-app-status-bar-style"}
     %meta{:content => content_for?(:description) ? yield(:description) : "What's Happening in Santa Cruz", :name => "description"}
     = stylesheet_link_tag "preview", :media => "all"
-    = javascript_include_tag "application"
+    = javascript_include_tag "application", :async => "true"
     = csrf_meta_tags
     = yield(:head)
     - if Rails.env.production?
