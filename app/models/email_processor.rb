@@ -12,6 +12,7 @@ class EmailProcessor
     user.articles.create!(
       title: @email.subject,
       body: @email.body
+      image: @email.attachment
     )
   end
 end
