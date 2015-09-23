@@ -11,8 +11,8 @@ class EmailProcessor
     user = User.find_or_initialize_by(email: @email.from[:email])
     user.articles.create!(
       title: @email.subject,
-      body: @email.body
-      image: @email.attachment
+      body: @email.body,
+      image: @email.attachments.first
     )
   end
 end
