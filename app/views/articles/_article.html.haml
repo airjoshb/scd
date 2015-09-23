@@ -13,8 +13,9 @@
     %h1= article.title
   %p.subtitle= article.subhead
   %small.info
-    = time_ago_in_words(article.publish_date)
-    ago •
+    - if article.publish_date.present?
+      = time_ago_in_words(article.publish_date)
+      ago •
     - if defined?(index) && index
       - if article.recommended_users.present?
         recommended by
