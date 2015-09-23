@@ -42,6 +42,7 @@ gem 'stripe_event', '~> 1.1.0'
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 gem 'redcarpet'
 gem 'mail_form'
+gem 'rails_12factor', group: :production
 
 gem 'geocoder'
 gem 'geoip'
