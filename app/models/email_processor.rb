@@ -8,7 +8,7 @@ class EmailProcessor
     # processing reports, etc
 
     # here's an example of model creation
-    user = User.find_or_create_by_email(@email.from[:email])
+    user = User.find_or_initialize_by(email: @email.from[:email])
     user.articles.create!(
       title: @email.subject,
       body: @email.body
