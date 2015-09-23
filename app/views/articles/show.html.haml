@@ -31,9 +31,15 @@
   - if @article.next.present?
     %h4= "Read Next" unless @article.next.blank?
     .well
-      = link_to @article.next.title, article_path(@article.next)
+      %span.title= link_to @article.next.title, article_path(@article.next)
       %small
-        •
+        - if @article.next.recommended_users.present?
+          • recommended by
+          = @article.next.recommended_users.count
+          - if @article.next.recommended_users.count > 1
+            people
+          - else
+            person
       %p= Nokogiri::HTML.parse(markdown(@article.next.body)).css('p').first.text
       .readnext
         = link_to @article.next do

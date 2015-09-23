@@ -6,7 +6,8 @@ class Article < ActiveRecord::Base
   belongs_to :user
   has_many :events
   has_many :locations
-  has_many :recommendations
+  has_many :statuses, dependent: :destroy
+  has_many :recommendations, dependent: :destroy
   has_many :recommended_users, :through => :recommendations, :source => :user
 
 
@@ -18,6 +19,8 @@ class Article < ActiveRecord::Base
 
   attr_accessor :events
   attr_accessor :locations
+
+  after_create :status_default
 
   scope :active, -> { where('publish_date <= ?', Time.current).order('publish_date DESC') }
   scope :next, lambda { |id| where("id > ?", id).order("id ASC")}
@@ -31,6 +34,20 @@ class Article < ActiveRecord::Base
 
   def previous
     Article.active.tagged_with(["tags", "food", "adventure", "liveevent", "shopping", "tinyvacation", "location"], :on => :tags, :any => true).where("articles.id < ?", self.id).order("id ASC").last
+  end
+
+  def find_status(status)
+   return !!self.statuses.find_by_status(status)
+  end
+
+  def self.status(status)
+    where(:statuses => {:status => status}).joins(:statuses)
+  end
+
+
+  def status_default
+    self.statuses.build
+    self.save
   end
 
   def word_count

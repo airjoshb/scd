@@ -10,15 +10,16 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require font-awesome/font-awesome
  *= require articles
- *= require font-awesome
  *= require tufte
 
  *= require_self
  */
 @import "variables";
-.logo { width: 70px; margin: 0 auto 10px; img {width: 100%; }}
 
+.logo { width: 70px; margin: 0 auto 10px; img {width: 100%; }}
+a { border: none; }
 #nav {
   width: 220px;
   top: 0;
@@ -75,9 +76,25 @@
   margin-right: 10px;
   opacity: .75;
 }
-.logotype {font-size: 2.4rem;}
+.logotype {
+  font-size: 2.4rem;
+  background: rgba($white, .95);
+  position: fixed;
+  top: 0;
+  margin: 0;
+  padding: 10px 0;
+  z-index: 500;
+  width: 100%;
+  .small { display: inline; }
+  a {
+    font-size: .4em;
+    border:none;
+    vertical-align: middle;
+    &:hover { color: $orange; }
+  }
+}
 
-#container {  margin-left: 220px; }
+#container {  margin-left: 220px; border-top: 60px transparent solid; }
 .flex {
   height: auto;
   -webkit-flex-display: flex;
@@ -86,7 +103,37 @@
    flex-direction: column;
 
 }
+#modal {display:none; text-align: center; * { font-family: $sansFontFamily;} }
+.input * { font-size: 1.5em; padding: 10px; margin-bottom: 20px;}
 .center { text-align: center;}
 .pull-right {float: right; }
-.circle { border-radius: 50px; vertical-align: middle; }
+.circle { border-radius: 50px; }
 .well { background: $veryLight; width: 75%; padding: 2rem; * {font-size: .9rem;}  p { width: 100%; }}
+.hidden { display: none; }
+.small {font-size: .8em; }
+.text.simplemodal-close { font-size: 1em; color:  $white; cursor: pointer; display: block; line-height: 2em; &:hover { color: darken($white, 20%);} }
+#simplemodal-overlay {background-color:#000;}
+.coa {  font-size: 2em; line-height: 3em; color: $white; cursor: pointer; border: $white thin solid; padding: 10px 15px;  &:hover { color: darken($white, 10%);} }
+.coa.first { background: $orange; border: none; }
+/* Container */
+#simplemodal-container {height:300px; width:600px; color:#bbb; background-color: rgba($orange, .9); padding:12px;}
+#simplemodal-container .simplemodal-data {padding:8px;}
+#simplemodal-container code {background:#141414; border-left:3px solid #65B43D; color:#bbb; display:block; font-size:12px; margin-bottom:12px; padding:4px 6px 6px;}
+#simplemodal-container a.modalCloseImg {
+  &:before {
+    content: "\f057";
+    position:absolute;
+    font-family: FontAwesome;
+    top:0;
+    font-size: 2em;
+    color: $white;
+  }
+  width:25px;
+  height:29px;
+  display:inline;
+  z-index:3200;
+  position:absolute;
+  top:-15px;
+  right:-16px;
+  cursor:pointer;
+}

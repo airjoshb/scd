@@ -1,0 +1,8 @@
+%ul
+  - for article in @deleted
+    %li
+      = link_to article_path(article) do
+        %i.fa.fa-eye
+      = article.title
+      = article.statuses.last.status
+= link_to "hide deleted articles", "", remote: true, class: "btn4"

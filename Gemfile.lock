@@ -207,9 +207,16 @@ GEM
     formatador (0.2.5)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
+    geocoder (1.2.11)
+    geoip (1.6.1)
     gibbon (2.0.0)
       faraday (>= 0.9.1)
       multi_json (>= 1.11.0)
+    griddler (1.2.1)
+      htmlentities
+      rails (>= 3.2.0)
+    griddler-sendgrid (0.0.1)
+      griddler
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -229,6 +236,7 @@ GEM
       haml (~> 4.0.0)
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
+    htmlentities (4.3.4)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
@@ -242,12 +250,12 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     jwt (1.5.1)
-    kaminari (0.16.3)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mail_form (1.5.1)
+      actionmailer (>= 3.2, < 5)
+      activemodel (>= 3.2, < 5)
     mime-types (1.25.1)
     mini_magick (4.2.10)
     mini_portile (0.6.2)
@@ -284,8 +292,6 @@ GEM
       omniauth-oauth (~> 1.1)
     orm_adapter (0.5.0)
     pg (0.18.2)
-    polyamorous (1.2.0)
-      activerecord (>= 3.0)
     polyglot (0.3.5)
     pundit (1.0.1)
       activesupport (>= 3.0.0)
@@ -308,12 +314,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    ransack (1.7.0)
-      actionpack (>= 3.0)
-      activerecord (>= 3.0)
-      activesupport (>= 3.0)
-      i18n
-      polyamorous (~> 1.2)
     rdoc (4.2.0)
       json (~> 1.4)
     redcarpet (3.3.2)
@@ -374,13 +374,6 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    upmin-admin (0.1.01)
-      haml (>= 3.0.0)
-      jquery-rails
-      kaminari
-      rails
-      ransack
-      sass-rails
     validates_formatting_of (0.9.0)
       activemodel
     warden (1.2.3)
@@ -404,12 +397,17 @@ DEPENDENCIES
   devise_invitable (~> 1.5.2)
   fog (~> 1.20)
   friendly_id (~> 5.1.0)
+  geocoder
+  geoip
   gibbon
+  griddler
+  griddler-sendgrid
   haml-rails
   heroku_rails_deflate
   heroku_secrets!
   jbuilder (~> 2.0)
   jquery-rails
+  mail_form
   mini_magick
   omniauth
   omniauth-facebook
@@ -427,5 +425,4 @@ DEPENDENCIES
   thin
   tzinfo-data
   uglifier (>= 1.3.0)
-  upmin-admin
   validates_formatting_of
