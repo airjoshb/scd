@@ -10,7 +10,7 @@
         = article.statuses.last.status
         - if article.statuses.last.published?
           = link_to "delete", change_status_article_path(article, status: "deleted"), remote: true, class: "btn2"
-        - elsif article.statuses.last.deleted?
+        - elsif article.statuses.last.pending?
           = link_to "approve", change_status_article_path(article, status: "approved"), remote: true, class: "btn2"
           = link_to "decline", change_status_article_path(article, status: "declined"), remote: true, class: "btn2"
 
