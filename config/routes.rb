@@ -3,12 +3,18 @@ Rails.application.routes.draw do
 
   resources :users do
     put 'add_tag/:tag', to: 'users#add_tag', as: :add_tag, on: :member
+    put 'remove_tag/:tag', to: 'users#remove_tag', as: :remove_tag, on: :member
   end
+
+  get 'admin', to: 'admin#dashboard'
+
+  resources :share_emails
 
   resources :articles, :path => "/lineup" do
     resources :events
     put :recommend, on: :member
     put :unrecommend, on: :member
+    get 'change_status/:status', to: 'articles#change_status', as: :change_status, on: :member
   end
 
   get 'tagged' => 'articles#tagged', :as => 'tagged'
@@ -38,6 +44,9 @@ Rails.application.routes.draw do
       root to: 'articles#index', as: :authenticated
     end
   end
+
+  # mount using default path: /email_processor
+  mount_griddler
 
 
 end

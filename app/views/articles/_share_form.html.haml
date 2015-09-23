@@ -1,0 +1,65 @@
+.popover-title
+  Share via email
+.popover-body
+  - if user_signed_in?
+    = simple_form_for @share, :html => {:class => 'form-horizontal' }, remote: true do |f|
+      = f.input :recipient, placeholder: 'name@example.com',label: false
+      = f.input :message, :as => :text, placeholder: 'Add a personal message', label: false
+      = f.hidden_field :name, value: current_user.name
+      = f.hidden_field :title
+      = f.hidden_field :email, value: current_user.email
+      = f.hidden_field :file
+      = f.hidden_field :url
+
+      .hidden
+        = f.input :nickname, :hint => 'Leave this field blank!'
+      .popover-preview
+        .pull-left= image_tag @article.image.thumb
+        = @article.title
+        .small
+          %i= @article.subhead
+
+      %div
+        %a.coa{ onclick: "$('#new_share_email').submit()"} Share it!
+        %a.simplemodal-close.text I don't like sharing
+
+  - else
+    = simple_form_for @share, :html => {:class => 'form-horizontal' }, remote: true do |f|
+      = f.input :email, placeholder: 'Your email address',label: false
+      = f.input :recipient, placeholder: 'to: name@example.com',label: false
+      = f.input :message, :as => :text, placeholder: 'Add a personal message', label: false
+      = f.hidden_field :title
+      = f.hidden_field :file
+      = f.hidden_field :url
+
+      .hidden
+        = f.input :nickname, :hint => 'Leave this field blank!'
+
+      %div
+        %a.coa{ onclick: "$('#new_share_email').submit()"} Share it!
+        %a.simplemodal-close.text I don't like sharing
+
+
+:javascript
+  $(function(){
+    $("#new_share_email").submit(function(){
+        var dataSet = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: dataSet,
+            complete: function(){
+                alert("Sent!");
+            },
+            error: function(){
+                alert("Something went wrong!");
+            }
+        });
+        return false;
+    });
+  })
+
+  $('.btn').click(function (e) {
+    $('.email-popover').modal();
+    return false;
+  });

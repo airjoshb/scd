@@ -22,3 +22,18 @@ jQuery ->
 
 
     return
+
+  $(document).on 'ajax:success', '.add a', (status,data,xhr)->
+    $(".add a").each ->
+      $a = $(this)
+      href = $a.attr 'href'
+      c = $a.attr 'class'
+      allclass = c.split('')[0]
+      $a.attr 'href', $a.data('toggle-href')
+      $a.removeClass(c).addClass($a.data('toggle-class'))
+      $a.data 'toggle-href', href
+      $a.data 'toggle-class', c
+      return
+
+
+  return

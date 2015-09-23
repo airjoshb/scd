@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911224804) do
+ActiveRecord::Schema.define(version: 20150921213601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,15 @@ ActiveRecord::Schema.define(version: 20150911224804) do
 
   add_index "recommendations", ["article_id"], name: "index_recommendations_on_article_id", using: :btree
   add_index "recommendations", ["user_id"], name: "index_recommendations_on_user_id", using: :btree
+
+  create_table "statuses", force: true do |t|
+    t.integer  "article_id"
+    t.integer  "status",     default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "statuses", ["article_id"], name: "index_statuses_on_article_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

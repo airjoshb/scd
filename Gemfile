@@ -41,8 +41,12 @@ gem 'stripe'
 gem 'stripe_event', '~> 1.1.0'
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 gem 'redcarpet'
+gem 'mail_form'
 
-gem 'upmin-admin'
+gem 'geocoder'
+gem 'geoip'
+gem 'griddler'
+gem 'griddler-sendgrid'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

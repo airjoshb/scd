@@ -1,0 +1,8 @@
+$(document).on('ajax:success', '.btn3', function(status, data, xhr) {
+    $("#deleted_articles").show();
+    $("#deleted_articles").html("<%= escape_javascript(render partial: 'deleted', locals: { deleted: @deleted } ) %>");
+  });
+
+$(document).on('ajax:success', '.btn4', function(status, data, xhr) {
+    $("#deleted_articles").hide();
+  });

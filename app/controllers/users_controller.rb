@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     authorize @user
   end
 
+
   def update
     authorize! :update, @user
     respond_to do |format|
@@ -45,12 +46,22 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     authorize user
     user.destroy
-    redirect_to users_path, :notice => "User deleted."
+    render :nothing => true
   end
 
 
   def add_tag
-    current_user.tag_list.add(:tag)
+    authorize current_user
+    current_user.tag_list.add(params[:tag])
+    current_user.save
+    render :nothing => true
+
+  end
+
+  def remove_tag
+    authorize current_user
+    current_user.tag_list.remove(params[:tag])
+    current_user.save
     render :nothing => true
 
   end

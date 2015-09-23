@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   attr_accessor :locations
   accepts_nested_attributes_for :articles
 
+  after_create :default_role
+
   # before_save :update_stripe
   # before_destroy :cancel_subscription
 
@@ -159,4 +161,10 @@ class User < ActiveRecord::Base
 
 
   devise authentication_keys: [:login]
+
+  private
+
+  def default_role
+    self.user!
+  end
 end

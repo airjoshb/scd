@@ -28,6 +28,10 @@ class UserPolicy
     @current_user.admin? or @current_user == @user
   end
 
+  def remove_tag?
+    @current_user.admin? or @current_user == @user
+  end
+
   class Scope < Struct.new(:user, :scope)
     def resolve
       scope

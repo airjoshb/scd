@@ -2,7 +2,11 @@
 
 .logotype { font-family: $logotypeFontFamily; margin: 20px 0; img {width: 100%; } }
 article img { padding: 1rem 0; }
-.follow a { &:hover { color: $orange; .tag{border-color: $orange;} }}
+.add a { &:hover { color: $orange; .tag{border-color: $orange;} }}
+.add a:first-child { border: none; }
+.followed:hover {  &::after { content: "\f068"; font-family: 'FontAwesome'; border-bottom: none; }}
+.follow {  &::after { content: "\f067"; font-family: 'FontAwesome'; border-bottom: none; }}
+
 hr {
   display: block;
   height: 1px;
@@ -16,12 +20,15 @@ hr {
   font-size: 1.3em;
   line-height: 1.8em;
   color: $gray;
-
+  > span { margin: 0 10px; }
   a {
     border: none; color: $gray;
     &:hover { color: $orange !important; }
   }
 }
+.well {
+  .title a { font-size: 1.6em; border-bottom: 1px solid $grayDarker ;    &:hover { color: $orange !important; border-color: $orange; }
+} }
 .tag, .tag-button {
   font-family: $sansFontFamily;
   line-height: normal;
@@ -52,3 +59,19 @@ hr {
   opacity: .75;
   display: inline-block;
 }
+.share-popover {
+  font-size: .8em;
+  display: none;
+  background: $orange;
+  * { padding: 10px; color: $white; }
+  a {
+    color: white;
+    cursor: pointer;
+    &:hover { color: darken($orange, 10%) !important;  }
+  }
+}
+.email-popover { display: none; text-align: center; }
+.popover-title { font-size: 26px; color: $white; line-height: 40px;}
+.popover-body  { color: white; }
+.popover-preview { border-top: $white solid thin; border-bottom: $white solid thin; border-width: 85%; padding: 20px; font-size: 26px; overflow: hidden; text-align: left; vertical-align: middle; img { margin-right: 10px;}}
+#simplemodal-container {height:500px !important; }

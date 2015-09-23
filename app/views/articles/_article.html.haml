@@ -53,6 +53,28 @@
       %i.fa.fa-bullhorn
     %span.recommend-count
       = article.recommended_users.count
-    %div.recommend-users
-      - for user in article.recommended_users[0,10]
-        = image_tag user.identities.first.avatar.thumb, :class => "circle"
+    - unless article.recommended_users.blank?
+      .recommend-users
+        - for user in article.recommended_users[0,10]
+          = image_tag user.identities.first.avatar.thumb, :class => "circle"
+    %span.share
+      %a.btn-2
+        %i.fa.fa-share
+      .share-popover
+        = link_to "", onclick: "window.open('http://www.facebook.com/sharer/sharer.php?href=#{article_url(@article)}', 'newwindow', 'width=600, height=300'); return false;" do
+          %i.fa.fa-facebook-official
+          Share on Facebook
+        = link_to "", onclick: "window.open('http://twitter.com/share?text=#{@article.title} via @santacruzdaily&url=#{article_url(@article)}', 'newwindow', 'width=600, height=300'); return false;" do
+          %i.fa.fa-twitter-square
+          Share on Twitter
+        %a.btn
+          %i.fa.fa-envelope
+          Share via Email
+      .email-popover
+        = render 'share_form'
+
+:javascript
+  $('.btn-2').click(function (e) {
+    $('.share-popover').toggle();
+    return false;
+  });

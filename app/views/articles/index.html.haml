@@ -20,14 +20,19 @@
   .main.summary
     - if @tag.present?
       - if !@tags.include?(@tag)
-        .follow
-          = link_to add_tag_user_path(current_user, @tag.name), remote: true, method: :put do
+        .add
+          = link_to add_tag_user_path(current_user, @tag.name), class: 'follow', remote: true, method: :put, data: {toggle_href: "", toggle_class: 'followed'} do
             .tag.center
               = @tag
-            %i.fa.fa-plus
       - else
-        .tag.center
-          = @tag
+        .add.added
+          = link_to remove_tag_user_path(current_user, @tag.name), class: 'followed', remote: true, method: :put, data: {toggle_href: add_tag_user_path(current_user, @tag.name), toggle_class: 'follow'} do
+            .tag.center
+              = @tag
+    - if @articles.blank?
+      .tag.center
+        = params[:tag]
+      %p We don't have any articles on this topic yet. Check back, or submit one!
     - for article in @articles
       = render article, index: true
       - unless article == @articles.last
