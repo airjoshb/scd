@@ -1,6 +1,5 @@
 class Article < ActiveRecord::Base
   validates_presence_of :title, :body
-  validates_uniqueness_of :title
   validates_numericality_of :user_id
 
   belongs_to :user
@@ -49,6 +48,7 @@ class Article < ActiveRecord::Base
     self.statuses.build
     self.save
   end
+
 
   def word_count
     body.split.size
