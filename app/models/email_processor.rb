@@ -13,7 +13,9 @@ class EmailProcessor
       body: @email.body,
       image: @email.attachments.first
     )
-    a.subhead = @email.body.match(/subhead:(.*)/)[1]
+    if @email.body.match('subhead:').present?
+      a.subhead = @email.raw_body.match(/subhead:(.*)/)[1]
+    end
     a.save
   end
 
