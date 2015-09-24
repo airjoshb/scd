@@ -13,7 +13,7 @@ class EmailProcessor
       body: @email.body,
       image: @email.attachments.first
     )
-    if @email.body.match('subhead:').present?
+    if @email.raw_text.match('subhead:').present?
       a.subhead = @email.raw_text.match(/subhead:(.*)/)[1]
     end
     a.save
