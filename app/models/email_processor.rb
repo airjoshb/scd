@@ -13,12 +13,9 @@ class EmailProcessor
       body: @email.body,
       image: @email.attachments.first
     )
-    a.subhead = subhead(@email.body)
+    a.subhead = @email.body.match(/subhead:(.*)/)[1]
     a.save
   end
 
-  def subhead(input)
-    input.match(/subhead:(.*)/)[1]
-  end
 
 end
