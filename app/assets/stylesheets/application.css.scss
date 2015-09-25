@@ -11,9 +11,9 @@
  * file per style scope.
  *
  *= require font-awesome/font-awesome
- *= require articles
  *= require tufte
 
+ *= require articles
  *= require_self
  */
 @import "variables";

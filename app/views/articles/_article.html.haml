@@ -24,15 +24,32 @@
           people •
         - else
           person •
-    - if @tags.present?
-      found in:
-      - for tag in article.tags
-        = link_to tag, articles_path(:tag => tag.name), :class => "tag-button"
+    found in:
+    - for tag in article.tags
+      = link_to tag, articles_path(:tag => tag.name), :class => "tag-button"
   .hero= image_tag article.image.hero
   - if defined?(index) && index
     %p= Nokogiri::HTML.parse(markdown(article.body)).css('p').first.text
   - else
+    - if article.events.present? or article.locations.present?
+      %label.margin-toggle{:for => "mn-demo"} ⊕
+      %input#mn-demo.margin-toggle{:type => "checkbox"}/
+      %span.marginnote
+        %h3 Info
+        - if article.events.present?
+          - if article.events.count > 1
+            %h4 Dates
+          - else
+            %h4 Date
+          - for event in article.events
+            %p= event.start_date.strftime("%b %d, %Y")
+            - if event.end_date.present?
+              to
+              %p= event.end_date.strftime("%b %d, %Y")
+        - if article.locations.present?
+          = render partial: 'location', locals: { article: article }
     %p= markdown(article.body)
+
 .readnext
   - if defined?(index) && index
     = link_to article do

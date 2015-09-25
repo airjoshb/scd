@@ -1,0 +1,10 @@
+-if article.locations.count > 1
+  %h4 Locations
+- else
+  %h4 Location
+- for location in article.locations do
+  %p= location.line_1
+  %p= location.line_2
+  %p= "#{location.city}, #{location.state_or_province} #{location.postal_code}"
+  = link_to image_tag( "http://maps.googleapis.com/maps/api/staticmap?center=#{location.latitude},#{location.longitude}&zoom=14&size=150x150&markers=color:orange%7Clabel:A%7C#{location.latitude},#{location.longitude}"), "https://www.google.com/maps/dir/Current+Location/#{location.latitude},#{location.longitude}", :target => "_blank"
+  = link_to "click for directions", "https://www.google.com/maps/dir/Current+Location/#{location.latitude},#{location.longitude}", :target => "_blank"

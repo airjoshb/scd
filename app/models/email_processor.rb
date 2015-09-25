@@ -16,6 +16,18 @@ class EmailProcessor
     if @email.raw_text.match('subhead:').present?
       a.subhead = @email.raw_text.match(/subhead:(.*)/)[1]
     end
+    if @email.raw_text.match('event:').present?
+      start_date =  @email.raw_text.match(/start:(.*)/)[1]
+      end_date =  @email.raw_text.match(/end:(.*)/)[1]
+      a.events.create!(start_date: start_date.to_datetime, end_date: end_date.to_datetime)
+    end
+    if @email.raw_text.match('location:').present?
+      line_1 = @email.raw_text.match(/line_1:(.*)/)[1]
+      line_1 = @email.raw_text.match(/line_2:(.*)/)[1]
+      line_1 = @email.raw_text.match(/city:(.*)/)[1]
+      line_1 = @email.raw_text.match(/postal_code:(.*)/)[1]
+      a.locations.create!(line_1: line_1, line_2: line_2, city: city, state_or_province: "CA", postal_code: postal_code)
+    end
     a.save
   end
 
