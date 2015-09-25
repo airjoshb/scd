@@ -1,6 +1,6 @@
 class EmailProcessor
   def initialize(email)
-    @email = email
+    @email = replace_text_body(email)
   end
 
   def process
@@ -49,6 +49,22 @@ class EmailProcessor
       end
     end
     a.save
+  end
+
+  private
+  def replace_text_body(email)
+    # If there's only a text/plain body then there's nothing we can do about
+    # the newlines added by email clients.
+    if email.raw_text && email.raw_html
+      premailer = Premailer.new email.raw_html,
+        line_length: 10000,
+        with_html_string: true
+
+      Griddler::Email.new \
+        email.send(:params).merge(text: premailer.to_plain_text)
+    else
+      email
+    end
   end
 
 
