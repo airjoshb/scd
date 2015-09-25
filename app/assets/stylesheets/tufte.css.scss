@@ -221,12 +221,12 @@ label.sidenote-number { display: inline; }
 
 label.margin-toggle:not(.sidenote-number) { display: none; }
 
-@media (max-width: 760px) { label.margin-toggle:not(.sidenote-number) { display: inline; }
+@media (max-width: 760px) { label.margin-toggle:not(.sidenote-number) { display: block; color: $orange; font-size: 1.2rem; }
                             .sidenote, .marginnote { display: none; }
                             .margin-toggle:checked + .sidenote,
                             .margin-toggle:checked + .marginnote { display: block;
                                                                    float: left;
-                                                                   left: 1rem;
+                                                                   left: 0;
                                                                    clear: both;
                                                                    width: 95%;
                                                                    margin: 1rem 2.5%;

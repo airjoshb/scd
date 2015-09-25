@@ -33,4 +33,14 @@ module ApplicationHelper
     markdown.render(text).html_safe
   end
 
+  def custom_time_distance(time)
+
+    date = Date.today.beginning_of_week
+    return "Today" if time.today?
+    return "Tomorrow" if time == Date.tomorrow
+    return "This week" if time..date + 6.days
+    return "Info" if  !time..date + 6.days
+    distance_of_time_in_words_to_now(time)
+  end
+
 end

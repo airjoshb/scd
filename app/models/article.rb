@@ -46,6 +46,10 @@ class Article < ActiveRecord::Base
     self.save
   end
 
+  def current_week?
+    date = Date.today.beginning_of_week
+    return (date..date + 6.days).to_a
+  end
 
   def word_count
     body.split.size
