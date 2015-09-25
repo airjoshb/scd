@@ -16,6 +16,10 @@ class EmailProcessor
     if @email.raw_text.match('subhead:').present?
       a.subhead = @email.raw_text.match(/subhead:(.*)/)[1]
     end
+    if @email.raw_text.match('tags:').present?
+      tags = @email.raw_text.match(/tags:(.*)/)[1]
+      a.tag_list.add(tags.split(',')
+    end
     if @email.raw_text.match('event:').present?
       start_date =  @email.raw_text.match(/start:(.*)/)[1]
       if @email.raw_text.match('end:').present?
