@@ -72,7 +72,21 @@ hr {
 }
 .email-popover { display: none; text-align: center; }
 .popover-title { font-size: 26px; color: $white; line-height: 40px;}
-.popover-body  { color: white; }
+.popover-body  { color: $white; }
+.info { margin-bottom: .5em; }
+.tip {
+  display: block;
+  margin-left: 15px;
+}
 .popover-preview { border-top: $white solid thin; border-bottom: $white solid thin; border-width: 85%; padding: 20px; font-size: 26px; overflow: hidden; text-align: left; vertical-align: middle; img { margin-right: 10px;}}
 #simplemodal-container {height:500px !important; }
-.marginnote { margin: 0 0 10px 10px; background: $veryLight; padding-left: 10px; font-size: 1rem; width: 35%; p {font-size: .9rem; line-height: .9rem; margin-top: .8rem; margin-bottom: .8rem;} a{ border: none; display: block; }}
+.marginnote {
+  margin: 0 10px 10px 10px;
+  background: $white;
+  font-size: 1rem;
+  width: 35%;
+  border: $veryLight thin solid;
+  p {font-size: .9rem; line-height: .9rem; margin-top: .8rem; margin-bottom: .8rem; padding-left: 10px;}
+  a{ border: none; display: block;} h3 {padding-left: 10px;}
+  img {padding: 0;}
+}

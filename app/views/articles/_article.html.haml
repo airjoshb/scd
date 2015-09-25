@@ -12,6 +12,22 @@
   - else
     %h1= article.title
   %p.subtitle= article.subhead
+  - if defined?(index) && index
+    - if article.events.present?
+      %small.info
+        - if article.events.first.start_date > Time.current
+          %strong= custom_time_distance(article.events.first.start_date) + "!"
+        - else
+          = time_ago_in_words(article.events.first.start_date)
+          ago
+        = article.events.first.start_date.strftime("%A, %b %d")
+        @
+        = article.events.first.start_date.strftime("%l:%M%P")
+        - if article.locations.present?
+          at
+          = article.locations.first.line_1 + ","
+          = article.locations.first.city
+          = link_to "map", "http://maps.apple.com/maps?q=#{article.locations.first.latitude},#{article.locations.first.longitude}", :class => "tag-button"
   %small.info
     - if article.publish_date.present?
       = time_ago_in_words(article.publish_date)
@@ -31,22 +47,36 @@
   - if defined?(index) && index
     %p= Nokogiri::HTML.parse(markdown(article.body)).css('p').first.text
   - else
-    - if article.events.present? or article.locations.present?
-      %label.margin-toggle{:for => "mn-demo"} ⊕
-      %input#mn-demo.margin-toggle{:type => "checkbox"}/
+    - if article.events.present?
+      %label.margin-toggle{:for => "mn-dates"}
+        ⊕ Info
+      %input#mn-dates.margin-toggle{:type => "checkbox"}/
       %span.marginnote
-        %h3 Info
-        - if article.events.present?
-          - if article.events.count > 1
-            %h4 Dates
+        - for event in article.events
+          - if event.start_date > Time.current
+            %h3.first= custom_time_distance(event.start_date)
           - else
-            %h4 Date
-          - for event in article.events
-            %p= event.start_date.strftime("%b %d, %Y")
-            - if event.end_date.present?
+            %h3.first
+              = time_ago_in_words(event.start_date)
+              ago
+          %p.fa.fa-calendar
+            = event.start_date.strftime("%A, %b %d")
+            @
+            = event.start_date.strftime("%l:%M%P")
+          - if event.end_date.present?
+            %p
               to
-              %p= event.end_date.strftime("%b %d, %Y")
-        - if article.locations.present?
+              = event.end_date.strftime("%b %d, %Y")
+          %h3 Why?
+          %p= article.why
+          %h3 Tips
+          - for tip in article.tips.split(',')
+            %p.tip.fa.fa-check= tip
+      - if article.locations.present?
+        %label.margin-toggle{:for => "mn-location"}
+          ⊕ Location
+        %input#mn-location.margin-toggle{:type => "checkbox"}/
+        %span.marginnote
           = render partial: 'location', locals: { article: article }
     %p= markdown(article.body)
 

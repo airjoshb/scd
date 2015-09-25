@@ -1,10 +1,9 @@
--if article.locations.count > 1
-  %h4 Locations
-- else
-  %h4 Location
+%h3.first The Spot
 - for location in article.locations do
-  %p= location.line_1
-  %p= location.line_2
-  %p= "#{location.city}, #{location.state_or_province} #{location.postal_code}"
-  = link_to image_tag( "http://maps.googleapis.com/maps/api/staticmap?center=#{location.latitude},#{location.longitude}&zoom=14&size=150x150&markers=color:orange%7Clabel:A%7C#{location.latitude},#{location.longitude}"), "https://www.google.com/maps/dir/Current+Location/#{location.latitude},#{location.longitude}", :target => "_blank"
-  = link_to "click for directions", "https://www.google.com/maps/dir/Current+Location/#{location.latitude},#{location.longitude}", :target => "_blank"
+  %p.fa.fa-map-pin
+    = location.line_1
+    %br
+    = location.line_2
+    %br
+    = "#{location.city}, #{location.state_or_province} #{location.postal_code}"
+  = link_to image_tag( "https://maps.googleapis.com/maps/api/staticmap?size=315x315&zoom=15&amp;center=37.787,-122.413&markers=color:orange%7Clabel:A%7C#{location.latitude},#{location.longitude}"), "http://maps.apple.com/maps?q=#{location.latitude},#{location.longitude}", :target => "_blank"
