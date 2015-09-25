@@ -47,6 +47,7 @@ gem 'geocoder'
 gem 'geoip'
 gem 'griddler'
 gem 'griddler-sendgrid'
+gem 'premailer'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
