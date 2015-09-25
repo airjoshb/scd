@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
 
   belongs_to :user
   has_many :events
-  has_many :locations
+  has_many :locations, dependent: :destroy
   has_many :statuses, dependent: :destroy
   has_many :recommendations, dependent: :destroy
   has_many :recommended_users, :through => :recommendations, :source => :user
@@ -15,9 +15,6 @@ class Article < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history]
-
-  attr_accessor :events
-  attr_accessor :locations
 
   after_create :status_default
 
