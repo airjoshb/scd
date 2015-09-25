@@ -140,7 +140,7 @@ figure.fullwidth figcaption { margin-right: 24%; }
 a { color: $grayDarker;
     text-decoration: none;
 }
-article a {     border-bottom: 1px solid $grayDarker;
+article a { font-size: 1rem;    border-bottom: 1px solid $grayDarker;
     padding-bottom: 1px; &:hover {border-color: $orange;} }
 h1 a { border:none; &:hover {border-bottom: 1px solid $grayDarker;} }
 
