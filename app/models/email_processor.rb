@@ -29,7 +29,7 @@ class EmailProcessor
         line_1 = @email.raw_text.match(/address_2:(.*)/)[1]
       end
       line_1 = @email.raw_text.match(/city:(.*)/)[1]
-      line_1 = @email.raw_text.match(/postal_code:(.*)/)[1]
+      line_1 = @email.raw_text.match(/zip:(.*)/)[1]
       a.locations.create!(line_1: line_1, line_2: line_2, city: city, state_or_province: "CA", postal_code: postal_code)
     end
     a.save
