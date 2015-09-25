@@ -20,17 +20,21 @@ class EmailProcessor
       start_date =  @email.raw_text.match(/start:(.*)/)[1]
       if @email.raw_text.match('end:').present?
         end_date =  @email.raw_text.match(/end:(.*)/)[1]
+        a.events.create!(start_date: start_date.to_datetime, end_date: end_date.to_datetime)
+      else
+        a.events.create!(start_date: start_date.to_datetime)
       end
-      a.events.create!(start_date: start_date.to_datetime, end_date: end_date.to_datetime)
     end
     if @email.raw_text.match('location:').present?
       line_1 = @email.raw_text.match(/address:(.*)/)[1]
+      city = @email.raw_text.match(/city:(.*)/)[1]
+      postal_code = @email.raw_text.match(/zip:(.*)/)[1]
       if @email.raw_text.match('address_2:').present?
-        line_1 = @email.raw_text.match(/address_2:(.*)/)[1]
+        line_2 = @email.raw_text.match(/address_2:(.*)/)[1]
+        a.locations.create!(line_1: line_1, line_2: line_2, city: city, state_or_province: "CA", postal_code: postal_code)
+      else
+        a.locations.create!(line_1: line_1, city: city, state_or_province: "CA", postal_code: postal_code)
       end
-      line_1 = @email.raw_text.match(/city:(.*)/)[1]
-      line_1 = @email.raw_text.match(/zip:(.*)/)[1]
-      a.locations.create!(line_1: line_1, line_2: line_2, city: city, state_or_province: "CA", postal_code: postal_code)
     end
     a.save
   end
