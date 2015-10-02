@@ -16,6 +16,8 @@ class Article < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history]
 
+  default_scope {order("Created_at DESC") }
+
   after_create :status_default
 
   scope :active, -> { where('publish_date <= ?', Time.current).order('publish_date DESC') }
