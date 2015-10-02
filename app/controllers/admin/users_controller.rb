@@ -14,6 +14,19 @@ class Admin::UsersController < Devise::RegistrationsController
     super
   end
 
+  def add_role
+    respond_to do |format|
+      format.js do
+        role = params[:role]
+        @user = User.find(params[:id])
+        @user.role = role
+        @user.save
+        # manage return status here
+        head :ok
+      end
+    end
+  end
+
   private
   def build_resource(*args)
     super

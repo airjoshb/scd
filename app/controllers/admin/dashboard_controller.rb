@@ -6,6 +6,7 @@ class Admin::DashboardController < ApplicationController
     @articles = Article.all
     @users = User.all
     @deleted = Article.status(4)
+    @roles = User.roles
     respond_to do |format|
       format.js
       format.html
