@@ -50,6 +50,11 @@ hr {
     margin: 0 3px;
     &:hover { background: $orange}
   }
+.published { border-color: $green; color: $green; }
+.approved { border-color: $green; color: $green; }
+.deleted { border-color: $red; color: $red; }
+.declined { border-color: $orange; color: $orange; }
+.pending { border-color: $grayLighter; color: $grayLighter; }
 .recommended { color: $orange !important; }
 .recommend { color: $gray;  }
 .recommend-count { font-size: .8em; }
