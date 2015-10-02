@@ -44,9 +44,7 @@ class Admin::ArticlesController < ApplicationController
   # DELETE /articles/1.json
   def destroy
     @article.destroy
-    respond_to do |format|
-      format.js
-    end
+    render nothing: true
   end
 
 
