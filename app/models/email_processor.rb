@@ -26,7 +26,7 @@ class EmailProcessor
       tags = @email.raw_text.match(/tags:(.*)/)[1]
       a.tag_list.add(tags.split(','))
     end
-    if @email.raw_text.match('event:').present?
+    if @email.raw_text.match('start:').present?
       start_date =  @email.raw_text.match(/start:(.*)/)[1]
       converted_date = Time.zone.parse(start_date)
       if @email.raw_text.match('end:').present?
@@ -37,7 +37,7 @@ class EmailProcessor
         a.events.create!(start_date: converted_date.to_datetime)
       end
     end
-    if @email.raw_text.match('location:').present?
+    if @email.raw_text.match('address:').present?
       line_1 = @email.raw_text.match(/address:(.*)/)[1]
       city = @email.raw_text.match(/city:(.*)/)[1]
       postal_code = @email.raw_text.match(/zip:(.*)/)[1]
