@@ -1,8 +1,8 @@
-class AdminController < ApplicationController
+class Admin::DashboardController < ApplicationController
   before_filter :authenticate_user!
 
 
-  def dashboard
+  def index
     @articles = Article.all
     @users = User.all
     @deleted = Article.status(4)
@@ -11,5 +11,7 @@ class AdminController < ApplicationController
       format.html
     end
   end
+
+
 
 end

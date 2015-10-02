@@ -1,0 +1,22 @@
+%h2
+  Edit #{@user.name}
+= simple_form_for(@user, as: :update, url: admin_user_path(@user), html: { method: :put }) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :username, required: true, autofocus: true
+    = f.input :email, required: true, autofocus: true
+    = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
+    = f.input :password_confirmation, required: false
+    = f.input :tag_list
+  .form-actions
+    = f.button :submit, "Update"
+
+Connected Accounts
+-if current_user.identities.present?
+  - for identity in current_user.identities
+    = link_to identity.url do
+      %i{ class: ("fa fa-#{identity.provider}") }
+
+  %br
+%h3 Cancel account
+%p #{link_to "Cancel my account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete}

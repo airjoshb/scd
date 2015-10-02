@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     put 'remove_tag/:tag', to: 'users#remove_tag', as: :remove_tag, on: :member
   end
 
-  get 'admin', to: 'admin#dashboard'
+  namespace :admin do
+    get '', to: 'dashboard#index', as: '/'
+    resources :articles
+    resources :users
+  end
 
   resources :share_emails
 
