@@ -61,6 +61,7 @@
               ago
           %p.fa.fa-calendar
             = event.start_date.strftime("%A, %b %d")
+          %p
             @
             = event.start_date.strftime("%l:%M%P")
             - if event.end_date.present?
