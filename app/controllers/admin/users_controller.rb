@@ -11,11 +11,25 @@ class Admin::UsersController < Devise::RegistrationsController
   end
 
   def show
-    super
+    @user = User.find(params[:id])
   end
 
   def edit
-    super
+    @user = User.find(params[:id])
+
+  end
+
+  def update
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @user.update_without_password(user_params)
+        format.html { redirect_to admin_path, notice: 'Your profile was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def add_role
@@ -53,7 +67,7 @@ class Admin::UsersController < Devise::RegistrationsController
     params.require(:user).permit(:name, :username, :email, :password, :password_confirmation, :stripe_token, :tag_list)
   end
 
-  def account_update_params
+  def user_params
     params.require(:user).permit(:name, :username, :email, :password, :password_confirmation, :current_password, :stripe_token, :tag_list)
   end
 

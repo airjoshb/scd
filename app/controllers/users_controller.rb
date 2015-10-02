@@ -14,7 +14,6 @@ class UsersController < ApplicationController
 
 
   def update
-    authorize! :update, @user
     respond_to do |format|
       if @user.update(user_params)
         sign_in(@user == current_user ? @user : current_user, :bypass => true)
