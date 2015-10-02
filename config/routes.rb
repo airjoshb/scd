@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
     resources :articles
-    resources :users
   end
 
   resources :share_emails
@@ -43,6 +42,8 @@ Rails.application.routes.draw do
     put    "signup"  => "users/registrations#update", as: :update_user_registration
     get    "account" => "users/registrations#edit",   as: :edit_user_registration
     post 'admin/add_role/:id/:role', to: 'admin/users#add_role', as: :add_role
+    get 'admin/users/:id', to: 'admin/users#edit', as: :edit_admin_user
+    get 'admin/users', to: 'admin/users#new', as: :new_admin_user
 
   end
 
