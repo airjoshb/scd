@@ -14,7 +14,7 @@ module ApplicationHelper
 
   def markdown(text)
     options = {
-      hard_wrap:       true,
+      hard_wrap:       false,
       link_attributes: { target: "_blank" },
       space_after_headers: true,
       fenced_code_blocks: true
