@@ -7,8 +7,8 @@
         = link_to edit_admin_article_path(article) do
           %i.fa.fa-edit
         = article.title
-        %span{:class => [article.statuses.last.status, 'small']}= article.statuses.last.status
         %div
+          %span{:class => [article.statuses.last.status, 'small']}= article.statuses.last.status
           - if article.statuses.last.published?
             = link_to "delete", change_status_article_path(article, status: "deleted"), remote: true, class: "btn2 deleted tag small"
           - elsif article.statuses.last.pending?
@@ -22,4 +22,5 @@
           - elsif article.statuses.last.approved?
             = link_to "publish", change_status_article_path(article, status: "published"), remote: true, class: "btn2 published tag small"
             = link_to "delete", change_status_article_path(article, status: "deleted"), remote: true, class: "btn2 deleted tag small"
+          = link_to "destroy", admin_article_path(article), method: :delete, remote: true, class: "btn tag-button destroyed small"
         %hr

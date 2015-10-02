@@ -55,6 +55,7 @@ hr {
 .deleted { border-color: $red; color: $red; }
 .declined { border-color: $orange; color: $orange; }
 .pending { border-color: $grayLighter; color: $grayLighter; }
+.destroyed { background: $red; color: $red; }
 .recommended { color: $orange !important; }
 .recommend { color: $gray;  }
 .recommend-count { font-size: .8em; }
