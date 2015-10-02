@@ -67,7 +67,8 @@
             - if event.end_date.present?
               to
               - if event.start_date.day == event.end_date.day
-                = event.start_date.strftime("%l:%M%P")
+                - if event.start_date.time != event.end_date.time
+                  = event.start_date.strftime("%l:%M%P")
               - else
                 = event.end_date.strftime("%A, %b %d")
                 @
