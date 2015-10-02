@@ -14,13 +14,10 @@ class Admin::ArticlesController < ApplicationController
   # article /articles
   # article /articles.json
   def create
-    @article = Article.new(article_params)
-    @article.user_id = current_user.id
-
-    @article.save
+    @article = current_user.articles.build(article_params)
     respond_to do |format|
       if @article.save
-        format.html { redirect_to admin_articles_url, notice: 'Article was successfully created.' }
+        format.html { redirect_to admin_path, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new }
