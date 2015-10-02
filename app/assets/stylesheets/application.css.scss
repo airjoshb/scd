@@ -111,6 +111,7 @@ a { border: none; }
 .well { background: $veryLight; width: 75%; padding: 2rem; * {font-size: .9rem;}  p { width: 100%; }}
 .hidden { display: none; }
 .small {font-size: .8rem; }
+.lineup {font-size: 3rem; display: inline; }
 .first {margin-top: 1rem; }
 .text.simplemodal-close { font-size: 1em; color:  $white; cursor: pointer; display: block; line-height: 2em; &:hover { color: darken($white, 20%);} }
 #simplemodal-overlay {background-color:#000;}
