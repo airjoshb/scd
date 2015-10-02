@@ -33,6 +33,9 @@ Rails.application.routes.draw do
   #->Prelang (user_login:devise/stylized_paths)
   devise_scope :user do
     root to: 'users/registrations#new'
+    get 'admin/users/:id', to: 'admin/users#edit', as: :edit_admin_user
+    put 'admin/users/:id', to: 'admin/users#update'
+    get 'admin/users', to: 'admin/users#new', as: :new_admin_user
     get    "login"   => "users/sessions#new",         as: :new_user_session
     post   "login"   => "users/sessions#create",      as: :user_session
     delete "signout" => "users/sessions#destroy",     as: :destroy_user_session
@@ -42,8 +45,7 @@ Rails.application.routes.draw do
     put    "signup"  => "users/registrations#update", as: :update_user_registration
     get    "account" => "users/registrations#edit",   as: :edit_user_registration
     post 'admin/add_role/:id/:role', to: 'admin/users#add_role', as: :add_role
-    get 'admin/users/:id', to: 'admin/users#edit', as: :edit_admin_user
-    get 'admin/users', to: 'admin/users#new', as: :new_admin_user
+
 
   end
 
