@@ -7,6 +7,10 @@ class Admin::UsersController < Devise::RegistrationsController
   end
 
   def new
+    @user = User.new
+  end
+
+  def show
     super
   end
 
@@ -40,9 +44,6 @@ class Admin::UsersController < Devise::RegistrationsController
     resource.update_without_password(params)
   end
 
-  def after_sign_up_path_for(resource)
-    root_path
-  end
 
   def sign_up(resource_name, resource)
     false

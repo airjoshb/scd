@@ -1,6 +1,6 @@
 %h2
-  Edit #{@user.name}
-= simple_form_for(@user, as: :update, url: admin_user_path(@user), html: { method: :put }) do |f|
+  Edit #{resource_name.to_s.humanize}
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = f.error_notification
   .form-inputs
     = f.input :username, required: true, autofocus: true
