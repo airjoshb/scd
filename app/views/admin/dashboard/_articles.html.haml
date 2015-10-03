@@ -4,7 +4,7 @@
       %li
         = link_to article_path(article) do
           %i.fa.fa-eye
-        = link_to edit_admin_article_path(article) do
+        = link_to admin_edit_article_path(article) do
           %i.fa.fa-edit
         = article.title
         %div
@@ -22,5 +22,5 @@
           - elsif article.statuses.first.approved?
             = link_to "publish", change_status_article_path(article, status: "published"), remote: true, class: "btn2 published tag small"
             = link_to "delete", change_status_article_path(article, status: "deleted"), remote: true, class: "btn2 deleted tag small"
-          = link_to "destroy", admin_article_path(article), method: :delete, remote: true, class: "btn tag-button destroyed small"
+          = link_to "destroy", admin_delete_article_path(article), remote: true, class: "btn tag-button destroyed small"
         %hr

@@ -1,4 +1,4 @@
-= simple_form_for(@article) do |f|
+= simple_form_for @article, url: {controller: "admin/articles", action: "edit"}, method: :put do |f|
   = f.error_notification
   .form-inputs
     = f.input :title
