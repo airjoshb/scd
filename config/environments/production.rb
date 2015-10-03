@@ -80,7 +80,7 @@ Rails.application.configure do
   # config.autoflush_log = false
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'santacruzdaily.com' }
+  config.action_mailer.default_url_options = { :host => 'www.santacruzdaily.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?
