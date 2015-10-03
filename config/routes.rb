@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :share_emails
 
-  resources :articles, :path => "/lineup" do
+  resources :articles, :path => "/lineup" , :except => [:new, :create, :edit, :update, :destroy] do
     resources :events
     resources :locations
     put :recommend, on: :member
@@ -52,7 +52,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
-    resources :articles
+    get 'article/:id', to: 'articles#edit', as: :edit_article
+    patch 'article', to: 'articles#update'
+    put 'article', to: 'articles#update'
+    delete 'articles/:id', to: 'articles#delete', as: :delete_article
   end
 
 
