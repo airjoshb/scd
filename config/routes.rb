@@ -6,11 +6,6 @@ Rails.application.routes.draw do
     put 'remove_tag/:tag', to: 'users#remove_tag', as: :remove_tag, on: :member
   end
 
-  namespace :admin do
-    get '', to: 'dashboard#index', as: '/'
-    resources :articles
-  end
-
   resources :share_emails
 
   resources :articles, :path => "/lineup" do
@@ -54,6 +49,12 @@ Rails.application.routes.draw do
       root to: 'articles#index', as: :authenticated
     end
   end
+
+  namespace :admin do
+    get '', to: 'dashboard#index', as: '/'
+    resources :articles
+  end
+
 
   # mount using default path: /email_processor
   mount_griddler
