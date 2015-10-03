@@ -1,6 +1,6 @@
 %html
   %head
-    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,700,600,300,800", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "https://fonts.googleapis.com/css?family=Open+Sans:400,700", :rel => "stylesheet", :type => "text/css"}
     %link{:href => "http://fonts.googleapis.com/css?family=Comfortaa", :rel => "stylesheet", :type => "text/css"}
   %body{style: "font-family: 'Open Sans'; font-size: 14px; color: #292929; width: 90%; margin: 20px auto;"}
     %div{style: "text-align: center;"}= image_tag 'santa-cruz-daily-octopus.png', style: "width: 100px;"
@@ -9,7 +9,7 @@
     = yield
     %div{style: "text-align: center; font-size: .7em;" }
       = link_to "Go to your lineup", articles_url, style: "line-height: normal; text-transform: uppercase; font-size: 15px; border: thin #ffbe00 solid; display: inline-block; padding: 5px 8px; color: #ffbe00; background: transparent; text-decoration: none;"
-      %p{style: "font-family: 'Open Sans';" }
+      %p{style: "font-family: 'Open Sans'; font-weight: 400;" }
         Sent by Santa Cruz Daily ·
         = link_to "Change your subscription or unsubscribe", edit_user_registration_url, style: "color: inherit;"
         · Help center · Privacy policy
