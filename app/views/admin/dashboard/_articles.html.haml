@@ -8,18 +8,18 @@
           %i.fa.fa-edit
         = article.title
         %div
-          %span{:class => [article.statuses.last.status, 'small']}= article.statuses.last.status
-          - if article.statuses.last.published?
+          %span{:class => [article.statuses.first.status, 'small']}= article.statuses.first.status
+          - if article.statuses.first.published?
             = link_to "delete", change_status_article_path(article, status: "deleted"), remote: true, class: "btn2 deleted tag small"
-          - elsif article.statuses.last.pending?
+          - elsif article.statuses.first.pending?
             = link_to "approve", change_status_article_path(article, status: "approved"), remote: true, class: "btn2 approved tag small"
             = link_to "decline", change_status_article_path(article, status: "declined"), remote: true, class: "btn2 declined tag small"
 
             = link_to "delete", change_status_article_path(article, status: "deleted"), remote: true, class: "btn2 deleted tag small"
-          - elsif article.statuses.last.declined?
+          - elsif article.statuses.first.declined?
             = link_to "approve", change_status_article_path(article, status: "approved"), remote: true, class: "btn2 approved tag small"
             = link_to "delete", change_status_article_path(article, status: "deleted"), remote: true, class: "btn2 deleted tag small"
-          - elsif article.statuses.last.approved?
+          - elsif article.statuses.first.approved?
             = link_to "publish", change_status_article_path(article, status: "published"), remote: true, class: "btn2 published tag small"
             = link_to "delete", change_status_article_path(article, status: "deleted"), remote: true, class: "btn2 deleted tag small"
           = link_to "destroy", admin_article_path(article), method: :delete, remote: true, class: "btn tag-button destroyed small"
