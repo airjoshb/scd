@@ -1,5 +1,5 @@
 class UserNewsletter < ActionMailer::Base
-  default from: "lineup@santacruzdaily.com"
+  default from: "Santa Cruz Daily <lineup@santacruzdaily.com>"
   helper ApplicationHelper
   layout 'mailer'
 
