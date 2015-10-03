@@ -53,8 +53,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
     get 'article/:id', to: 'articles#edit', as: :edit_article
-    patch 'article', to: 'articles#update'
-    put 'article', to: 'articles#update'
+    patch 'article/:id', to: 'articles#update'
+    put 'article/:id', to: 'articles#update'
     delete 'articles/:id', to: 'articles#delete', as: :delete_article
   end
 
