@@ -35,6 +35,7 @@ Rails.application.configure do
   config.assets.digest = true
 
   config.action_controller.asset_host = "https://d2hpyijb4a66bq.cloudfront.net"
+  config.action_mailer.asset_host = config.action_controller.asset_host
 
   # `config.assets.precompile` has moved to config/initializers/assets.rb
 
