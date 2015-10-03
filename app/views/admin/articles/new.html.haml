@@ -1,2 +1,15 @@
 %h1 New article
-= render 'form'
+= simple_form_for @article, url: {controller: "admin/articles", action: "new"}, method: :put do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :title
+    = f.input :subhead
+    = f.input :body
+    = f.input :slug
+    = f.input :origin
+    = f.input :image
+    = f.input :publish_date
+    = f.input :tag_list
+
+  .form-actions
+    = f.button :submit
