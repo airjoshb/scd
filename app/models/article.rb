@@ -3,7 +3,7 @@ class Article < ActiveRecord::Base
   validates_numericality_of :user_id
 
   belongs_to :user
-  has_many :events
+  has_many :events, dependent: :destroy
   has_many :locations, dependent: :destroy
   has_many :statuses, dependent: :destroy
   has_many :recommendations, dependent: :destroy
@@ -19,6 +19,9 @@ class Article < ActiveRecord::Base
   default_scope {order("Created_at DESC") }
 
   after_create :status_default
+
+  accepts_nested_attributes_for  :events
+  accepts_nested_attributes_for :locations
 
   scope :active, -> { where('publish_date <= ?', Time.current).order('publish_date DESC') }
   scope :next, lambda { |id| where("id > ?", id).order("id ASC")}
