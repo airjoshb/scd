@@ -61,6 +61,10 @@ class Article < ActiveRecord::Base
     (word_count / 200.0).ceil
   end
 
+  def normalize_friendly_id(string)
+    string.to_s.gsub("\'", "").parameterize
+  end
+
   scope :popular, -> {
     joins('LEFT OUTER JOIN recommendations ON articles.id = recommendations.article_id')
     .select('articles.*, count(recommendations.id) as "user_count"')
