@@ -54,7 +54,7 @@ Rails.application.routes.draw do
     get '', to: 'dashboard#index', as: '/'
     get 'article/:id', to: 'articles#edit', as: :edit_article
     get 'articles', to: 'articles#new', as: :new_article
-    get 'articles', to: 'articles#destroy', as: :destroy_article
+    delete 'articles/:id', to: 'articles#destroy', as: :destroy_article
     put 'articles', to: 'articles#create'
     patch 'article/:id', to: 'articles#update'
     put 'article/:id', to: 'articles#update'
