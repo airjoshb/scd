@@ -22,5 +22,5 @@
           - elsif article.statuses.first.approved?
             = link_to "publish", change_status_article_path(article, status: "published"), remote: true, class: "btn2 published tag small"
             = link_to "delete", change_status_article_path(article, status: "deleted"), remote: true, class: "btn2 deleted tag small"
-          = link_to "destroy", admin_destroy_article_path(article), remote: true, class: "btn tag-button destroyed small"
+          = link_to "destroy", admin_destroy_article_path(article), method: :delete, remote: true, class: "btn tag-button destroyed small"
         %hr
