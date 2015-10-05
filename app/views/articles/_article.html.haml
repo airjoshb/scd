@@ -73,13 +73,13 @@
                 = event.end_date.strftime("%A, %b %d")
                 @
                 = event.end_date.strftime("%l:%M%P")
-          - if article.why.present?
-            %h3 Why?
-            %p= article.why
-          - if article.tips.present?
-            %h3 Tips
-            - for tip in article.tips.split(',')
-              %p.tip.fa.fa-check= tip
+        - if article.why.present?
+          %h3 Why?
+          %p= article.why
+        - if article.tips.present?
+          %h3 Tips
+          - for tip in article.tips.split(',')
+            %p.tip.fa.fa-check= tip
     - if article.locations.present?
       %label.margin-toggle{:for => "mn-location"}
         ⊕ Location
