@@ -11,6 +11,15 @@
     = f.input :tips
     = f.input :publish_date
     = f.input :tag_list
+    = f.simple_fields_for :locations do |p|
+      p.input :line_1
+      p.input :line_2
+      p.input :city
+      p.input :state_or_province
+      p.input :postal_code
+    = f.simple_fields_for :events do |e|
+      p.input :start_date
+      p.input :end_date
 
   .form-actions
     = f.button :submit
