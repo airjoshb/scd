@@ -18,8 +18,8 @@
       p.input :state_or_province
       p.input :postal_code
     = f.simple_fields_for :events do |e|
-      p.input :start_date
-      p.input :end_date
+      e.input :start_date
+      e.input :end_date
 
   .form-actions
     = f.button :submit
