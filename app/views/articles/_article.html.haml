@@ -47,7 +47,7 @@
   - if defined?(index) && index
     %p= Nokogiri::HTML.parse(markdown(article.body)).css('p').first.text
   - else
-    - if article.events.present?
+    - if article.events.present? or article.why.present? or article.tips.present?
       %label.margin-toggle{:for => "mn-dates"}
         ⊕ Info
       %input#mn-dates.margin-toggle{:type => "checkbox"}/
@@ -80,12 +80,12 @@
             %h3 Tips
             - for tip in article.tips.split(',')
               %p.tip.fa.fa-check= tip
-      - if article.locations.present?
-        %label.margin-toggle{:for => "mn-location"}
-          ⊕ Location
-        %input#mn-location.margin-toggle{:type => "checkbox"}/
-        %span.marginnote
-          = render partial: 'location', locals: { article: article }
+    - if article.locations.present?
+      %label.margin-toggle{:for => "mn-location"}
+        ⊕ Location
+      %input#mn-location.margin-toggle{:type => "checkbox"}/
+      %span.marginnote
+        = render partial: 'location', locals: { article: article }
     %p= markdown(article.body)
 
 .readnext
