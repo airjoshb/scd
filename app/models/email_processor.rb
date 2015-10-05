@@ -1,6 +1,6 @@
 class EmailProcessor
   def initialize(email)
-    @email = replace_text_body(email)
+    @email = email
   end
 
   def process
