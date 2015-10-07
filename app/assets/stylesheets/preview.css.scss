@@ -176,3 +176,7 @@ small { color: $textColor; }
   .slide-text {h1 { font-size: 2em }}
   #simplemodal-container {width: 90%;}
 }
+
+@media (max-width: 900px) {
+  .flex-element { width: auto; }
+}
