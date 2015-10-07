@@ -35,7 +35,8 @@
 #page-preview.pages
   %h1.center
     The Lineup
-  .flex
+  .flex.screen
+    .sidebar
     - for article in @articles
       .flex-element
         = render 'devise/registrations/article', article: article
