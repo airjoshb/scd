@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   enum role: [:user, :subscriber, :admin, :sponsor]
+  enum frequency: [:monthly, :weekly, :daily]
+
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
 

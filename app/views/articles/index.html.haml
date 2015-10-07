@@ -19,14 +19,14 @@
 .flex
   .main.summary
     - if @tag.present?
-      - if !@tags.include?(@tag)
+      - if !@user_tags.include?(params[:tag])
         .add
-          = link_to add_tag_user_path(current_user, @tag.name), class: 'follow', remote: true, method: :put, data: {toggle_href: "", toggle_class: 'followed'} do
+          = link_to add_tag_path(@tag.name), id: @tag.name, class: 'follow', remote: true, method: :put, data: {toggle_href: "", toggle_class: 'followed'} do
             .tag.center
               = @tag
       - else
         .add.added
-          = link_to remove_tag_user_path(current_user, @tag.name), class: 'followed', remote: true, method: :put, data: {toggle_href: add_tag_user_path(current_user, @tag.name), toggle_class: 'follow'} do
+          = link_to remove_tag_path(@tag.name), id: @tag.name, class: 'followed', remote: true, method: :put, data: {toggle_href: add_tag_path(@tag.name), toggle_class: 'follow'} do
             .tag.center
               = @tag
     - if @articles.blank?

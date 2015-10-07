@@ -8,10 +8,10 @@ class ArticlesController < ApplicationController
        @tag = ActsAsTaggableOn::Tag.find_by_name(params[:tag])
        @articles = Article.status(1).active.tagged_with(@tag).popular
        @user = current_user
-       @tags = @user.tags
+       @user_tags = @user.tag_list
     elsif current_user.present?
        @user = current_user
-       @tags = @user.tags
+       @user_tags = @user.tag_list
        @articles = Article.tagged_with(@tags, :any => :true).status(1).active.popular
     else
       @articles = Article.active

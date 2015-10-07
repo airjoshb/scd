@@ -1,0 +1,33 @@
+-for tag in article.tags
+  .tag= tag
+
+.mini-article
+  = image_tag article.image.medium
+  %h3= article.title
+  - if article.events.present?
+    %small.info
+      - if article.events.first.start_date > Time.current
+        %strong= custom_time_distance(article.events.first.start_date) + "!"
+      - else
+        = time_ago_in_words(article.events.first.start_date)
+        ago
+      = article.events.first.start_date.strftime("%A, %b %d")
+      @
+      = article.events.first.start_date.strftime("%l:%M%P")
+    - if article.locations.present?
+      at
+      = article.locations.first.line_1 + ","
+      = article.locations.first.city
+      = link_to "map", "http://maps.apple.com/maps?q=#{article.locations.first.latitude},#{article.locations.first.longitude}", :class => "tag-button"
+  %small
+    - if article.publish_date.present?
+      = time_ago_in_words(article.publish_date)
+      ago
+    - if defined?(index) && index
+      - if article.recommended_users.present?
+        • recommended by
+        = article.recommended_users.count
+        - if article.recommended_users.count > 1
+          people
+        - else
+          person

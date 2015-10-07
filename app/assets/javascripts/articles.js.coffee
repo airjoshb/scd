@@ -24,7 +24,8 @@ jQuery ->
     return
 
   $(document).on 'ajax:success', '.add a', (status,data,xhr)->
-    $(".add a").each ->
+    i = $(this).attr 'id'
+    $("#"+i).each ->
       $a = $(this)
       href = $a.attr 'href'
       c = $a.attr 'class'

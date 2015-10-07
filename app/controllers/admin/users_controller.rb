@@ -19,6 +19,13 @@ class Admin::UsersController < Devise::RegistrationsController
 
   end
 
+  def destroy
+    user = User.find(params[:id])
+    authorize user
+    user.destroy
+    render :nothing => true
+  end
+
   def update
     @user = User.find(params[:id])
     respond_to do |format|

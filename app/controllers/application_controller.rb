@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
       if resource.admin?
         admin_path || root_path
       else
-        edit_user_registration_path || root_path
+        articles_path
       end
   end
 
@@ -31,6 +31,17 @@ class ApplicationController < ActionController::Base
 
   def last_page
     session[:last_page] = request.env['HTTP_REFERER']
+  end
+
+  def ensure_signup_complete
+    # Ensure we don't go into an infinite loop
+    return if action_name == 'finish_signup'
+
+    # Redirect to the 'finish_signup' page if the user
+    # email hasn't been verified yet
+    if current_user && !current_user.password.blank?
+      redirect_to finish_signup_path(current_user)
+    end
   end
 
 

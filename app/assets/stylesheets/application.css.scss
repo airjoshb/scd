@@ -14,9 +14,12 @@
  *= require tufte
 
  *= require articles
+ *= require visitors
  *= require_self
  */
 @import "variables";
+
+
 
 .logo { width: 70px; margin: 0 auto 10px; img {width: 100%; }}
 a { border: none; }

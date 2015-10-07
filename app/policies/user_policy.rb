@@ -32,6 +32,10 @@ class UserPolicy
     @current_user.admin? or @current_user == @user
   end
 
+  def finish_signup?
+    @current_user.admin? or @current_user == @user
+  end
+
   class Scope < Struct.new(:user, :scope)
     def resolve
       scope
