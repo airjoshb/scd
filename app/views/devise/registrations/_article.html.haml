@@ -5,7 +5,7 @@
   = image_tag article.image.medium
   %h3= article.title
   - if article.events.present?
-    %small.info
+    %small
       - if article.events.first.start_date > Time.current
         %strong= custom_time_distance(article.events.first.start_date) + "!"
       - else
@@ -15,7 +15,7 @@
       @
       = article.events.first.start_date.strftime("%l:%M%P")
   - if article.locations.present?
-    %small.info
+    %small
       at
       = article.locations.first.line_1 + ","
       = article.locations.first.city
@@ -33,11 +33,11 @@
         - else
           person
   - if article.why.present?
-    %p
-      Why?
+    %small
+      %strong Why?
       = article.why
   - if article.tips.present?
-    %p
-      Tips
+    %small
+      %strong Tips
       - for tip in article.tips.split(',')
-        %p.tip.fa.fa-check= tip
+        %small.tip.fa.fa-check= tip
