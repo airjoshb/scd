@@ -121,8 +121,8 @@ input { font-size: 1.5em; padding: 10px; margin-bottom: 20px;}
   display: flex;
   -webkit-flex-direction: row;
    flex-direction: row;
-  justify-content: center;
-  -webkit-justify-content: center;
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   -webkit-align-content: center;
   align-content: center;
   -webkit-flex-flow: row wrap;
@@ -130,6 +130,7 @@ input { font-size: 1.5em; padding: 10px; margin-bottom: 20px;}
 
 }
 .scoop { width: 40%; margin-left: 10px;}
+.screen { margin: 0 10px; }
 .email, .screen {
   border: $grayDarker thin solid;
   padding: 20px;
@@ -167,6 +168,58 @@ small { color: $textColor; }
   min-height: 427px;
   small { display: block; margin: 3px 0; }
   img { max-width: 100%; }
+}
+
+
+#nav {
+  width: 150px;
+  height: 100vh;
+  padding: 12px 0;
+  border-right-color: $veryLight;
+  border-right-width: 1px;
+  border-right-style: solid;
+  background: $white;
+  a { border: none; }
+  .nav-group {
+    border-top-color: $veryLight;
+    border-top-style: solid;
+    border-top-width: 1px;
+    vertical-align: middle;
+    .nav-title {
+      font-weight: 400;
+      font-size: 14px;
+      text-transform: uppercase;
+      padding: 16px 16px 12px;
+      color: darken($veryLight, 5%);
+    }
+    .nav-element {
+      width: 100%;
+      height: 100%;
+      padding: 8px 16px;
+      text-align: left;
+      * {color: $grayLighter;}
+      line-height: 32px;
+      cursor: hand;
+      &:hover { background: $veryLight; transition: all .7s ease; }
+      .nav-icon {  float: left; }
+      .nav-text {
+        font-weight: 500;
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .nav-group:first-child { border-top: 0; }
+
+}
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: -2px;
+  margin-right: 10px;
+  opacity: .75
 }
 
 @media (max-width: 1200px) {

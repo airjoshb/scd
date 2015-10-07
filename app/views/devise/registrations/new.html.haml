@@ -36,7 +36,34 @@
   %h1.center
     The Lineup
   .flex.screen
-    .sidebar
+    #nav
+      .nav-group
+        .logo= image_tag("santa-cruz-daily-octopus.png")
+        .nav-element
+          - if current_user.present?
+            = link_to edit_registration_path(current_user) do
+              - if current_user.identities.present?
+                .nav-icon= image_tag current_user.identities.first.avatar, :class => "circle"
+              .nav-text
+                - if  current_user.identities.present?
+                  = current_user.identities.first.nickname
+                - else
+                  = current_user.username || current_user.email
+            %i.fa.fa-chevron-circle-right
+            = link_to "Logout", destroy_user_session_path, method: :delete
+          - else
+            %i.fa.fa-chevron-circle-right
+            = link_to "Login", new_user_session_path
+      .nav-group
+        - if current_user.present?
+          .nav-title
+            Interests
+          - for tag in @tags
+            .nav-element
+              .nav-text= link_to tag, articles_path(:tag => tag.name)
+      .nav-group
+        .nav-title
+          Santa Cruz Daily ©2015
     - for article in @articles
       .flex-element
         = render 'devise/registrations/article', article: article
