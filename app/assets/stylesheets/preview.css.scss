@@ -164,6 +164,7 @@ small { color: $textColor; }
 .mini-article {
   background: $veryLight;
   padding-bottom: 20px;
+  min-height: 427px;
   img { max-width: 100%; }
 }
 

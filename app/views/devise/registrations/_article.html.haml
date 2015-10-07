@@ -1,4 +1,4 @@
--for tag in article.tags
+-for tag in article.tags.reverse.take(2)
   .tag= tag
 
 .mini-article
@@ -14,7 +14,8 @@
       = article.events.first.start_date.strftime("%A, %b %d")
       @
       = article.events.first.start_date.strftime("%l:%M%P")
-    - if article.locations.present?
+  - if article.locations.present?
+    %small.info
       at
       = article.locations.first.line_1 + ","
       = article.locations.first.city
@@ -31,3 +32,10 @@
           people
         - else
           person
+  - if article.why.present?
+    %h3 Why?
+    %p= article.why
+  - if article.tips.present?
+    %h3 Tips
+    - for tip in article.tips.split(',')
+      %p.tip.fa.fa-check= tip
