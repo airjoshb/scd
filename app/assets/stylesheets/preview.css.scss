@@ -1,8 +1,12 @@
 @import "variables";
 @import "font-awesome/font-awesome";
+
 body { font-family: $sansFontFamily; margin: 0; font-size: 16px;}
 a { text-decoration: none; }
 .logo { width: 150px; height: 150px; margin: 0 auto 20px; img {width: 100%; }}
+.white * {  color: $white; }
+.orange * {  color: $orange; }
+h1 { font-weight: 300; font-size: 3rem; img {vertical-align: middle;}}
 
 #slideshow {
   max-width: 100%; overflow: hidden; position: relative; min-height: 100vh;
@@ -97,7 +101,71 @@ input { font-size: 1.5em; padding: 10px; margin-bottom: 20px;}
   right:-16px;
   cursor:pointer;
 }
+.down a { font-size: 3em; transition: all .2s ease; }
+#page-submit { background: $veryLight; }
+.pages {
+  white-space:normal;
+  vertical-align:top;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  input {margin-bottom: 5px;}
+  .hint { text-align: center; display: block; font-size: .9em; margin-top: 0; padding-top: 0; }
+  p  { text-align: center; display: block; width: 100%; }
+  h1:first-child {margin-top: 50px;}
+}
+.flex {
+  margin-top: 50px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+   flex-direction: row;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -webkit-align-content: center;
+  align-content: center;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
 
+}
+.scoop { width: 40%; margin-left: 10px;}
+.email {
+  border: $grayDarker thin solid;
+  padding: 20px;
+  margin-top: 10px;
+  p {text-align: left;}
+}
+small { color: $textColor; }
+.flex-element {
+  flex: 0 1 auto;
+  -webkit-flex: 0 1 auto;
+  margin: 5px;
+  width: 24%;
+  overflow: hidden;
+  h3, small { padding: 0 20px; }
+  p { text-align: left; }
+}
+.center { text-align: center; margin: 0 auto; }
+.tag {
+  font-family: $sansFontFamily;
+  line-height: normal;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 15px;
+  border: thin $grayLighter solid;
+  font-weight: $baseFontWeight;
+  text-align: center;
+  display: inline-block;
+  padding: 5px 8px;
+  background: lighten($veryLight, 5%);
+
+}
+.mini-article {
+  background: $veryLight;
+  padding-bottom: 20px;
+  img { max-width: 100%; }
+}
 
 @media (max-width: 1200px) {
   #slideshow > img {

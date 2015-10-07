@@ -30,6 +30,8 @@ $orange:                #ffbe00;
 $pink:                  #c3325f;
 $purple:                #7a43b6;
 
+.blue-hover:hover { background: $blue; color: $white; }
+
 // Scaffolding
 // -------------------------
 $bodyBackground:        $gray;
@@ -42,6 +44,7 @@ $linkColorHover:        darken($linkColor, 15%);
 
 .white { color: $white; }
 .black-bg { background-color: $grayDarker;}
+.orange { color: $orange; }
 
 
 // Typography

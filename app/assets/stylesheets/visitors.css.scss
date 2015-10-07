@@ -1,3 +1,56 @@
 // Place all the styles related to the Visitors controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+.pages {
+  float:none;
+  display:inline-block;
+  white-space:normal;
+  vertical-align:top;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  margin-left: -110px;
+  input {margin-bottom: 5px;}
+  .hint { text-align: center; display: block; font-size: .9em; margin-top: 0; padding-top: 0; }
+  p  { text-align: center; display: block; width: 100%; }
+}
+.down a { font-size: 3em; transition: all .2s ease; color: $blue; }
+#page-preferences h2:before, #page-frequency h2:before{
+  display: block;
+  content: " ";
+  margin-top: -250px;
+  padding-top: 250px;
+  height: 300px;
+  visibility: hidden;
+  transition: all .2s ease;
+}
+#page-preferences h2, #page-preferences h3, #page-frequency h2, #page-frequency h3 { margin-bottom: 20px; }
+#page-preferences p, #page-frequency p { font-size: .9em; width: 60%; margin-left: 20%;}
+#weekly, #daily, #monthly { padding: 100px 20px; width: 1px;  flex: 1 1 auto; -webkit-flex: 1 1 auto; input[type="radio"] {color: $grayLighter;}  }
+#daily { background: $veryLight; color: $grayLighter;}
+#weekly {border: $orange solid thin; border-left: none; color: $grayLighter;}
+#monthly {border: $orange solid thin; color: $orange; input[type="radio"] {color: $orange;}}
+input[type="radio"] + label { font-size: 1.5em;  }
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+input[type="radio"]:before { font-family: FontAwesome; content: "\f10c"; font-size: 1.5em; }
+input[type="radio"]:checked:before { font-family: FontAwesome; color: $orange; content: "\f058"; }
+.btn.tag:hover { color: $white; background: $orange; }
+.form-flex {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+   flex-direction: row;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -webkit-align-content: space-between;
+  align-content: space-between;
+
+}
+.add { display: inline-block; margin: 20px 10px; }

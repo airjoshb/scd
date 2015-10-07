@@ -1,0 +1,67 @@
+#add-email.container
+  = simple_form_for(current_user, :as => 'user', :url => finish_signup_path(current_user), :html => { role: 'form'}) do |f|
+    #page-info.pages
+      %h2 Let's get to it
+      %p
+        Wanna hook up?
+        %br
+        %span.small Your accounts, that is...it makes login a snap and gives you an image for your profile!
+      - ['facebook', 'twitter'].each do |provider|
+        - if current_user.identities.pluck(:provider).include?(provider.to_s)
+          %i{ class: "fa #{"fa-" + provider.to_s}" }
+        - else
+          = link_to "Sign in with #{provider.to_s.titleize}",  user_omniauth_authorize_path(provider), class: "tag blue-hover"
+      %p Now the easy stuff
+      = f.input :username, label: false, placeholder: "username", hint: "That clever name you've been saving up goes here"
+      = f.input :password, autocomplete: "off", required: true, label: false, placeholder: "password"
+      = f.input :password_confirmation, required: true, label: false, placeholder: "password again", hint: "Make it good, at least 8 characters and maybe some &!*?"
+      .down
+        = link_to "#page-preferences", class: "nav-element" do
+          %i.fa.fa-chevron-down
+    #page-preferences.pages
+      %h2 What do you like to do?
+      %p Here's some things we like. Just click to add them to your interests. Click again, to remove. Don't toggle too much, it's not becoming.
+      .tags
+        - for tag in @interests
+          - if !@user_tags.include?(tag["name"])
+            .add
+              = link_to add_tag_path(tag["name"]), id: tag["name"], class: 'follow', remote: true, method: :put, data: {toggle_href: "", toggle_class: 'followed '} do
+                .tag.center
+                  = tag["name"]
+          - else
+            .add.added
+              = link_to remove_tag_path(tag["name"]), id: tag["name"], class: 'followed', remote: true, method: :put, data: {toggle_href: add_tag_path(tag["name"]), toggle_class: 'follow'} do
+                .tag.center
+                  = tag["name"]
+      %p Don't see something? make a comma separated list and when things get posted with those tags, they'll automatically be included in your Lineup.
+      = f.input :tag_list, label: false, placeholder: "kittens, unicorns, internet of things"
+      .down
+        = link_to "#page-frequency", class: "nav-element" do
+          %i.fa.fa-chevron-down
+    #page-frequency.pages
+      %h2 How much of a doer are you?
+      %p Set how often you want to receive an email with things to do from your list of interests.
+      .form-flex
+        - User.frequencies.keys.each do |frequency|
+          %div{id: frequency}
+            - if frequency == "monthly"
+              %h3 Some Doin'
+              %small Our standard plan, but once you start doin, it is hard to stop.
+            - elsif frequency == "weekly"
+              %h3 Serious Doer
+              %small Available to all during our beta testing to get a taste of doer life.
+            - else
+              %h3 Maximum Doer
+              %small  Available with our doer subscriber plan coming soon!
+            %div
+              = f.radio_button :frequency, frequency, id: "user_#{frequency}"
+              = f.label frequency.to_sym
+      %h3 All done?
+      %a.tag.btn{ onclick: "$('#edit_user').submit()"} Take me to the Lineup
+:javascript
+  $.localScroll({
+     target: 'body', // could be a selector or a jQuery object too.
+     queue:true,
+     duration:1500,
+     hash:true
+   });

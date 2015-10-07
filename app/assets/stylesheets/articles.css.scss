@@ -4,6 +4,7 @@
 article img { padding: 1rem 0; }
 .add a { &:hover { color: $orange; .tag{border-color: $orange;} }}
 .add a:first-child { border: none; }
+.followed { color: $orange; .tag{border-color: $orange;}}
 .followed:hover {  &::after { content: "\f068"; font-family: 'FontAwesome'; border-bottom: none; }}
 .follow {  &::after { content: "\f067"; font-family: 'FontAwesome'; border-bottom: none; }}
 

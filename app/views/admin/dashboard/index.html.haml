@@ -16,7 +16,7 @@
       = user.email
       %div
         = select_tag "roles", options_for_select(@roles.keys.to_a, user.role), class: "role-select", data: { "user-id" => user.id }
-        = link_to "delete", user_path(user), method: :delete, remote: true, class: "tag-button destroyed small"
+        = link_to "delete", delete_user_admin_path(user), method: :delete, remote: true, class: "tag-button destroyed small"
     %hr
 
 :javascript

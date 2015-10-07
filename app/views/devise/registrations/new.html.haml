@@ -1,4 +1,4 @@
-#slideshow
+#slideshow.pages
   =image_tag image_url('santa-cruz-1.jpg')
   =image_tag image_url('santa-cruz-7.jpg')
   =image_tag image_url('santa-cruz-3.jpg')
@@ -22,14 +22,56 @@
         %i.fa.fa-instagram.fa-2x.large.white
       = link_to "http://facebook.com/santacruzdaily", target: '_blank' do
         %i.fa.fa-facebook.fa-2x.large.white
+    .down.white
+      = link_to "#page-preview", class: "nav-element" do
+        %i.fa.fa-chevron-down
     #modal
       = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: "sign_up_user"}, format: :json, remote: true ) do |f|
         .form-inputs
+          = hidden_field_tag :authenticity_token, form_authenticity_token
           = f.email_field :email, autofocus: true, placeholder: "Enter your email", label: false
         %a.coa{ onclick: "$('#sign_up_user').submit()"} Get your invite
         %a.simplemodal-close.text thanks, but I don't do cool stuff
+#page-preview.pages
+  %h1.center
+    The Lineup
+  .flex
+    - for article in @articles
+      .flex-element
+        = render 'devise/registrations/article', article: article
+    .down.orange
+      = link_to "#page-submit", class: "nav-element" do
+        %i.fa.fa-chevron-down
+#page-submit.pages
+  %h1.center Give us the scoop
+  .flex
+    .flex-element
+      %h4 We want your events and info on what's happening
+      %p Most of the content on Santa Cruz Daily is created by our own Santa Cruz mavens, but we can't know everything.
+      %h4 Submit via email
+      %p Sending us your content and events couldn't be easier, send an email to: <em>submissions at santacruzdaily dot com</em> with the format next door and it will automatically be in our database waiting for final approval. Submission does not guarantee that it will make it into the lineup, so make sure you are sending us awesome content.
+    .scoop
+      = image_tag 'scoop.svg'
+      .email
+        %p To: <em>The email in the instructions</em>
+        %p From: <em>Your email address will become your user login</em>
+        %p Subject: <em>The post, or event title</em>
+        %p The body of the email will become the content of your post. An attached image will become your post image and resized automatically, so please send something at least 1000px wide. URLs will automatically be generated from content that starts with "www" and you can even format using Markdown. Pretty cool, no?
+        %p The following details can be added with the exact formatting of the example (feel free to copy/paste this text).
+        %pAny components you aren't using, leave out completely.
+        <em>All details must come after a double-hyphen "--".</em>
+        %p --
+        %p subhead: <em>If you've got one, it goes here</em>
+        %p why: <em>A super quick, why people should care.</em>
+        %p Tips: <em>Quick tips, comma separated.</em>
+        %p tags: <em>tags are comma separated. please only submit a few relevant tags.</em>
+        %p start: <em>If you have an event, this is the start date and time of your event, for example</em> Nov 11, 2015, 12:15pm
+        %p end: <em>if you want to specify a specific ending time, or is a multi-day event use this detail</em> Nov 11, 2015, 12:15pm
+        %p address: <em>The first line of your address goes here. Addresses are geocoded automatically for generating maps and directions</em>
+        %p city: <em>Only Santa Cruz area towns will be accepted at this time.</em>
+        %p zip: <em>Important for the geocoding</em>
 
-
+  %p.center.small ©2015 Santa Cruz Daily
 :javascript
 
   /**
@@ -42,4 +84,10 @@
     $('#modal').modal();
     return false;
   });
+  $.localScroll({
+     target: 'body', // could be a selector or a jQuery object too.
+     queue:true,
+     duration:1500,
+     hash:true
+   });
 

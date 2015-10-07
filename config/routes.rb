@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   get 'visitors/index'
 
-  resources :users do
-    put 'add_tag/:tag', to: 'users#add_tag', as: :add_tag, on: :member
-    put 'remove_tag/:tag', to: 'users#remove_tag', as: :remove_tag, on: :member
-  end
 
   resources :share_emails
 
@@ -20,8 +16,6 @@ Rails.application.routes.draw do
 
   mount StripeEvent::Engine => '/stripe'
 
-  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
-
 
   devise_for :users, controllers: {registrations: "users/registrations", sessions: "users/sessions", passwords: "users/passwords", omniauth_callbacks: 'omniauth_callbacks'}, skip: [:sessions, :registrations]
 
@@ -31,9 +25,14 @@ Rails.application.routes.draw do
     get 'admin/users/:id', to: 'admin/users#edit', as: :edit_admin_user
     put 'admin/users/:id', to: 'admin/users#update'
     get 'admin/users', to: 'admin/users#new', as: :new_admin_user
+    put 'add_tag/:tag', to: 'users/registrations#add_tag', as: :add_tag
+    put 'remove_tag/:tag', to: 'users/registrations#remove_tag', as: :remove_tag
+    delete "admin/users/:id" => "admin/users#destroy", as: :delete_user_admin
     get    "login"   => "users/sessions#new",         as: :new_user_session
     post   "login"   => "users/sessions#create",      as: :user_session
     delete "signout" => "users/sessions#destroy",     as: :destroy_user_session
+    match '/users/:id/finish_signup' => 'users/registrations#finish_signup', via: [:get, :patch], :as => :finish_signup
+
 
     get    "signup"  => "users/registrations#new",    as: :new_user_registration
     post   "signup"  => "users/registrations#create", as: :user_registration

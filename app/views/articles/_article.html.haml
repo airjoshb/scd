@@ -112,7 +112,7 @@
     - unless article.recommended_users.blank?
       .recommend-users
         - for user in article.recommended_users[0,10]
-          = image_tag user.identities.first.avatar.thumb, :class => "circle"
+          = image_tag user.identities.first.avatar.thumb, :class => "circle" unless user.identities.first.blank?
     %span.share
       %a.btn-2
         %i.fa.fa-share
