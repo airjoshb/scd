@@ -112,6 +112,7 @@ input { font-size: 1.5em; padding: 10px; margin-bottom: 20px;}
   input {margin-bottom: 5px;}
   .hint { text-align: center; display: block; font-size: .9em; margin-top: 0; padding-top: 0; }
   p  { text-align: center; display: block; width: 100%; }
+  em { margin: 0 auto; width: 50%; display: block; text-align: center; }
   h1:first-child {margin-top: 50px;}
 }
 .flex {
@@ -135,6 +136,18 @@ input { font-size: 1.5em; padding: 10px; margin-bottom: 20px;}
   margin: 0 10px; border: $veryLight thin solid;
   padding: 20px;
   margin-top: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.daily {
+  width: 50%;
+  margin: 0 auto; border: $veryLight thin solid;
+  padding: 20px;
+  margin-top: 10px;
+  overflow: hidden;
+  position: relative;
+  h4 { text-align: center; font-family: 'Comfortaa'; font-size: 1.2em; line-height: 2em; border-bottom: $veryLight 1px solid; }
+  .flex-element { width: 70%; margin: 0 auto;}
 }
 .email {
   border: $grayDarker thin solid;
@@ -177,14 +190,14 @@ small { color: $textColor; }
   img { max-width: 100%; }
 }
 
-.logo { width: 70px; margin: 0 auto 10px; img {width: 100%; }}
+.daily .logo, .screen .logo { width: 70px; height: 70px; margin: 0 auto 10px; img {width: 100%; }}
 
 #nav {
   width: 150px;
-  height: 100vh;
   padding: 12px 0;
   position: absolute;
-  top: 130px;
+  top: 0px;
+  bottom: 0;
   left: 12px;
   border-right-color: $veryLight;
   border-right-width: 1px;
@@ -247,4 +260,8 @@ small { color: $textColor; }
   #nav { display: none; }
   .post {  border-left: none; img { min-width: 100%; } }
   .mini-article {width: 100%;}
+  .daily {
+    width: 90%;
+    margin: 20px auto;
+  }
 }
