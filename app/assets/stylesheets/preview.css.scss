@@ -102,7 +102,6 @@ input { font-size: 1.5em; padding: 10px; margin-bottom: 20px;}
   cursor:pointer;
 }
 .down a { font-size: 3em; transition: all .2s ease; }
-#page-submit { background: $veryLight; }
 .pages {
   white-space:normal;
   vertical-align:top;
@@ -129,6 +128,8 @@ input { font-size: 1.5em; padding: 10px; margin-bottom: 20px;}
   flex-flow: row wrap;
 
 }
+#page-submit { background: $veryLight; .flex { justify-content: center;
+  -webkit-justify-content: center;  } }
 .post { border-left: 165px transparent solid; }
 .scoop { width: 40%; margin-left: 10px;}
 .screen {
@@ -202,7 +203,6 @@ small { color: $textColor; }
       color: darken($veryLight, 5%);
     }
     .nav-element {
-      width: 100%;
       height: 100%;
       padding: 8px 16px;
       text-align: left;
