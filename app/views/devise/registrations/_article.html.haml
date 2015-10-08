@@ -7,7 +7,7 @@
   - if article.events.present?
     %small
       - if article.events.first.start_date > Time.current
-        %strong= custom_time_distance(article.events.first.start_date) + "!"
+        %strong= custom_time_distance(article.events.first.start_date.to_date)
       - else
         = time_ago_in_words(article.events.first.start_date)
         ago
