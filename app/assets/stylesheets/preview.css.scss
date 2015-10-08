@@ -131,7 +131,6 @@ input { font-size: 1.5em; padding: 10px; margin-bottom: 20px;}
 #page-submit { background: $veryLight; .flex { justify-content: center;
   -webkit-justify-content: center;  } }
 .post { border-left: 165px transparent solid; }
-.scoop { width: 40%; margin-left: 10px;}
 .screen {
   margin: 0 10px; border: $veryLight thin solid;
   padding: 20px;
@@ -153,6 +152,8 @@ small { color: $textColor; }
   h3, small { padding: 0 20px; }
   p { text-align: left; }
 }
+.scoop { width: 40%; margin-left: 10px; img { max-width: 100%; }}
+
 .center { text-align: center; margin: 0 auto; }
 .tag {
   font-family: $sansFontFamily;
@@ -244,5 +245,6 @@ small { color: $textColor; }
 @media (max-width: 900px) {
   .flex-element { width: auto; }
   #nav { display: none; }
-  .post {  border-left: none; }
+  .post {  border-left: none; img { min-width: 100%; } }
+  .mini-article {width: 100%;}
 }
