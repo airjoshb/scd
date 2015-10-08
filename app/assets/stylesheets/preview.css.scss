@@ -243,5 +243,6 @@ small { color: $textColor; }
 
 @media (max-width: 900px) {
   .flex-element { width: auto; }
-  #nav { display: hidden; }
+  #nav { display: none; }
+  .post {  border-left: none; }
 }
