@@ -133,7 +133,7 @@ input { font-size: 1.5em; padding: 10px; margin-bottom: 20px;}
   -webkit-justify-content: center;  } }
 .post { border-left: 165px transparent solid; }
 .screen {
-  margin: 0 10px; border: $veryLight thin solid;
+  margin: 0 10px; border: #bbb thin solid;
   padding: 20px;
   margin-top: 10px;
   overflow: hidden;
@@ -141,7 +141,7 @@ input { font-size: 1.5em; padding: 10px; margin-bottom: 20px;}
 }
 .daily {
   width: 50%;
-  margin: 0 auto; border: $veryLight thin solid;
+  margin: 0 auto; border: #bbb thin solid;
   padding: 20px;
   margin-top: 10px;
   overflow: hidden;
