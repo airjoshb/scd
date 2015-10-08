@@ -40,7 +40,7 @@ module ApplicationHelper
     return "Tomorrow" if time == Date.tomorrow
     return "This week" if (date..date + 6.days).include?(time)
     return "Next week" if (date..date + 13.days).include?(time)
-    return "Info" if  !(date..date + 13.days).include?(time)
+    return "Info" if  time > date + 13.days
     distance_of_time_in_words_to_now(time)
   end
 
