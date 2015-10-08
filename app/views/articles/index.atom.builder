@@ -10,6 +10,7 @@ atom_feed do |feed|
     feed.entry(post) do |entry|
       entry.title(post.title)
       entry.content(markdown(post.body), type: 'html')
+      entry.published(post.publish_date)
       entry.author do |author|
         author.name(post.user.identities.presence ? post.user.identities.first.nickname : post.user.username ? post.user.username : post.email)
       end
