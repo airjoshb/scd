@@ -43,9 +43,6 @@
                   = current_user.username || current_user.email
             %i.fa.fa-chevron-circle-right
             = link_to "Logout", destroy_user_session_path, method: :delete
-          - else
-            %i.fa.fa-chevron-circle-right
-            = link_to "Login", new_user_session_path
       .nav-group
         - if current_user.present?
           .nav-title
