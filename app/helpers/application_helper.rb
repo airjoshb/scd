@@ -38,8 +38,9 @@ module ApplicationHelper
     date = Date.today.beginning_of_week
     return "Today" if time.today?
     return "Tomorrow" if time == Date.tomorrow
-    return "This week" if time..date + 6.days
-    return "Info" if  !time..date + 6.days
+    return "This week" if (date..date + 6.days).include?(time)
+    return "Next week" if (date..date + 13.days).include?(time)
+    return "Info" if  !(date..date + 13.days).include?(time)
     distance_of_time_in_words_to_now(time)
   end
 
