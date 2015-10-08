@@ -16,6 +16,10 @@ class ArticlesController < ApplicationController
     else
       @articles = Article.active
     end
+    respond_to do |format|
+      format.html
+      format.atom
+    end
   end
 
   # GET /articles/1
