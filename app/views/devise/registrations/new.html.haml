@@ -82,7 +82,7 @@
           - if article.events.present?
             %small{style: "margin: 5px 0; display: block; font-family: 'Open Sans', sans-serif;"}
               - if article.events.first.start_date > Time.current
-                %strong= custom_time_distance(article.events.first.start_date) + "!"
+                %strong= custom_time_distance(article.events.first.start_date.to_date)
               - else
                 = time_ago_in_words(article.events.first.start_date)
                 ago
