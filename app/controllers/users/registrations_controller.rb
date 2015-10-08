@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def new
-    @articles = Article.status(1).active.popular.limit(20)
+    @articles = Article.status(1).active.popular.limit(12)
 
     super
   end
