@@ -244,7 +244,7 @@ small { color: $textColor; }
   margin-right: 10px;
   opacity: .75
 }
-
+.email-text {width: 55%; display: inline-block;}
 @media (max-width: 1200px) {
   #slideshow > img {
     height: auto;
@@ -260,6 +260,7 @@ small { color: $textColor; }
   #nav { display: none; }
   .post {  border-left: none; img { min-width: 100%; } }
   .mini-article {width: 100%;}
+  .email-text {width: 100%; }
   .daily {
     width: 90%;
     margin: 20px auto;
