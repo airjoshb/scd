@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   get 'visitors/index'
 
+  get '/feed' => 'visitors#rss',
+      as: :feed,
+      defaults: { :format => 'xml' }
+  get '/sitemap' => 'visitors#sitemap',
+      defaults: { :format => 'xml' }
 
   resources :share_emails
 
