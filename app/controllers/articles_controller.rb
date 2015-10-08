@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
        @user_tags = @user.tag_list
        @articles = Article.tagged_with(@tags, :any => :true).status(1).active.popular
     else
-      @articles = Article.active
+      @articles = Article.status(1).active
     end
     respond_to do |format|
       format.html
