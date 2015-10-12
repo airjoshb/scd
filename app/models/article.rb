@@ -3,7 +3,7 @@ class Article < ActiveRecord::Base
   validates_numericality_of :user_id
 
   belongs_to :user
-  has_many :events, -> { order(start_date :asc) }, dependent: :destroy
+  has_many :events, -> { order(start_date: :desc) }, dependent: :destroy
   has_many :locations, dependent: :destroy
   has_many :statuses, dependent: :destroy
   has_many :recommendations, dependent: :destroy
