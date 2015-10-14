@@ -69,9 +69,8 @@ hr {
 .share-popover, .lineup-popover {
   font-size: .8em;
   display: none;
-  background: $orange;
   a {
-    color: white;
+    color: orange;
     cursor: pointer;
     &:hover { color: darken($orange, 10%) !important;  }
   }

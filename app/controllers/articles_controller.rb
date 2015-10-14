@@ -47,7 +47,7 @@ class ArticlesController < ApplicationController
     @id = "Id:#{incr_id}"
     line_item = REDIS.hmset(@id,  :article_id, params[:article_id], :title, params[:title])
     REDIS.sadd current_user_cart, incr_id
-    REDIS.expire(@id, 90.minutes)
+    REDIS.expire(@id, 30.minutes)
     render :js => "window.location =  window.location"
   end
 
