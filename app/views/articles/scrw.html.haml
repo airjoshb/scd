@@ -23,7 +23,6 @@
       -for tag in article.tags.reverse[1..-1].take(2)
         .tag= tag
       .mini-article
-        = link_to image_tag(article.image.medium), article unless article.image.blank?
         %h3
           - if @cart_line_items.to_s.include? article.id.to_s
             %i.star.fa.fa-star.orange
