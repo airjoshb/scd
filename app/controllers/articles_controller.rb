@@ -38,6 +38,7 @@ class ArticlesController < ApplicationController
     cart_ids = REDIS.sort(current_user_cart, :by => 'NOSORT', :get => ['Id:*->article_id','Id:*->title', '#' ])
     cart_line_items = cart_ids
     LineupMailer.send_email(email, cart_line_items).deliver
+    REDIS.flushall
     render :nothing => :true
   end
 
@@ -46,6 +47,7 @@ class ArticlesController < ApplicationController
     @id = "Id:#{incr_id}"
     line_item = REDIS.hmset(@id,  :article_id, params[:article_id], :title, params[:title])
     REDIS.sadd current_user_cart, incr_id
+    REDIS.expire(@id, 90.minutes)
     render :js => "window.location =  window.location"
   end
 
