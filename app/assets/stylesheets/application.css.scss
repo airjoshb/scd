@@ -21,6 +21,7 @@
 .social { .fa {color: $gray;} padding: 5px; }
 .logo { width: 70px; margin: 0 auto 10px; img {width: 100%; }}
 .mobile { display:none; }
+i { vertical-align: middle; }
 .star {  font-style: normal; }
 .star:hover:before { color: $orange; }
 a { border: none; }

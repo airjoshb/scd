@@ -25,7 +25,10 @@
       .mini-article
         = link_to image_tag(article.image.medium), article unless article.image.blank?
         %h3
-          =link_to "", article_add_to_path(article_id: article.id, title: article.title), remote: true, class: "star fa fa-star-o", role: 'button', data: {target: @article}
+          - if @cart_line_items.to_s.include? article.id.to_s
+            %i.star.fa.fa-star.orange
+          - else
+            =link_to "", article_add_to_path(article_id: article.id, title: article.title), remote: true, class: "star fa fa-star-o", role: 'button', data: {toggle_href: "", toggle_class: 'fa-star'}
           = link_to article.title, article
         - if article.events.present?
           %small
@@ -55,12 +58,8 @@
                 people
               - else
                 person
-        - if article.why.present?
-          %small
-            %strong How much?
-            = article.why
-        - if article.tips.present?
-          %small
-            %strong Menu
-            - for tip in article.tips.split(',')
-              %small.tip.fa.fa-bullseye= tip
+        %h4= article.subhead unless article.subhead.blank?
+        %p= Nokogiri::HTML.parse(markdown(article.body)).css('p').first.text
+        .readmore
+          = link_to article do
+            more
