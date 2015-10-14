@@ -59,7 +59,6 @@
               - else
                 person
         %h4= article.subhead unless article.subhead.blank?
-        %p= Nokogiri::HTML.parse(markdown(article.body)).css('p').first.text
         .readmore
           = link_to article do
             more
