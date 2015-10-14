@@ -20,7 +20,7 @@
 .flex.post
   - for article in @articles
     .flex-element
-      -for tag in article.tags.reverse[1..-1].take(2)
+      -for tag in article.tags[1..-1].take(2)
         .tag= tag
       .mini-article
         %h3
