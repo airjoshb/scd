@@ -22,6 +22,38 @@ class ArticlesController < ApplicationController
     end
   end
 
+   def scrw
+    @tag = ActsAsTaggableOn::Tag.find_by_name('santa cruz restaurant week')
+    @articles = Article.status(1).active.tagged_with(@tag)
+    respond_to do |format|
+      format.html
+      format.atom
+    end
+  end
+
+  def send_mail
+    send_mail = params[:send_mail]
+    email = send_mail[:email]
+    cart_ids = REDIS.sort(current_user_cart, :by => 'NOSORT', :get => ['Id:*->article_id','Id:*->title', '#' ])
+    cart_line_items = cart_ids
+    LineupMailer.send_email(email, cart_line_items).deliver
+    render :nothing => :true
+  end
+
+  def add
+    incr_id = REDIS.incrby(:id,  1)
+    @id = "Id:#{incr_id}"
+    line_item = REDIS.hmset(@id,  :article_id, params[:article_id], :title, params[:title])
+    REDIS.sadd current_user_cart, incr_id
+    render :js => "window.location =  window.location"
+  end
+
+  def remove
+    REDIS.srem current_user_cart, params[:item_id]
+    render :js => "window.location = '#{article_path}'"
+
+  end
+
   # GET /articles/1
   # GET /articles/1.json
   def show
@@ -70,6 +102,11 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+    def current_user_cart
+      "cart#{session[:session_id]}"
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.friendly.find(params[:id])

@@ -1,0 +1,42 @@
+- for article in @articles
+  %article{style: "margin-bottom: 50px;" }
+    %div
+      - for tag in article.tags.reverse[1..-1].take(2)
+        %span{ style: "line-height: normal; text-transform: uppercase; font-size: 15px; border: thin #bbb solid; display: inline-block; padding: 5px 8px; color: #bbb; font-family: 'Open Sans', sans-serif;"}
+          =tag
+    %div{style: "width: 65%; display: inline-block;"}
+      %h2{style: "margin-bottom: 5px;"}= link_to article.title, article_path(article), style: "color: inherit; text-decoration: none; font-family: 'Open Sans', sans-serif;"
+      %i= article.subhead
+      - if article.events.present?
+        %small{style: "margin: 5px 0; display: block; font-family: 'Open Sans', sans-serif;"}
+          - if article.events.first.start_date > Time.current
+            %strong= custom_time_distance(article.events.first.start_date.to_date)
+          - else
+            = time_ago_in_words(article.events.first.start_date)
+            ago
+          = article.events.first.start_date.strftime("%A, %b %d")
+          @
+          = article.events.first.start_date.strftime("%l:%M%P")
+          - if article.locations.present?
+            at
+            = article.locations.first.line_1 + ","
+            = article.locations.first.city
+            = link_to "map", "http://maps.apple.com/maps?q=#{article.locations.first.latitude},#{article.locations.first.longitude}", :class => "tag-button"
+    - if article == @articles.first
+      = image_tag article.image.hero, style: "max-width: 100%;"
+      %p{ style: "font-family: 'Open Sans', sans-serif;"}= Nokogiri::HTML.parse(markdown(article.body)).css('p').first.text
+      - if article.why.present?
+        %small
+          %strong How much?
+          = article.why
+        - if article.tips.present?
+          %small
+            %strong Menu
+            - for tip in article.tips.split(',')
+              %small.tip.fa.fa-bullseye= tip
+      = link_to 'read',  article, style: "line-height: normal; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; background: #ffbe00; display: inline-block; padding: 3px 5px; color: white; text-decoration: none; font-family: 'Open Sans', sans-serif; "
+    - else
+      = link_to 'read',  article, style: "line-height: normal; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; background: #ffbe00; display: inline; padding: 3px 5px; color: white; text-decoration: none; font-family: 'Open Sans', sans-serif; "
+      = link_to image_tag(article.image.small, style: "max-width: 100%; vertical-align: top;"), article
+  - unless article == @articles.last
+    %hr{style: "display: block; height: 1px; border: 0; border-top: 1px solid #bbb; margin: 2em auto; padding: 0; " }

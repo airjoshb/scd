@@ -26,6 +26,15 @@ class Article < ActiveRecord::Base
   scope :active, -> { where('publish_date <= ?', Time.current).order('publish_date DESC') }
   scope :next, lambda { |id| where("id > ?", id).order("id ASC")}
 
+
+  scope :popular, -> {
+    joins('LEFT OUTER JOIN recommendations ON articles.id = recommendations.article_id')
+    .select('articles.*, count(recommendations.id) as "user_count"')
+    .group('articles.id')
+    .order('user_count desc')
+  }
+
+
   mount_uploader :image, ImageUploader
 
 

@@ -44,6 +44,9 @@ Rails.application.configure do
   # Send email in development mode?
   config.action_mailer.perform_deliveries = true
 
+  ENV["REDISTOGO_URL"] = 'redis://redistogo:6a56db461392447cbfd522f150086c49@hammerjaw.redistogo.com:9251'
+
+
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.

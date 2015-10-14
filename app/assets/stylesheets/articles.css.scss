@@ -66,11 +66,10 @@ hr {
   opacity: .75;
   display: inline-block;
 }
-.share-popover {
+.share-popover, .lineup-popover {
   font-size: .8em;
   display: none;
   background: $orange;
-  * { padding: 10px; color: $white; }
   a {
     color: white;
     cursor: pointer;
