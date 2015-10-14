@@ -9,7 +9,7 @@ class EmailProcessor
     # here's an example of model creation
     user = User.find_or_initialize_by(email: @email.from[:email])
     a = user.articles.find_or_create_by(title: @email.subject.squish) do |u|
-      u.body = @email.body,
+      u.body = @email.body
       u.image = @email.attachments.first
     end
     if @email.raw_text.match('subhead:').present?
