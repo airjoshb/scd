@@ -34,6 +34,7 @@ class ArticlesController < ApplicationController
   def send_mail
     send_mail = params[:send_mail]
     email = send_mail[:email]
+    user = User.find_or_create_by(email: email)
     cart_ids = REDIS.sort(current_user_cart, :by => 'NOSORT', :get => ['Id:*->article_id','Id:*->title', '#' ])
     cart_line_items = cart_ids
     LineupMailer.send_email(email, cart_line_items).deliver

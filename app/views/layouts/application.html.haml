@@ -64,6 +64,13 @@
           - for tag in @tags
             .nav-element
               .nav-text= link_to tag, articles_path(:tag => tag.name)
+        .center.social
+          = link_to "http://twitter.com/santacruzdaily", target: '_blank' do
+            %i.fa.fa-twitter.fa-2x.large
+          = link_to "http://instagram.com/thesantacruzdaily", target: '_blank' do
+            %i.fa.fa-instagram.fa-2x.large
+          = link_to "http://facebook.com/santacruzdaily", target: '_blank' do
+            %i.fa.fa-facebook.fa-2x.large
       .nav-group.scd
         .nav-title
           Santa Cruz Daily ©2015
@@ -71,9 +78,13 @@
       .logotype
         = link_to image_tag("santa-cruz-daily-octopus.png", class: 'mobile' ), root_path
         Santa Cruz Daily
+        - if controller.action_name == "scrw"
+          %i.fa.fa-envelope-o
+          #modal.lineup-popover
+            = render 'lineup_email'
         - if @article.present? or params[:tag].present?
           .lineup
-            = link_to articles_path do
+            = link_to santa_cruz_restaurant_week_path do
               %i.fa.fa-caret-left
               lineup
 
