@@ -18,7 +18,7 @@ class EmailProcessor
     if @email.raw_text.match('why:').present?
       a.why = @email.raw_text.match(/why:(.*)/)[1]
     end
-    if @email.raw_text.match('subhead:').present?
+    if @email.raw_text.match('tips:').present?
       a.tips = @email.raw_text.match(/tips:(.*)/)[1]
     end
     if @email.raw_text.match('tags:').present?
