@@ -23,7 +23,6 @@
             = article.locations.first.city
             = link_to "map", "http://maps.apple.com/maps?q=#{article.locations.first.latitude},#{article.locations.first.longitude}", :class => "tag-button"
     - if article == @articles.first
-      = image_tag article.image.hero, style: "max-width: 100%;"
       %h4{ style: "font-family: 'Open Sans', sans-serif;"}=article.subhead unless article.subhead.blank?
       - if article.why.present?
         %small
@@ -37,6 +36,5 @@
       = link_to 'read',  article, style: "line-height: normal; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; background: #ffbe00; display: inline-block; padding: 3px 5px; color: white; text-decoration: none; font-family: 'Open Sans', sans-serif; "
     - else
       = link_to 'read',  article, style: "line-height: normal; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; background: #ffbe00; display: inline; padding: 3px 5px; color: white; text-decoration: none; font-family: 'Open Sans', sans-serif; "
-      = link_to image_tag(article.image.small, style: "max-width: 100%; vertical-align: top;"), article
   - unless article == @articles.last
     %hr{style: "display: block; height: 1px; border: 0; border-top: 1px solid #bbb; margin: 2em auto; padding: 0; " }
