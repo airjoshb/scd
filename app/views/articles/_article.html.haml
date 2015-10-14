@@ -113,6 +113,10 @@
       .recommend-users
         - for user in article.recommended_users[0,10]
           = image_tag user.identities.first.avatar.thumb, :class => "circle" unless user.identities.first.blank?
+    - if @cart_line_items.to_s.include? article.id.to_s
+      %i.star.fa.fa-star.orange
+    - else
+      =link_to "", article_add_to_path(article_id: article.id, title: article.title), remote: true, class: "star fa fa-star-o", role: 'button', data: {toggle_href: "", toggle_class: 'fa-star'}
     %span.share
       %a.btn-2
         %i.fa.fa-share

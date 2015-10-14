@@ -25,6 +25,9 @@ class ArticlesController < ApplicationController
    def scrw
     @tag = ActsAsTaggableOn::Tag.find_by_name('santa cruz restaurant week')
     @articles = Article.status(1).active.tagged_with(@tag)
+
+    cart_ids = REDIS.sort(current_user_cart, :by => 'NOSORT', :get => ['Id:*->article_id','Id:*->price','Id:*->title', '#' ])
+    @cart_line_items = cart_ids
     respond_to do |format|
       format.html
       format.atom
@@ -52,14 +55,17 @@ class ArticlesController < ApplicationController
   end
 
   def remove
-    REDIS.srem current_user_cart, params[:item_id]
-    render :js => "window.location = '#{article_path}'"
+    id = REDIS.hmget(current_user_cart,  params[:article_id])
+    REDIS.srem current_user_cart, id.id
+    render :js => "window.location = window.location"
 
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
+    cart_ids = REDIS.sort(current_user_cart, :by => 'NOSORT', :get => ['Id:*->article_id','Id:*->price','Id:*->title', '#' ])
+    @cart_line_items = cart_ids
     @related_articles = @article.find_related_tags.active.limit(5)
     @share = ShareEmail.new({ title: @article.title, file: @article.image.medium, url: url_for(@article) })
   end

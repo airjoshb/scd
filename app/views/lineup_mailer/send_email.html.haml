@@ -24,6 +24,7 @@
             = link_to "map", "http://maps.apple.com/maps?q=#{article.locations.first.latitude},#{article.locations.first.longitude}", :class => "tag-button"
     - if article == @articles.first
       = image_tag article.image.hero, style: "max-width: 100%;"
+      %h4{ style: "font-family: 'Open Sans', sans-serif;"}=article.subhead unless article.subhead.blank?
       %p{ style: "font-family: 'Open Sans', sans-serif;"}= Nokogiri::HTML.parse(markdown(article.body)).css('p').first.text
       - if article.why.present?
         %small

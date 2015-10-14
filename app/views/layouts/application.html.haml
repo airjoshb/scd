@@ -31,6 +31,12 @@
     %nav#nav
       .nav-group
         .logo= link_to image_tag("santa-cruz-daily-octopus.png"), root_path
+        .nav-group
+          .nav-element
+            - if @article.present? or params[:tag].present?
+              = link_to santa_cruz_restaurant_week_path do
+                %i.fa.fa-caret-left
+                back to the lineup
         .nav-element
           - if current_user.present?
             = link_to edit_registration_path(current_user) do
@@ -78,15 +84,11 @@
       .logotype
         = link_to image_tag("santa-cruz-daily-octopus.png", class: 'mobile' ), root_path
         Santa Cruz Daily
-        - if controller.action_name == "scrw"
-          %i.fa.fa-envelope-o
+        - if controller.action_name == "scrw" or controller.action_name == "show"
+          = link_to "" do
+            %i.fa.fa-3x.fa-envelope-o
           #modal.lineup-popover
             = render 'lineup_email'
-        - if @article.present? or params[:tag].present?
-          .lineup
-            = link_to santa_cruz_restaurant_week_path do
-              %i.fa.fa-caret-left
-              lineup
 
 
       = yield

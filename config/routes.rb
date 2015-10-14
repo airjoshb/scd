@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :events
     resources :locations
     get 'add/:article_id', to: 'articles#add', as: :add_to
-    get 'remove/:item_id', to: 'articles#remove', as: :remove_from
+    get 'remove/:article_id', to: 'articles#remove', as: :remove_from
     put :recommend, on: :member
     put :unrecommend, on: :member
     get 'change_status/:status', to: 'articles#change_status', as: :change_status, on: :member

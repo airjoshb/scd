@@ -17,6 +17,9 @@ hr {
   margin: 1em 0;
   padding: 0;
 }
+.readmore {
+  line-height: normal; text-transform: uppercase; font-size: 11px; background: #ffbe00; display: inline; padding: 3px 5px; text-decoration: none; font-family: 'Open Sans', sans-serif; a {color: $white;}
+}
 .readnext {
   font-size: 1.3em;
   line-height: 1.8em;
