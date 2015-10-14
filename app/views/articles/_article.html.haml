@@ -118,14 +118,11 @@
         %i.fa.fa-share
       .share-popover
         = link_to "", onclick: "window.open('http://www.facebook.com/sharer/sharer.php?href=#{article_url(@article)}', 'newwindow', 'width=600, height=300'); return false;" do
-          %i.fa.fa-facebook-official
-          Share on Facebook
+          %i.fa.fa-3x.fa-facebook-official
         = link_to "", onclick: "window.open('http://twitter.com/share?text=#{@article.title} via @santacruzdaily&url=#{article_url(@article)}', 'newwindow', 'width=600, height=300'); return false;" do
-          %i.fa.fa-twitter-square
-          Share on Twitter
+          %i.fa.fa-3x.fa-twitter-square
         %a.btn
-          %i.fa.fa-envelope
-          Share via Email
+          %i.fa.fa-3x.fa-envelope
       .email-popover
         = render 'share_form'
 
@@ -135,7 +132,7 @@
     return false;
   });
 
-  $('document').ready {
+  $('document').ready(function() {
     var regexp = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/i;
 
     $('article').innerHTML = aHref.match(/([\w\d\-_]*\.)+(\w*$|\w*\/[\w\d]*)/)[0];
