@@ -59,6 +59,15 @@
               - else
                 person
         %h4= article.subhead unless article.subhead.blank?
+        - if article.why.present?
+          %small
+            %strong Why?
+            = article.why
+          - if article.tips.present?
+            %small
+              %strong Tips
+              - for tip in article.tips.split(',')
+                %small.tip.fa.fa-bullseye= tip
         .readmore
           = link_to article do
             more
