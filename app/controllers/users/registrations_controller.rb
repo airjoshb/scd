@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def new
-    @articles = Article.joins(:events).status(1).active.group('events.start_date').popular.limit(12)
+    @articles = Article.status(1).active.popular.limit(12)
 
     super
   end

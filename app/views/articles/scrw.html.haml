@@ -1,0 +1,69 @@
+- content_for :head do
+  %meta{property: "og:title", content: "Santa Cruz Restaurant Week on Santa Cruz Daily"}
+  %meta{property: "og:site_name", content: "Santa Cruz Restaurant Week on Santa Cruz Daily"}
+  %meta{property: "og:description", content: "Where to go for Santa Cruz Restaurant Week"}
+  %meta{property: "og:type", content: "website"}
+  %meta{property: "og:url", content: request.url}
+  %meta{property: "fb:admins", content: "750702877"}
+  %meta{name: "twitter:title", content: "Santa Cruz Restaurant Week on Santa Cruz Daily"}
+  %meta{name: "twitter:description", content: "Where to go for Santa Cruz Restaurant Week"}
+  %meta{name: "twitter:card", content: "summary"}
+  %meta{name: "twitter:domain", content: request.url}
+  %meta{name: "twitter:creator", content: "@airjoshb"}
+  %meta{itemprop: "headline", content: "Santa Cruz Daily"}
+  %meta{itemprop: "description", content: "Where to go for Santa Cruz Restaurant Week"}
+- content_for :title do
+  Santa Cruz Restaurant Week on Santa Cruz Daily
+- content_for :description do
+  Where to go for Santa Cruz Restaurant Week
+%h1 Santa Cruz Restaurant Week
+%i.fa.fa-envelope-o
+.lineup-popover
+  = render 'lineup_email'
+.flex.post
+  - for article in @articles
+    .flex-element
+      -for tag in article.tags.reverse[1..-1].take(2)
+        .tag= tag
+      .mini-article
+        = image_tag article.image.medium unless article.image.blank?
+        %h3
+          =link_to "", article_add_to_path(article_id: article.id, title: article.title), remote: true, class: "star fa fa-star-o", role: 'button', data: {target: @article}
+          = article.title
+        - if article.events.present?
+          %small
+            - if article.events.first.start_date > Time.current
+              %strong= custom_time_distance(article.events.first.start_date.to_date)
+            - else
+              = time_ago_in_words(article.events.first.start_date)
+              ago
+            = article.events.first.start_date.strftime("%A, %b %d")
+            @
+            = article.events.first.start_date.strftime("%l:%M%P")
+        - if article.locations.present?
+          %small
+            at
+            = article.locations.first.line_1 + ","
+            = article.locations.first.city
+            = link_to "map", "http://maps.apple.com/maps?q=#{article.locations.first.latitude},#{article.locations.first.longitude}", :class => "tag-button"
+        %small
+          - if article.publish_date.present?
+            = time_ago_in_words(article.publish_date)
+            ago
+          - if defined?(index) && index
+            - if article.recommended_users.present?
+              • recommended by
+              = article.recommended_users.count
+              - if article.recommended_users.count > 1
+                people
+              - else
+                person
+        - if article.why.present?
+          %small
+            %strong How much?
+            = article.why
+        - if article.tips.present?
+          %small
+            %strong Menu
+            - for tip in article.tips.split(',')
+              %small.tip.fa.fa-bullseye= tip

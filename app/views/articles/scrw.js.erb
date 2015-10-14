@@ -1,0 +1,12 @@
+$(document).ready(function() {
+   $('#mycart .remove').click(function(e) {
+    var $this, url;
+    e.preventDefault();
+    $this =  $(this).closest('a');
+    url = $this.data('targeturl');
+     $.ajax({
+        url: url,
+        type: 'put'
+    });
+  });
+});

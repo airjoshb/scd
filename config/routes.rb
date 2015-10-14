@@ -6,13 +6,19 @@ Rails.application.routes.draw do
 
   resources :share_emails
 
+  get '/santa-cruz-restaurant-week', to: 'articles#scrw', as: :santa_cruz_restaurant_week
+
   resources :articles, :path => "/lineup" , :except => [:new, :create, :edit, :update, :destroy] do
     resources :events
     resources :locations
+    get 'add/:article_id', to: 'articles#add', as: :add_to
+    get 'remove/:item_id', to: 'articles#remove', as: :remove_from
     put :recommend, on: :member
     put :unrecommend, on: :member
     get 'change_status/:status', to: 'articles#change_status', as: :change_status, on: :member
   end
+
+  get 'send_mail', to: 'articles#send_mail', as: :send_mail
 
   get 'tagged' => 'articles#tagged', :as => 'tagged'
 

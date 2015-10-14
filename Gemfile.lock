@@ -328,6 +328,7 @@ GEM
     rdoc (4.2.0)
       json (~> 1.4)
     redcarpet (3.3.2)
+    redis (3.0.7)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     rest-client (1.8.0)
@@ -429,6 +430,7 @@ DEPENDENCIES
   rails (= 4.1.4)
   rails_12factor
   redcarpet
+  redis (~> 3.0.1)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   simple_form

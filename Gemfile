@@ -49,6 +49,9 @@ gem 'griddler'
 gem 'griddler-sendgrid'
 gem 'premailer'
 
+gem 'redis', '~> 3.0.1'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -1,0 +1,20 @@
+.popover-title
+  Share via email
+.popover-body
+  = simple_form_for :send_mail, url: send_mail_path(:email), remote: true, method: :get do |f|
+    = f.input :email, placeholder: 'Your email address',label: false
+
+    .hidden
+      = f.input :nickname, :hint => 'Leave this field blank!'
+
+    %div
+      %a.coa{ onclick: "$('.send_mail').submit()"} Share it!
+      %a.simplemodal-close.text I don't like sharing
+
+
+:javascript
+
+  $('i').click(function (e) {
+    $('.lineup-popover').modal();
+    return false;
+  });
