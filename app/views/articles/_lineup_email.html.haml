@@ -1,15 +1,18 @@
 .popover-title
-  Share via email
+  You are almost ready for Restaurant Week!
 .popover-body
-  = simple_form_for :send_mail, url: send_mail_path(:email), remote: true, method: :get do |f|
+  = simple_form_for :send_mail, url: send_mail_path(:email), remote: true, format: :json, method: :get do |f|
     = f.input :email, placeholder: 'Your email address',label: false
 
     .hidden
       = f.input :nickname, :hint => 'Leave this field blank!'
 
     %div
-      %a.coa{ onclick: "$('.send_mail').submit()"} Share it!
-      %a.simplemodal-close.text I don't like sharing
+      %a.coa{ onclick: "$('.send_mail').submit()"} Send my restaurant list
+      %br
+      .small By receiving this personalized email, you will be the first to know about our launch. We will never share or sell your information.
+      %br
+      %a.simplemodal-close.text Nevermind, I don't like food.
 
 
 :javascript
@@ -17,4 +20,17 @@
   $('i').click(function (e) {
     $('.lineup-popover').modal();
     return false;
+  });
+
+  $(document).on('ajax:success', '.send_mail', function(e, data, status, xhr) {
+    if (data.success) {
+      $('.lineup-popover').hide();
+      return $('.btn').hide();
+    } else {
+      $('.lineup-popover').hide();
+      $('#simplemodal-container').hide();
+      $('#simplemodal-overlay').hide();
+      $('.btn').hide();
+      return $('h1').text("Sent!");
+    }
   });

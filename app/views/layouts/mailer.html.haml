@@ -8,6 +8,10 @@
     %hr{style: "width: 30%; display: block; height: 1px; border: 0; border-top: 1px solid #bbb; margin: 1em auto 2em; padding: 0; "}
     = yield
     %div{style: "text-align: center; font-size: .7em; margin-top: 30px;" }
-      = link_to "Go to your lineup", articles_url, style: "line-height: normal; text-transform: uppercase; font-size: 15px; border: thin #ffbe00 solid; display: inline-block; padding: 5px 8px; color: #ffbe00; background: transparent; text-decoration: none;"
       %p{style: "font-family: 'Open Sans', sans-serif;" }
-        Sent by Santa Cruz Daily
+        Sent by Santa Cruz Daily •
+        = link_to "Twitter", "http://twitter.com/santacruzdaily", target: '_blank'
+        •
+        = link_to "Instagram", "http://instagram.com/thesantacruzdaily", target: '_blank'
+        •
+        = link_to "Facebook, "http://facebook.com/santacruzdaily", target: '_blank'
