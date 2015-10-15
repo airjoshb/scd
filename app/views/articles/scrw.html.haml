@@ -27,7 +27,7 @@
           - if @cart_line_items.to_s.include? article.id.to_s
             %i.star.fa.fa-star.orange
           - else
-            =link_to "", article_add_to_path(article_id: article.id, title: article.title), remote: true, class: "star fa fa-star-o", role: 'button', data: {toggle_href: "", toggle_class: 'fa-star'}
+            =link_to "", article_add_to_path(article_id: article.id, title: article.title), remote: true, class: "star fa fa-star-o add#{article.id}", role: 'button', data: {toggle_href: "", toggle_class: 'fa-star orange'}
           = link_to article.title, article
         - if article.events.present?
           %small
@@ -70,3 +70,17 @@
         .tag-button.orange-bgnd.pull-right
           = link_to article do
             more
+    :javascript
+      $(document).on('ajax:success', 'a.add#{article.id}', function(status, data, xhr) {
+        $("a.add#{article.id}").each(function() {
+          var $a, allclass, c, href;
+          $a = $(this);
+          href = $a.attr('href');
+          c = $a.attr('class');
+          allclass = c.split('')[0];
+          $a.attr('href', $a.data('toggle-href'));
+          $a.removeClass('fa-star-o');
+          $a.toggleClass($a.data('toggle-class'));
+          $a.data('toggle-href', href);
+        });
+      });
