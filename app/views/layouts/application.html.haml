@@ -82,8 +82,9 @@
           Santa Cruz Daily ©2015
     #container
       .logotype
-        = link_to image_tag("santa-cruz-daily-octopus.png", class: 'mobile' ), root_path
-        Santa Cruz Daily
+        = link_to santa_cruz_restaurant_week_path do
+          = image_tag("santa-cruz-daily-octopus.png", class: 'mobile' )
+          Santa Cruz Daily
         - if controller.action_name == "scrw" or controller.action_name == "show"
           = link_to "" do
             %i.fa.fa-3x.fa-envelope-o

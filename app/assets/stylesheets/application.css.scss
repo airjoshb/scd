@@ -94,7 +94,7 @@ a { border: none; }
   width: 100%;
   .small { display: inline; }
   a {
-    font-size: .4em;
+    font-size: 2.4em;
     border:none;
     vertical-align: middle;
     &:hover { color: $orange; }
@@ -179,7 +179,7 @@ a { border: none; }
     .scd { display: none; }
   }
   .show #nav { display: none; }
-  .logotype { font-size: 1.6rem; }
+  .logotype a, .logotype i { font-size: 1.8rem; }
   #container { margin-left: 0; }
   h1{ text-align: center; }
   .mobile { display: inline;  max-width: 50px; vertical-align: middle;}
