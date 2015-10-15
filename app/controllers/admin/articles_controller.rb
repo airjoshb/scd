@@ -57,7 +57,7 @@ class Admin::ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :subhead, :body, :slug, :origin, :image, :publish_date, :user_id, :why, :tips, :tag_list, statuses_attributes: [:status, :article_id], locations_attributes: [], events_attributes: [] )
+      params.require(:article).permit(:title, :subhead, :body, :slug, :origin, :image, :publish_date, :user_id, :why, :tips, :tag_list, :tags, statuses_attributes: [:status, :article_id], locations_attributes: [], events_attributes: [] )
     end
 
 end
