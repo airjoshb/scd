@@ -100,7 +100,7 @@ a { border: none; }
     &:hover { color: $orange; }
   }
 }
-
+.main {  width: 90%; }
 #container {  margin-left: 110px; border-top: 60px transparent solid; }
 .flex {
   margin-top: 50px;
@@ -111,7 +111,6 @@ a { border: none; }
   -webkit-column-gap: 20px; /* Chrome, Safari, Opera */
   -moz-column-gap: 20px; /* Firefox */
   column-gap: 20px;
-  height: 50vh;
 }
 .scroll-arrows {display: inline; }
 .flex-element {
