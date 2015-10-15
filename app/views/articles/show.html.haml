@@ -27,24 +27,23 @@
   #{@article.title} | Santa Cruz Daily
 - content_for :description do
   = Nokogiri::HTML.parse(markdown(@article.body)).css('p').first.text
-.flex
-  .main
-    = render @article
-  - if @article.next.present?
-    .next
-      %h4= "Read Next" unless @article.next.blank?
-      .well
-        %span.title= link_to @article.next.title, article_path(@article.next)
-        %small
-          - if @article.next.recommended_users.present?
-            • recommended by
-            = @article.next.recommended_users.count
-            - if @article.next.recommended_users.count > 1
-              people
-            - else
-              person
-        %p= Nokogiri::HTML.parse(markdown(@article.next.body)).css('p').first.text
-        .readnext
-          = link_to @article.next do
-            continue reading
-          %i.fa.fa-arrow-right
+.main
+  = render @article
+- if @article.next.present?
+  .next
+    %h4= "Read Next" unless @article.next.blank?
+    .well
+      %span.title= link_to @article.next.title, article_path(@article.next)
+      %small
+        - if @article.next.recommended_users.present?
+          • recommended by
+          = @article.next.recommended_users.count
+          - if @article.next.recommended_users.count > 1
+            people
+          - else
+            person
+      %p= Nokogiri::HTML.parse(markdown(@article.next.body)).css('p').first.text
+      .readnext
+        = link_to @article.next do
+          continue reading
+        %i.fa.fa-arrow-right
