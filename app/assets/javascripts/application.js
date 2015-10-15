@@ -19,3 +19,31 @@ $.ajaxSetup({
     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
   }
 });
+
+$(document).ready(function () {
+    // use UI arrows in page content to control scrolling
+    var scrolling = false;
+
+    $('.scroll-arrows').on('mousedown', 'div', function (evt) {
+        scrolling = true;
+        startScrolling($('.flex'), 40, evt.target.id);
+    }).on('mouseup', function () {
+        scrolling = false;
+    });
+
+    function startScrolling(obj, spd, btn) {
+        var travel = (btn.indexOf('left') > -1) ? '-=' + spd + 'px' : '+=' + spd + 'px';
+        if (!scrolling) {
+            obj.stop();
+        } else {
+            // recursively call startScrolling while mouse is pressed
+            obj.animate({
+                "scrollRight": travel
+            }, "fast", function () {
+                if (scrolling) {
+                    startScrolling(obj, spd, btn);
+                }
+            });
+        }
+    }
+});

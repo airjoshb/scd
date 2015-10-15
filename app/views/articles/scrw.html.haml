@@ -17,6 +17,10 @@
 - content_for :description do
   Where to go for Santa Cruz Restaurant Week
 %h1 Santa Cruz Restaurant Week
+.scroll-arrows.pull-right
+  .arrow-up
+    %i.fa.fa-3x.fa-caret-right.orange
+
 .flex.post
   - for article in @articles
     .flex-element
@@ -83,3 +87,31 @@
           $a.data('toggle-href', href);
         });
       });
+
+      $(function () {
+              // use UI arrows in page content to control scrolling
+              var scrolling = false;
+
+              $('.scroll-arrows').on('mousedown', 'div', function (evt) {
+                  scrolling = true;
+                  startScrolling($('.flex'), 40, evt.target.id);
+              }).on('mouseup', function () {
+                  scrolling = false;
+              });
+
+              function startScrolling(obj, spd, btn) {
+                  var travel = (btn.indexOf('up') > -1) ? '-=' + spd + 'px' : '+=' + spd + 'px';
+                  if (!scrolling) {
+                      obj.stop();
+                  } else {
+                      // recursively call startScrolling while mouse is pressed
+                      obj.animate({
+                          "scrollLeft": travel
+                      }, "fast", function () {
+                          if (scrolling) {
+                              startScrolling(obj, spd, btn);
+                          }
+                      });
+                  }
+              }
+          });

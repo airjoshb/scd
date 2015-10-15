@@ -111,9 +111,9 @@ a { border: none; }
   -webkit-column-gap: 20px; /* Chrome, Safari, Opera */
   -moz-column-gap: 20px; /* Firefox */
   column-gap: 20px;
-
+  height: 50vh;
 }
-
+.scroll-arrows {display: inline; }
 .flex-element {
   display: inline-block;
   margin: 5px;
@@ -180,7 +180,7 @@ a { border: none; }
     -webkit-column-count: 1; /* Chrome, Safari, Opera */
     -moz-column-count: 1; /* Firefox */
     column-count: 1;
-
+    height: auto;
 
   }
   .show #nav { display: none; }
