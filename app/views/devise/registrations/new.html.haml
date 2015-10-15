@@ -11,10 +11,9 @@
   .slide-text
     .logo= image_tag image_url('santa-cruz-daily-octopus.png')
     %h1
-      Santa Cruz Daily
-      .small what you want to do, delivered daily
-    %a.coa.btn.first
-      I want an invite!
+      Santa Cruz Restaurant Week Guide
+      .small a personalized guide from your friends at SCD
+    = link_to "I love to eat!", santa_cruz_restaurant_week_path, class: "coa btn first"
     .social
       = link_to "http://twitter.com/santacruzdaily", target: '_blank' do
         %i.fa.fa-twitter.fa-2x.large.white
@@ -158,7 +157,7 @@
   * http://www.css-101.org/articles/ken-burns_effect/css-transition.php
   */
   !function(){function e(){m==a&&(m=0),s[m].className="fx",0===m&&(s[a-2].className=""),1===m&&(s[a-1].className=""),m>1&&(s[m-2].className=""),m++}document.getElementById("slideshow").getElementsByTagName("img")[0].className="fx",window.setInterval(e,7e3);var s=document.getElementById("slideshow").getElementsByTagName("img"),a=s.length,m=1}();
-  $('.btn').click(function (e) {
+  $('#mybutton').click(function (e) {
     $('#modal').modal();
     return false;
   });
