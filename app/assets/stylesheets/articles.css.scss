@@ -51,7 +51,7 @@ hr {
     padding: 2px 4px;
     font-size: 10px;
     border: none;
-    margin: 0 3px;
+    margin: 5px;
     &:hover { background: $orange}
   }
 .published { border-color: $green; color: $green; }
@@ -85,6 +85,10 @@ hr {
 .tip {
   display: block;
   margin-left: 15px;
+}
+.mini-article {
+  padding-bottom: 20px;
+  border: $veryLight thin solid;
 }
 .popover-preview { border-top: $white solid thin; border-bottom: $white solid thin; border-width: 85%; padding: 20px; font-size: 26px; overflow: hidden; text-align: left; vertical-align: middle; img { margin-right: 10px;}}
 #simplemodal-container {height:500px !important; }
