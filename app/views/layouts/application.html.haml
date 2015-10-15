@@ -30,7 +30,7 @@
     / NAVIGATION
     %nav#nav
       .nav-group
-        .logo= link_to image_tag("santa-cruz-daily-octopus.png"), root_path
+        .logo= link_to image_tag("santa-cruz-daily-octopus.png"), santa_cruz_restaurant_week_path
         .nav-group
           .nav-element
             - if @article.present? or params[:tag].present?
