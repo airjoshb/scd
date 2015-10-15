@@ -178,6 +178,7 @@ a { border: none; }
     background: $white;
     .scd { display: none; }
   }
+  .show #nav { display: none; }
   .logotype { font-size: 1.6rem; }
   #container { margin-left: 0; }
   h1{ text-align: center; }
