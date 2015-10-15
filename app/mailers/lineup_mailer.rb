@@ -6,7 +6,7 @@ class LineupMailer < ActionMailer::Base
   def send_email(email, cart_line_items)
     @articles = Article.where(id: cart_line_items)
     mail( :to => email,
-    :subject => 'Your personal guide to Santa Cruz Restaurant Week | Santa Cruz Daily' )
+    :subject => 'Your personal guide to Santa Cruz Restaurant Week' )
   end
 
 
