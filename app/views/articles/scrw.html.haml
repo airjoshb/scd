@@ -20,7 +20,7 @@
 .flex.post
   - for article in @articles
     .flex-element
-      -for tag in article.tags[1..-1].uniq.take(2)
+      -for tag in article.tags[1..-1].uniq
         .tag= tag
       .mini-article
         %h3
@@ -57,7 +57,6 @@
                 people
               - else
                 person
-        %h4= article.subhead unless article.subhead.blank?
         - if article.why.present?
           %small
             %strong Why?
