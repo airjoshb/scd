@@ -89,6 +89,7 @@ hr {
 .mini-article {
   padding-bottom: 20px;
   border: $veryLight thin solid;
+  small:last-child { margin-bottom: 10px; }
 }
 .popover-preview { border-top: $white solid thin; border-bottom: $white solid thin; border-width: 85%; padding: 20px; font-size: 26px; overflow: hidden; text-align: left; vertical-align: middle; img { margin-right: 10px;}}
 #simplemodal-container {height:500px !important; }

@@ -25,7 +25,6 @@ class ArticlesController < ApplicationController
    def scrw
     @tag = ActsAsTaggableOn::Tag.find_by_name('santa cruz restaurant week')
     @articles = Article.status(1).active.tagged_with(@tag)
-
     cart_ids = REDIS.sort(current_user_cart, :by => 'NOSORT', :get => ['Id:*->article_id','Id:*->price','Id:*->title', '#' ])
     @cart_line_items = cart_ids
     respond_to do |format|
