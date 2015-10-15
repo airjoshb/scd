@@ -5,6 +5,8 @@ class Admin::ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
+    @article.locations.build
+    @article.events.build
   end
 
   # GET /articles/1/edit
@@ -55,7 +57,7 @@ class Admin::ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :subhead, :body, :slug, :origin, :image, :publish_date, :user_id, :why, :tips, :tag_list, statuses_attributes: [:status, :article_id], locations_attributes: [:line_1, :line_2, :city, :state_or_province, :postal_code], events_attributes: [:start_date, :end_date] )
+      params.require(:article).permit(:title, :subhead, :body, :slug, :origin, :image, :publish_date, :user_id, :why, :tips, :tag_list, statuses_attributes: [:status, :article_id], locations_attributes: [], events_attributes: [] )
     end
 
 end
