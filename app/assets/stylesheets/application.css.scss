@@ -179,12 +179,12 @@ a { border: none; }
     .scd { display: none; }
   }
   .show #nav { display: none; }
-  .logotype a, .logotype i { font-size: 1.8rem; }
+  .logotype a, .logotype i { font-size: 1.6rem; }
   #container { margin-left: 0; }
   h1{ text-align: center; }
   .mobile { display: inline;  max-width: 50px; vertical-align: middle;}
   .logo {display: none; }
-  .scrw .flex-element { width: 90%; border-bottom: $veryLight thin solid; padding-bottom: 20px; margin-bottom: 20px;}
+  .scrw .flex-element { width: 80%; border-bottom: $veryLight thin solid; padding-bottom: 20px; margin-bottom: 20px;}
 
-  #simplemodal-container {height:300px; width:90%; color:#bbb; background-color: rgba($orange, .9); padding:12px;}
+  #simplemodal-container {height:300px; width:80%; color:#bbb; background-color: rgba($orange, .9); padding:12px;}
 }
