@@ -17,11 +17,11 @@
           = article.events.first.start_date.strftime("%A, %b %d")
           @
           = article.events.first.start_date.strftime("%l:%M%P")
-          - if article.locations.present?
-            at
-            = article.locations.first.line_1 + ","
-            = article.locations.first.city
-            = link_to "map", "http://maps.apple.com/maps?q=#{article.locations.first.latitude},#{article.locations.first.longitude}", :class => "tag-button"
+      - if article.locations.present?
+        at
+        = article.locations.first.line_1 + ","
+        = article.locations.first.city
+        = link_to "map", "http://maps.apple.com/maps?q=#{article.locations.first.latitude},#{article.locations.first.longitude}", :class => "tag-button"
     - if article == @articles.first
       %h4{ style: "font-family: 'Open Sans', sans-serif;"}=article.subhead unless article.subhead.blank?
       - if article.why.present?
