@@ -21,7 +21,7 @@
 .flex.post
   - for article in @articles
     .flex-element
-      -for tag in article.tags[1..-1].uniq
+      -for tag in article.tags.uniq
         .tag= tag
       .mini-article
         %h3
