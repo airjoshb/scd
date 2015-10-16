@@ -10,10 +10,10 @@ class VisitorsController < ApplicationController
   end
 
   def atom
-    @posts = Article.active
+    @posts = Article.status(1).active
 
     respond_to do |format|
-      format.atom {
+      format.xml {
         render :layout => false
         headers["Content-Type"] = 'application/rss+xml; charset=utf-8'
       }
