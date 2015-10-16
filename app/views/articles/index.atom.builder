@@ -8,7 +8,7 @@ atom_feed do |feed|
 
   @articles.each do |post|
     feed.entry(post) do |entry|
-      entry.title(post.title), "og:title"
+      entry.title(post.title, type: 'og:title')
       entry.image(post.image)
       entry.content(markdown(post.body), type: 'html')
       entry.published(post.publish_date)
