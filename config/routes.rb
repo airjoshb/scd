@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get '/sitemap' => 'visitors#sitemap',
       defaults: { :format => 'xml' }
 
+  get '/atom' => 'visitors#atom',
+      defaults: { :format => 'xml' }
+
   resources :share_emails
 
   get '/santa-cruz-restaurant-week', to: 'articles#scrw', as: :santa_cruz_restaurant_week
