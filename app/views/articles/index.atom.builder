@@ -7,11 +7,10 @@ atom_feed do |feed|
 
 
   @articles.each do |post|
-    feed.entry(post) do |entry|
-      entry.title(post.title, type: 'og:title')
+    feed.entry post, {published: post.publish_date, updated: post.updated_at}  do |entry|
+      entry.title(post.title)
       entry.image(post.image)
       entry.content(markdown(post.body), type: 'html')
-      entry.published(post.publish_date)
       entry.author do |author|
         author.name(post.user.identities.presence ? post.user.identities.first.nickname : post.user.username ? post.user.username : post.email)
       end
