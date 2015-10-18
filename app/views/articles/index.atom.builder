@@ -2,7 +2,6 @@ atom_feed do |feed|
   feed.title("Santa Cruz Daily")
   feed.updated(@articles[0].created_at) if @articles.length > 0
   feed.link :href=> "http://santacruzdaily.com", :rel => "canonical"
-  feed.lan("en")
   feed.link :rel => "apple-touch-icon", :href => "ico/apple-touch-icon.png"
 
 
@@ -10,10 +9,16 @@ atom_feed do |feed|
     feed.entry post, {published: post.publish_date, updated: post.updated_at}  do |entry|
       entry.title(post.title)
       unless post.image.blank?
-        entry.image(post.image)
+        feed.entry photo do |entry|
+          entry.link href: entry.image.hero, rel:"enclosure", type:"image/jpeg"
+        end
       end
       entry.content(markdown(post.body), type: 'html')
-      unless entry.author.blank?
+      if entry.author.blank?
+        entry.author do |author|
+          author.name("@teamanda")
+        end
+      else
         entry.author do |author|
           author.name(post.user.identities.presence ? post.user.identities.first.nickname : post.user.username ? post.user.username : post.email)
         end
