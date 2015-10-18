@@ -8,13 +8,11 @@ atom_feed do |feed|
     feed.entry post, {published: post.publish_date, updated: post.updated_at}  do |entry|
       entry.title(post.title)
       unless post.image.blank?
-        feed.entry post do |entry|
-          entry.link href: post.image.hero, rel:"enclosure", type:"image/jpeg"
-        end
+        entry.content image_tag(post.image.hero), type: 'html'
       end
       entry.content(markdown(post.body), type: 'html')
       entry.author do |author|
-        author.name(post.user.identities.presence ? post.user.identities.first.nickname : post.user.username ? post.user.username : post.email)
+        author.name(post.user.identities.presence ? post.user.identities.first.nickname : post.user.username ? post.user.username : post.email ? post.email : "@teammanda")
       end
     end
   end
