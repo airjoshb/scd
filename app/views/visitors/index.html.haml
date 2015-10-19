@@ -1,2 +1,170 @@
-%h1 Visitors#index
-%p Find me in app/views/visitors/index.html.erb
+#slideshow.pages
+  =image_tag image_url('santa-cruz-1.jpg')
+  =image_tag image_url('santa-cruz-7.jpg')
+  =image_tag image_url('santa-cruz-3.jpg')
+  =image_tag image_url('santa-cruz-4.jpg')
+  =image_tag image_url('santa-cruz-5.jpg')
+  =image_tag image_url('santa-cruz-6.jpg')
+  =image_tag image_url('santa-cruz-8.jpg')
+  =image_tag image_url('santa-cruz-2.jpg')
+  =image_tag image_url('santa-cruz-9.jpg')
+  .slide-text
+    .logo= image_tag image_url('santa-cruz-daily-octopus.png')
+    %h1
+      Santa Cruz Restaurant Week Guide
+      .small a personalized guide from your friends at SCD
+    = link_to "I love to eat!", santa_cruz_restaurant_week_path, class: "coa btn first"
+    .social
+      = link_to "http://twitter.com/santacruzdaily", target: '_blank' do
+        %i.fa.fa-twitter.fa-2x.large.white
+      = link_to "http://instagram.com/thesantacruzdaily", target: '_blank' do
+        %i.fa.fa-instagram.fa-2x.large.white
+      = link_to "http://facebook.com/santacruzdaily", target: '_blank' do
+        %i.fa.fa-facebook.fa-2x.large.white
+    .down.white
+      = link_to "#page-preview", class: "nav-element" do
+        %i.fa.fa-chevron-down
+    #modal
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: "sign_up_user"}, format: :json, remote: true ) do |f|
+        .form-inputs
+          = hidden_field_tag :authenticity_token, form_authenticity_token
+          = f.email_field :email, autofocus: true, placeholder: "Enter your email", label: false
+        %a.coa{ onclick: "$('#sign_up_user').submit()"} Get your invite
+        %a.simplemodal-close.text thanks, but I don't do cool stuff
+#page-preview.pages
+  %h1.center
+    The Lineup
+  %em [live preview]
+
+  %em After telling Santa Cruz Daily what kinds of things you like, it builds a personalized feed showing you things that are happening soon, new posts and the most popular.
+  .screen
+    #nav
+      .nav-group
+        .logo= image_tag("santa-cruz-daily-octopus.png")
+        .nav-element
+          .nav-text
+            airjoshb
+            %i.fa.fa-chevron-circle-right
+      .nav-group
+        .nav-title
+          Interests
+        .nav-element
+          .nav-text Food
+        .nav-element
+          .nav-text Live Events
+        .nav-element
+          .nav-text Adventures
+        .nav-element
+          .nav-text Shopping
+      .nav-group
+        .nav-title
+          Santa Cruz Daily ©2015
+    .flex.post
+      - for article in @articles
+        .flex-element
+          = render 'devise/registrations/article', article: article
+  %h1.center In your mailbox
+  %em You're more likely to actually do something if you don't have to search for the info.
+  %em You set how often and we'll send you the goods, so you don't miss a thing.
+  .daily
+    .logo= image_tag("santa-cruz-daily-octopus.png")
+    %h4 Santa Cruz Daily Lineup
+    - for article in @articles.take(3)
+      %article{style: "margin-bottom: 50px;" }
+        %div
+          - for tag in article.tags
+            %span{ style: "line-height: normal; text-transform: uppercase; font-size: 15px; border: thin #bbb solid; display: inline-block; padding: 5px 8px; color: #bbb; font-family: 'Open Sans', sans-serif;"}
+              =tag
+        %div.email-text
+          %h2{style: "margin-bottom: 5px;"}= link_to article.title, article_path(article), style: "color: inherit; text-decoration: none; font-family: 'Open Sans', sans-serif;"
+          %i= article.subhead
+          - if article.events.present?
+            %small{style: "margin: 5px 0; display: block; font-family: 'Open Sans', sans-serif;"}
+              - if article.events.first.start_date > Time.current
+                %strong= custom_time_distance(article.events.first.start_date.to_date)
+              - else
+                = time_ago_in_words(article.events.first.start_date)
+                ago
+              = article.events.first.start_date.strftime("%A, %b %d")
+              @
+              = article.events.first.start_date.strftime("%l:%M%P")
+              - if article.locations.present?
+                at
+                = article.locations.first.line_1 + ","
+                = article.locations.first.city
+                = link_to "map", "http://maps.apple.com/maps?q=#{article.locations.first.latitude},#{article.locations.first.longitude}", :class => "tag-button"
+          %small{style: "margin: 5px 0; display: block; font-family: 'Open Sans', sans-serif;"}
+            - if article.publish_date.present?
+              = time_ago_in_words(article.publish_date)
+              ago
+            - if article.recommended_users.present?
+              • recommended by
+              = article.recommended_users.count
+              - if article.recommended_users.count > 1
+                people •
+              - else
+                person
+        - if article == @articles.first
+          = image_tag article.image.hero, style: "max-width: 100%;"
+          %p{ style: "font-family: 'Open Sans', sans-serif;"}= Nokogiri::HTML.parse(markdown(article.body)).css('p').first.text
+          = link_to 'read',  article, style: "line-height: normal; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; background: #ffbe00; display: inline-block; padding: 3px 5px; color: white; text-decoration: none; font-family: 'Open Sans', sans-serif; "
+        - else
+          = link_to 'read',  article, style: "line-height: normal; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; background: #ffbe00; display: inline; padding: 3px 5px; color: white; text-decoration: none; font-family: 'Open Sans', sans-serif; "
+          = link_to image_tag(article.image.small, style: "max-width: 100%; vertical-align: top;"), article
+      - unless article == @articles.last
+        %hr{style: "display: block; height: 1px; border: 0; border-top: 1px solid #bbb; margin: 2em auto; padding: 0; " }
+
+  .down.orange.center
+    = link_to "#page-submit", class: "nav-element" do
+      %i.fa.fa-chevron-down
+#page-submit.pages
+  %h1.center Give us the scoop
+  .flex
+    .flex-element
+      %h4 We want your events and info on what's happening
+      %p Most of the content on Santa Cruz Daily is created by our own Santa Cruz mavens, but we can't know everything.
+      %h4 Submit via email
+      %p Sending us your content and events couldn't be easier, send an email to: <em>submissions at santacruzdaily dot com</em> with the format next door and it will automatically be in our database waiting for final approval. Submission does not guarantee that it will make it into the lineup, so make sure you are sending us awesome content.
+    .scoop.flex-element
+      = image_tag 'scoop.svg'
+      .email
+        %p To: <em>The email in the instructions</em>
+        %p From: <em>Your email address will become your user login</em>
+        %p Subject: <em>The post, or event title</em>
+        %p The body of the email will become the content of your post. An attached image will become your post image and resized automatically, so please send something at least 1000px wide. URLs will automatically be generated from content that starts with "www" and you can even format using Markdown. Pretty cool, no?
+        %p The following details can be added with the exact formatting of the example (feel free to copy/paste this text).
+        %pAny components you aren't using, leave out completely.
+        <em>All details must come after a double-hyphen "--".</em>
+        %p --
+        %p subhead: <em>If you've got one, it goes here</em>
+        %p why: <em>A super quick, why people should care.</em>
+        %p Tips: <em>Quick tips, comma separated.</em>
+        %p tags: <em>tags are comma separated. please only submit a few relevant tags.</em>
+        %p start: <em>If you have an event, this is the start date and time of your event, for example</em> Nov 11, 2015, 12:15pm
+        %p end: <em>if you want to specify a specific ending time, or is a multi-day event use this detail</em> Nov 11, 2015, 12:15pm
+        %p address: <em>The first line of your address goes here. Addresses are geocoded automatically for generating maps and directions</em>
+        %p city: <em>Only Santa Cruz area towns will be accepted at this time.</em>
+        %p zip: <em>Important for the geocoding</em>
+
+  %p.center.small
+    ©2015 Santa Cruz Daily •
+    = link_to "Terms of Service", "http://www.santacruzdaily.com/lineup/terms-of-service"
+:javascript
+
+  /**
+  * author: Thierry Koblentz
+  * Copyright 2011 - css-101.org
+  * http://www.css-101.org/articles/ken-burns_effect/css-transition.php
+  */
+  !function(){function e(){m==a&&(m=0),s[m].className="fx",0===m&&(s[a-2].className=""),1===m&&(s[a-1].className=""),m>1&&(s[m-2].className=""),m++}document.getElementById("slideshow").getElementsByTagName("img")[0].className="fx",window.setInterval(e,7e3);var s=document.getElementById("slideshow").getElementsByTagName("img"),a=s.length,m=1}();
+  $('#mybutton').click(function (e) {
+    $('#modal').modal();
+    return false;
+  });
+  $.localScroll({
+     target: 'body', // could be a selector or a jQuery object too.
+     queue:true,
+     duration:1500,
+     hash:true
+   });
+
