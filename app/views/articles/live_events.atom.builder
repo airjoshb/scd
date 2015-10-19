@@ -2,9 +2,6 @@ atom_feed do |feed|
   feed.title("Live Events at Santa Cruz Daily")
   feed.updated(@articles[0].created_at) if @articles.length > 0
   feed.link rel: "apple-touch-icon", href: "ico/apple-touch-icon.png"
-  feed.meta property: "og:title", content: "Live Events at Santa Cruz Daily"
-  feed.meta property: "og:description", content: "Discover live events happening in Santa Cruz."
-  feed.meta property: "og:url", content: request.original_url
 
   @articles.each do |post|
     feed.entry post, {published: post.publish_date, updated: post.updated_at}  do |entry|
