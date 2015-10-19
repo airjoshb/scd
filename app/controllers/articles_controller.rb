@@ -33,6 +33,38 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def live_events
+    @tag = ActsAsTaggableOn::Tag.find_by_name('live events')
+    @articles = Article.status(1).active.tagged_with(@tag)
+    respond_to do |format|
+      format.atom
+    end
+  end
+
+  def adventure
+    @tag = ActsAsTaggableOn::Tag.find_by_name('adventure')
+    @articles = Article.status(1).active.tagged_with(@tag)
+    respond_to do |format|
+      format.atom
+    end
+  end
+
+  def food
+    @tag = ActsAsTaggableOn::Tag.find_by_name('food')
+    @articles = Article.status(1).active.tagged_with(@tag)
+    respond_to do |format|
+      format.atom
+    end
+  end
+
+  def shopping
+    @tag = ActsAsTaggableOn::Tag.find_by_name('shopping')
+    @articles = Article.status(1).active.tagged_with(@tag)
+    respond_to do |format|
+      format.atom
+    end
+  end
+
   def send_mail
     send_mail = params[:send_mail]
     email = send_mail[:email]
