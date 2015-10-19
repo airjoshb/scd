@@ -2,7 +2,7 @@
 %html{lang: "en"}
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    %title= content_for?(:title) ? yield(:title) : "What's happening in Santa Cruz"
+    %title= content_for?(:title) ? yield(:title) : "What's happening in Santa Cruz | Santa Cruz Daily"
     = favicon_link_tag 'ico/favicon.ico'
     = render 'layouts/favicon'
     %link{href: "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,700,600,300,800", rel: "stylesheet", type: "text/css"}
@@ -10,7 +10,7 @@
     %link{href: "http://fonts.googleapis.com/css?family=Comfortaa", rel: "stylesheet", type: "text/css"}
     %meta{content: "yes", name: "apple-mobile-web-app-capable"}
     %meta{content: "black", name: "apple-mobile-web-app-status-bar-style"}
-    %meta{:content => content_for?(:description) ? yield(:description) : "What's Happening in Santa Cruz", :name => "description"}
+    %meta{:content => content_for?(:description) ? yield(:description) : "Welcome to Santa Cruz Daily, a place to discover and make plans for living, visiting and adventuring in Santa Cruz.", :name => "description"}
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
     - if Rails.env.production?
