@@ -4,7 +4,13 @@ Rails.application.routes.draw do
   get '/sitemap' => 'visitors#sitemap',
       defaults: { :format => 'xml' }
 
-  get '/atom' => 'visitors#atom',
+  get '/food' => 'articles#food',
+      defaults: { :format => 'xml' }
+  get '/live-events' => 'articles#live_events',
+      defaults: { :format => 'xml' }
+  get '/adventure' => 'articles#adventure',
+      defaults: { :format => 'xml' }
+  get '/shopping' => 'articles#shopping',
       defaults: { :format => 'xml' }
 
   resources :share_emails
