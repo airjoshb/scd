@@ -15,7 +15,7 @@ atom_feed do |feed|
       end
       entry.content(markdown(post.body), type: 'html')
       entry.author do |author|
-        author.name(post.user.identities.presence ? "@" + post.user.identities.first.nickname : post.user.username ? post.user.username : post.email ? post.email : "@teammanda")
+        author.name(post.user.identities.presence ? "@" + post.user.identities.first.nickname : post.user.username ? "@" + post.user.username : post.email ? post.email : "@teammanda")
       end
     end
   end
