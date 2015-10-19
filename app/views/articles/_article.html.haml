@@ -2,10 +2,10 @@
   - if defined?(index) && index
     - unless params[:tag].present?
       - for tag in article.tags
-        - if @tags.include?(tag)
+        - if @user_tags.include?(tag)
           .tag.center
             = tag
-        - unless params[:tag].present? or article.tags.blank? or @tags.present?
+        - unless article.tags.blank? or @user_tags.present?
           .tag
             = link_to article.tags.first, articles_path(:tag => article.tags.first)
     %h1= link_to article.title, article
@@ -105,8 +105,13 @@
       - else
         = link_to recommend_article_path(article), class: 'vote recommend', method: :put, remote: true, data: { toggle_href: unrecommend_article_path(article), id: article.id, toggle_class: 'recommended'  } do
           %i.fa.fa-bullhorn
+      - if @cart_line_items.to_s.include? article.id.to_s
+        %i.star.fa.fa-star.orange
+      - else
+        =link_to "", article_add_to_path(article_id: article.id, title: article.title), remote: true, class: "star fa fa-star-o add#{article.id}", role: 'button', data: {toggle_href: "", toggle_class: 'fa-star orange'}
     - else
       %i.fa.fa-bullhorn
+      %i.star.fa.fa-star.orange
     %span.recommend-count
       = article.recommended_users.count
     - unless article.recommended_users.blank?
