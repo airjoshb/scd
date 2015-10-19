@@ -1,8 +1,11 @@
 atom_feed do |feed|
   feed.title("Santa Cruz Daily")
   feed.updated(@articles[0].created_at) if @articles.length > 0
-  feed.link :rel => "apple-touch-icon", :href => "ico/apple-touch-icon.png"
-
+  feed.link rel: "apple-touch-icon", href: "ico/apple-touch-icon.png"
+  feed.meta property: "og:title", content: "Santa Cruz Daily"
+  feed.meta property: "og:description", content: "Welcome to Santa Cruz Daily, a place to discover and make plans for living, visiting and adventuring in Santa Cruz."
+  feed.meta property: "og:url", content: root_url
+  feed.meta property: "og:image", content: image_url('santa-cruz-1.jpg')
 
   @articles.each do |post|
     feed.entry post, {published: post.publish_date, updated: post.updated_at}  do |entry|
