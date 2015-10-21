@@ -13,13 +13,13 @@ class EmailProcessor
       u.image = @email.attachments.first
     end
     if @email.raw_text.match('subhead:').present?
-      a.subhead = @email.raw_text.match(/subhead:(.*)/)[1]
+      a.subhead = @email.raw_text.match(/subhead:(.*)why:/m)[1]
     end
     if @email.raw_text.match('why:').present?
-      a.why = @email.raw_text.match(/why:(.*)/)[1]
+      a.why = @email.raw_text.match(/why:(.*)tips:/m)[1]
     end
     if @email.raw_text.match('tips:').present?
-      a.tips = @email.raw_text.match(/tips:(.*)/)[1]
+      a.tips = @email.raw_text.match(/tips:(.*)tags:/m)[1]
     end
     if @email.raw_text.match('tags:').present?
       tags = @email.raw_text.match(/tags:(.*)/)[1]
@@ -36,6 +36,18 @@ class EmailProcessor
         a.events.create!(start_date: converted_date.to_datetime)
       end
     end
+    if @email.raw_text.match('start2:').present?
+      start_date =  @email.raw_text.match(/start2:(.*)/)[1]
+      converted_date = Time.zone.parse(start_date)
+      if @email.raw_text.match('end2:').present?
+        end_date =  @email.raw_text.match(/end2:(.*)/)[1]
+        converted_end_date = Time.zone.parse(end_date)
+        a.events.create!(start_date: converted_date.to_datetime, end_date: converted_end_date.to_datetime)
+      else
+        a.events.create!(start_date: converted_date.to_datetime)
+      end
+    end
+
     if @email.raw_text.match('address:').present?
       line_1 = @email.raw_text.match(/address:(.*)/)[1]
       city = @email.raw_text.match(/city:(.*)/)[1]
