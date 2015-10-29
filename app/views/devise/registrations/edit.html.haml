@@ -1,34 +1,79 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :username, required: true, autofocus: true
-    = f.input :email, required: true, autofocus: true
-    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      %p
-        Currently waiting confirmation for: #{resource.unconfirmed_email}
-    = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
-    = f.input :password_confirmation, required: false
-    = f.input :tag_list
-  .form-actions
-    = f.button :submit, "Update"
+  #page-info.pages
+    %h2
+      Update your info
+      %span.down
+        = link_to "#page-preferences", class: "nav-element" do
+          %i.fa.fa-chevron-down
+    %p make any changes to your identity here—real or alter-ego, we won't tell.
+    .form-inputs
+      = f.input :username, label: false, placeholder: "username", hint: "That clever username you've been saving up goes here"
+      = f.input :name, label: false, placeholder: "name", hint: "How we should refer to you (optional)."
+      = f.input :email, required: true, label: false, placeholder: "email address", hint: "make sure it's legit"
+      = f.input :password, autocomplete: "off", required: true, label: false, placeholder: "password"
+      = f.input :password_confirmation, required: false, label: false, placeholder: "password confirmation", hint: "Leave blank if you are not changing your password"
+    %p
+      Hook up your accounts, it makes login a snap and gives you an image for your profile!
+    - ['facebook', 'twitter'].each do |provider|
+      - if current_user.identities.pluck(:provider).include?(provider.to_s)
+        %i.disabled{ class: "fa #{"fa-" + provider.to_s}" }
+      - else
+        = link_to "Sign in with #{provider.to_s.titleize}",  user_omniauth_authorize_path(provider), class: "tag blue-hover"
+  #page-preferences.pages
+    %h2
+      What do you like to do?
+      %span.down
+        = link_to "#page-frequency", class: "nav-element" do
+          %i.fa.fa-chevron-down
+    %p Here's some things we like. Just click to add them to your interests. Click again, to remove. Don't toggle too much, it's not becoming.
+    .tags
+      - for tag in @interests
+        - if !@user_tags.include?(tag["name"])
+          .add
+            = link_to add_tag_path(tag["name"]), id: tag["name"].delete(' '), class: 'follow center', remote: true, method: :put, data: {toggle_href: remove_tag_path(tag["name"]), toggle_class: 'followed'} do
+              = tag["name"]
+        - else
+          .add.added
+            = link_to remove_tag_path(tag["name"]), id: tag["name"].delete(' '), class: 'followed', remote: true, method: :put, data: {toggle_href: add_tag_path(tag["name"]), toggle_class: 'follow'} do
+              = tag["name"]
+    %p Don't see something? make a comma separated list and when things get posted with those tags, they'll automatically be included in your Lineup.
+    = f.input :tag_list, label: false, placeholder: "kittens, unicorns, internet of things"
+  #page-frequency.pages
+    %h2 How much of a doer are you?
+    %p Set how often you want to receive an email with things to do from your list of interests.
+    .form-flex
+      - User.frequencies.keys.each do |frequency|
+        %div{id: frequency}
+          - if frequency == "monthly"
+            %h3 Some Doin'
+            %p Our standard plan.
+          - elsif frequency == "weekly"
+            %h3 Serious Doer
+            %p Available to all during our beta testing to get a taste of doer life.
+          - else
+            %h3 Maximum Doer
+            %p  Available with our doer subscriber plan coming soon!
+          %div
+            - if frequency == "daily"
+              = f.radio_button :frequency, frequency, id: "user_#{frequency}", disabled: true
+            - else
+              = f.radio_button :frequency, frequency, id: "user_#{frequency}"
+            = f.label frequency.to_sym
+    %h3 All done?
+    = devise_error_messages!
+    %a.tag.btn-large{ onclick: "$('#edit_user').submit()"} Update my account
 
-Connect Account
-- ['facebook', 'twitter'].each do |provider|
-  - if current_user.identities.pluck(:provider).include?(provider.to_s)
-    = provider.to_s.titleize
-    Connected
-  - else
-    = link_to "Sign in with #{provider.to_s.titleize}",  user_omniauth_authorize_path(provider)
--if current_user.identities.present?
-  - for identity in current_user.identities
-    - if identity.provider == "facebook"
-      = link_to identity.provider, identity.url
-    - else
-      = link_to identity.provider, identity.url
-  %br
-%h3 Cancel my account
-%p
-  Unhappy? #{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
-= link_to "Back", :back
+
+.pages
+
+.pages
+  %h2 Cancel my account
+  %p Really? Ok...
+  =link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "tag btn"
+:javascript
+  $.localScroll({
+     target: 'body', // could be a selector or a jQuery object too.
+     queue:true,
+     duration:1500,
+     hash:true
+   });

@@ -7,15 +7,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def new
-    @articles = Article.status(1).active.popular.limit(12)
-
+    @articles = Article.status(1).active.popular.limit(5)
+    @upcoming = Article.status(1).active.joins(:events).where("events.start_date >= ? and events.start_date <= ?", Date.today.beginning_of_week, Date.today.beginning_of_week + 6 ).popular.limit(5)
     super
   end
 
   def edit
+    @user_tags = @user.tag_list
+    @interests=Article.tag_counts.order('count DESC').map { |tagging| { 'id' => tagging.id.to_s, 'name' => tagging.name, 'count' => tagging.count } }.uniq
     super
   end
 
+  def update
+    @user_tags = @user.tag_list
+    @interests=Article.tag_counts.order('count DESC').map { |tagging| { 'id' => tagging.id.to_s, 'name' => tagging.name, 'count' => tagging.count } }.uniq
+    super
+  end
 
   def add_tag
     authorize current_user
@@ -24,6 +31,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     render :nothing => true
 
   end
+
 
   def remove_tag
     authorize current_user
@@ -65,7 +73,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-    root_path
+    articles_path
   end
 
   #def sign_up(resource_name, resource)

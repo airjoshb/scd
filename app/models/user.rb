@@ -30,9 +30,10 @@ class User < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on
 
-  validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+  #validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+  validates_uniqueness_of :username, :case_sensitive => false
+  validates_uniqueness_of :email,  :case_sensitive => false
 
-  validates_confirmation_of :password
   def password_required?
     if !persisted?
       !(password != "")
@@ -60,6 +61,27 @@ class User < ActiveRecord::Base
   def add_role(role)
     self.role ||= role
     self.save
+  end
+
+  def self.mail_newsletter_weekly
+    @user = User.where(frequency: 1)
+    @user.each do |u|
+      UserNewsletter.send_weekly_email(u).deliver
+    end
+  end
+
+  def self.mail_newsletter_monthly
+    @user = User.where(frequency: 0)
+    @user.each do |u|
+      UserNewsletter.send_monthly_email(u).deliver
+    end
+  end
+
+  def self.mail_newsletter_daily
+    @user = User.where(frequency: 2)
+    @user.each do |u|
+      UserNewsletter.send_daily_email(u).deliver
+    end
   end
 
   #->Prelang (user_login:devise/username_login_support)
@@ -144,7 +166,6 @@ class User < ActiveRecord::Base
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20]
         )
-        user.skip_confirmation!
         user.save!
       end
     end

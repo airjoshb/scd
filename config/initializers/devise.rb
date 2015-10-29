@@ -289,7 +289,9 @@ config.secret_key = 'd7bfb96f9841a9bfc5b650eb2eee7dce1083640106070b47fd31d1b89ab
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :twitter, Rails.application.secrets.twitter_consumer_key, Rails.application.secrets.twitter_consumer_secret, :image_size => 'bigger', :secure_image_url => true
-  config.omniauth :facebook, Rails.application.secrets.facebook_key, Rails.application.secrets.facebook_secret, :image_size => 'normal', :scope => "email", :info_fields => "email, link", :secure_image_url => true
+
+
+  config.omniauth :facebook, Rails.application.secrets.facebook_key, Rails.application.secrets.facebook_secret, :image_size => 'normal', :scope => "public_profile,email", :info_fields => "email, link, name", :secure_image_url => true
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

@@ -48,6 +48,7 @@ gem 'geoip'
 gem 'griddler'
 gem 'griddler-sendgrid'
 gem 'premailer'
+gem 'whenever', :require => false
 
 gem 'redis', '~> 3.0.1'
 

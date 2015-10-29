@@ -5,17 +5,21 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     if params[:tag].present?
-       @tag = ActsAsTaggableOn::Tag.find_by_name(params[:tag])
-       @articles = Article.status(1).active.tagged_with(@tag).popular
-       @user = current_user
-       @user_tags = @user.tag_list
+      @tag = ActsAsTaggableOn::Tag.find_by_name(params[:tag])
+      @articles = Article.status(1).active.tagged_with(@tag).popular
+      if current_user.present?
+        @user = current_user
+        @user_tags = @user.tag_list
+      end
     elsif current_user.present?
        @user = current_user
-       @user_tags = @user.tag_list
+       @user_tags = @user.tag_counts_on(:tags).limit(10)
        @articles = Article.tagged_with(@tags, :any => :true).status(1).active.popular
     else
       @articles = Article.status(1).active
     end
+    @upcoming = Article.status(1).active.joins(:events).where("events.start_date >= ? and events.start_date <= ?", Date.today.beginning_of_week, Date.today.beginning_of_week + 6 ).popular.limit(5)
+
     respond_to do |format|
       format.html
       format.atom

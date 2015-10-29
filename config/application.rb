@@ -20,6 +20,9 @@ module Scd
     config.time_zone = 'Pacific Time (US & Canada)'
     config.assets.enabled = true
 
+    #config.action_controller.asset_host = "https://d2hpyijb4a66bq.cloudfront.net"
+    #config.action_mailer.asset_host = config.action_controller.asset_host
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de

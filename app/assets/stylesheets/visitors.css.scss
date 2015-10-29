@@ -12,12 +12,11 @@
   position: relative;
   overflow: hidden;
   text-align: center;
-  margin-left: -110px;
   input {margin-bottom: 5px;}
   .hint { text-align: center; display: block; font-size: .9em; margin-top: 0; padding-top: 0; }
   p  { text-align: center; display: block; width: 100%; }
 }
-.down a { font-size: 3em; transition: all .2s ease; color: $blue; }
+.down a { transition: all .2s ease; color: $blue; vertical-align: text-top;}
 #page-preferences h2:before, #page-frequency h2:before{
   display: block;
   content: " ";
@@ -33,15 +32,19 @@
 #daily { background: $veryLight; color: $grayLighter;}
 #weekly {border: $orange solid thin; border-left: none; color: $grayLighter;}
 #monthly {border: $orange solid thin; color: $orange; input[type="radio"] {color: $orange;}}
-input[type="radio"] + label { font-size: 1.5em;  }
+input[type="radio"] + label { font-size: 1.5em;   cursor: pointer;  }
 input[type="radio"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+
 }
 input[type="radio"]:before { font-family: FontAwesome; content: "\f10c"; font-size: 1.5em; }
 input[type="radio"]:checked:before { font-family: FontAwesome; color: $orange; content: "\f058"; }
-.btn.tag:hover { color: $white; background: $orange; }
+.btn.tag:hover, .btn-large.tag:hover { color: $white; background: $orange; cursor: pointer; border: none;}
+.btn-large { font-size: 1.4rem; margin: 10px 0; }
+.small label{ font-size: 13px; margin-left: 5px;}
+
 .form-flex {
   display: -webkit-flex;
   display: flex;
