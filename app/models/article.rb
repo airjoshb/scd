@@ -16,7 +16,7 @@ class Article < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history]
 
-  default_scope {order("Created_at DESC") }
+  default_scope {order("publish_date DESC") }
 
   after_create :status_default
 

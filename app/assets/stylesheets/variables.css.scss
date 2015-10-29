@@ -30,7 +30,7 @@ $orange:                #ffbe00;
 $pink:                  #c3325f;
 $purple:                #7a43b6;
 
-.blue-hover:hover { background: $blue; color: $white; }
+.blue-hover:hover { background: $blue; color: $white; border-color: $blue; }
 
 // Scaffolding
 // -------------------------
@@ -172,7 +172,7 @@ $popoverArrowOuterColor:  rgba(0,0,0,.25);
 
 @mixin horiz-align {
   left: -50%;
-  -webkit-transform: translateX(-50%);
+  -webkit-transform: translateX(50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
 }

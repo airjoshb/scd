@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :get_user_prefs
   before_filter :last_page
+  before_filter :ensure_signup_complete, only: [:new, :create, :update]
 
   include Pundit
 
@@ -39,7 +40,7 @@ class ApplicationController < ActionController::Base
 
     # Redirect to the 'finish_signup' page if the user
     # email hasn't been verified yet
-    if current_user && !current_user.password.blank?
+    if current_user && !current_user.email_verified?
       redirect_to finish_signup_path(current_user)
     end
   end

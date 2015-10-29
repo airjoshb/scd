@@ -1,29 +1,68 @@
 @import "variables";
 
 .logotype { font-family: $logotypeFontFamily; margin: 20px 0; img {width: 100%; } }
+.summary .subtitle{ font-size: 18px;  }
+.summary .body p { width: 95%; }
 article img { padding: 1rem 0; }
-.add a { &:hover { color: $orange; .tag{border-color: $orange;} }}
-.add a:first-child { border: none; }
-.followed { color: $orange; .tag{border-color: $orange;}}
-.followed:hover {  &::after { content: "\f068"; font-family: 'FontAwesome'; border-bottom: none; }}
-.follow {  &::after { content: "\f067"; font-family: 'FontAwesome'; border-bottom: none; }}
+article {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.add a { &:hover { color: $orange; border-color: $orange; }}
+.followed:hover {  &::before { content: "\f068"; font-family: 'FontAwesome'; border-bottom: none; margin-right: 5px;}}
+.followed {
+  background: $grayLight;
+  color: #fff !important;
+  padding: 5px 8px;
+  border: none;
+  font-size: 15px;
+  vertical-align: text-top;
+  display: inline;
+  text-transform: uppercase;
 
-hr {
+}
+.follow {
+  text-transform: uppercase;
+  border: thin $grayLighter solid;
+  font-weight: $baseFontWeight;
+  padding: 5px 8px;
+  background: lighten($veryLight, 5%);
+  &::before { margin-right: 5px; content: "\f067"; font-family: 'FontAwesome'; border-bottom: none; }
+
+}
+.title a{
+  font-size: 26px;
+  line-height: 2;
+  letter-spacing: -0.022em;
+  border-bottom: none;
+  font-weight: 700;
+}
+hr, .separator {
   display: block;
   height: 1px;
   border: 0;
   width: 75%;
   border-top: 1px solid $grayLighter;
-  margin: 1em 0;
+  margin: 1em auto;
   padding: 0;
+  line-height: 0.05em;
+}
+.separator { margin: 2.5em auto;}
+.separator span {
+    background:#fff;
+    padding:0 10px;
 }
 .readmore {
-  line-height: normal; text-transform: uppercase; font-size: 11px; background: #ffbe00; display: inline; padding: 3px 5px; text-decoration: none; font-family: 'Open Sans', sans-serif; a {color: $white;}
+  line-height: normal; text-transform: uppercase; font-family: 'Open Sans', sans-serif;
 }
 .readnext {
   font-size: 1.3em;
   line-height: 1.8em;
   color: $gray;
+  border-bottom: 1px solid $grayLighter;
+  padding-bottom: 1px;
+  margin-top: 20px;
   > span { margin: 0 10px; }
   a {
     border: none; color: $gray;
@@ -33,10 +72,9 @@ hr {
 .well {
   .title a { font-size: 1.6em; border-bottom: 1px solid $grayDarker ;    &:hover { color: $orange !important; border-color: $orange; }
 } }
-.tag, .tag-button {
+.tag, .tag-button, .signin-button {
   font-family: $sansFontFamily;
   line-height: normal;
-  margin-bottom: 10px;
   text-transform: uppercase;
   font-size: 15px;
   border: thin $grayLighter solid;
@@ -44,6 +82,19 @@ hr {
   display: inline-block;
   padding: 5px 8px;
   background: lighten($veryLight, 5%);
+  a {border-bottom: none; }
+}
+a .tag:hover { border-color: $orange;}
+.signin-button {
+  background: $blue;
+  color: #fff !important;
+  border: none;
+  margin: 10px auto;
+  font-weight: 600;
+  width: 300px;
+  vertical-align: text-top;
+  display: block;
+  &:hover { background: darken($blue, 5%);}
 }
 .tag-button {
     background: $grayLight;
@@ -54,6 +105,18 @@ hr {
     margin: 5px;
     &:hover { background: $orange}
   }
+.disabled {
+  background: $grayLight;
+  color: #fff !important;
+  padding: 5px 8px;
+  border: none;
+  font-size: 15px;
+  vertical-align: text-top;
+  display: inline;
+  text-transform: uppercase;
+}
+a .disabled:hover { margin-right: 5px; background: $orange;  }
+
 .published { border-color: $green; color: $green; }
 .approved { border-color: $green; color: $green; }
 .deleted { border-color: $red; color: $red; }
@@ -81,7 +144,7 @@ hr {
 .email-popover { display: none; text-align: center; }
 .popover-title { font-size: 26px; color: $white; line-height: 40px;}
 .popover-body  { color: $white; margin-top: 30px; }
-.info { margin-bottom: .5em; }
+.info { line-height: 1.8; color: $gray; margin: 3px 0; }
 .tip {
   display: block;
   margin-left: 15px;

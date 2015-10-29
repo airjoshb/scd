@@ -1,43 +1,40 @@
--for tag in article.tags.reverse.take(2)
-  .tag= tag
-
-.mini-article
-  = image_tag article.image.medium
-  %h3= article.title
+%article
+  - for tag in article.tags
+    .tag
+      = link_to tag, articles_path(:tag => tag)
+  .title= link_to article.title, article
+  .subtitle= article.subhead
+  %small.info
   - if article.events.present?
-    %small
-      - if article.events.first.start_date > Time.current
-        %strong= custom_time_distance(article.events.first.start_date.to_date)
-      - else
-        = time_ago_in_words(article.events.first.start_date)
-        ago
-      = article.events.first.start_date.strftime("%A, %b %d")
-      @
-      = article.events.first.start_date.strftime("%l:%M%P")
+    = article.events.first.start_date.strftime("%A, %b %d")
+    @
+    = article.events.first.start_date.strftime("%l:%M%P")
   - if article.locations.present?
-    %small
-      at
-      = article.locations.first.line_1 + ","
-      = article.locations.first.city
-      = link_to "map", "http://maps.apple.com/maps?q=#{article.locations.first.latitude},#{article.locations.first.longitude}", :class => "tag-button"
-  %small
-    - if article.publish_date.present?
-      = time_ago_in_words(article.publish_date)
-      ago
-    - if defined?(index) && index
-      - if article.recommended_users.present?
-        • recommended by
+    at
+    = article.locations.first.line_1 + ","
+    = article.locations.first.city
+    = link_to "map", "http://maps.apple.com/maps?q=#{article.locations.first.latitude},#{article.locations.first.longitude}", :class => "tag-button"
+  .hero= image_tag article.image.hero unless article.image.blank?
+  %small.info
+  - if article.publish_date.present?
+    published
+    = time_ago_in_words(article.publish_date)
+    ago
+  - if article.recommended_users.present?
+    • recommended by
+    = article.recommended_users.count
+    - if article.recommended_users.count > 1
+      people
+    - else
+      person
+  .body
+    %p= Nokogiri::HTML.parse(markdown(article.body)).css('p').first.text
+  .readnext
+    %small.readmore
+      = link_to article do
+        Read more
+    %span.pull-right
+      %i.fa.fa-bullhorn
+      %span.recommend-count{'data-id' => '#{@article.id}'}
         = article.recommended_users.count
-        - if article.recommended_users.count > 1
-          people
-        - else
-          person
-  - if article.why.present?
-    %small
-      %strong Why?
-      = article.why
-  - if article.tips.present?
-    %small
-      %strong Tips
-      - for tip in article.tips.split(',')
-        %small.tip.fa.fa-check= tip
+      %i.star.fa.fa-star-o

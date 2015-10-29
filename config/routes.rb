@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   resources :share_emails
 
   get '/santa-cruz-restaurant-week', to: 'articles#scrw', as: :santa_cruz_restaurant_week
+  get '/lineup/food', to: 'articles#index', as: :food_lineup, :defaults => { :tag => 'food' }
+  get '/lineup/live-events', to: 'articles#index', as: :live_events_lineup, :defaults => { :tag => 'live events' }
+  get '/lineup/adventure', to: 'articles#index', as: :adventure_lineup, :defaults => { :tag => 'adventure' }
+  get '/lineup/shopping', to: 'articles#index', as: :shopping_lineup, :defaults => { :tag => 'shopping' }
 
   resources :articles, :path => "/lineup" , :except => [:new, :create, :edit, :update, :destroy] do
     resources :events
