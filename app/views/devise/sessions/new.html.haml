@@ -1,3 +1,7 @@
+- content_for :head do
+  :javascript
+    //<![CDATA[var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/"); document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E")); //]]>
+
 .pages
   %p Log in or sign up instantly with Twitter, Facebook, or your email address.
   #page-log.signup
@@ -29,3 +33,6 @@
         = f.input :email, autofocus: true, placeholder: "Enter your email", label: false
       .form-actions
         %a.tag.btn-large{ onclick: "$('#sign_up_user').submit()"} Sign Up
+%a{href: "https://www.positivessl.com/", id: "comodoTL"} Positive SSL
+:javascript
+  TrustLogo("https://d2hpyijb4a66bq.cloudfront.net/assets/comodo_secure_52x63_white.png", "CL1", "none");
