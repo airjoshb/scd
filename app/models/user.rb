@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   acts_as_taggable_on
 
   #validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
-  validates_uniqueness_of :username, :case_sensitive => false
+  #validates_uniqueness_of :username, :case_sensitive => false, :allow_blank => true
   validates_uniqueness_of :email,  :case_sensitive => false
 
   def password_required?
@@ -180,6 +180,7 @@ class User < ActiveRecord::Base
 
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
+
   end
 
 

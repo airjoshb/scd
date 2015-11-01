@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :get_user_prefs
   before_filter :last_page
-  before_filter :ensure_signup_complete, only: [:new, :create, :update]
+  #before_filter :ensure_signup_complete, only: [:new, :create, :update]
 
   include Pundit
 
@@ -19,7 +19,11 @@ class ApplicationController < ActionController::Base
       if resource.admin?
         admin_path || root_path
       else
-        articles_path
+        if !resource.email_verified? || resource.encrypted_password.blank?
+         finish_signup_path(resource)
+        else
+          articles_path
+        end
       end
   end
 

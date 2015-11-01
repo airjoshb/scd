@@ -72,9 +72,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.update_without_password(params)
   end
 
-  def after_sign_up_path_for(resource)
-    articles_path
-  end
 
   #def sign_up(resource_name, resource)
   #  false
