@@ -29,12 +29,20 @@ jQuery ->
       $a = $(this)
       href = $a.attr 'href'
       c = $a.attr 'class'
+      j = $a.data('toggle-value')
       allclass = c.split('')[0]
       $a.attr 'href', $a.data('toggle-href')
       $a.removeClass(c).addClass($a.data('toggle-class'))
+      $('#user_tag_list').val (i, origText) ->
+        if c=="follow"
+          $a.data('toggle-value') + origText
+        else
+          origText.replace(j,'')
       $a.data 'toggle-href', href
       $a.data 'toggle-class', c
+
       return
+
 
 
   return
