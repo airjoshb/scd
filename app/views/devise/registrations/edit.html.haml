@@ -30,11 +30,11 @@
       - for tag in @interests
         - if !@user_tags.include?(tag["name"])
           .add
-            = link_to add_tag_path(tag["name"]), id: tag["name"].delete(' '), class: 'follow center', remote: true, method: :put, data: {toggle_href: remove_tag_path(tag["name"]), toggle_class: 'followed'} do
+            = link_to add_tag_path(tag["name"]), id: tag["name"].delete(' '), class: 'follow', remote: true, method: :put, data: {toggle_href: remove_tag_path(tag["name"]), toggle_class: 'followed', toggle_value: "#{tag["name"]}, " } do
               = tag["name"]
         - else
           .add.added
-            = link_to remove_tag_path(tag["name"]), id: tag["name"].delete(' '), class: 'followed', remote: true, method: :put, data: {toggle_href: add_tag_path(tag["name"]), toggle_class: 'follow'} do
+            = link_to remove_tag_path(tag["name"]), id: tag["name"].delete(' '), class: 'followed', remote: true, method: :put, data: {toggle_href: add_tag_path(tag["name"]), toggle_class: 'follow', toggle_value: "#{tag["name"]}, "} do
               = tag["name"]
     %p Don't see something? make a comma separated list and when things get posted with those tags, they'll automatically be included in your Lineup.
     = f.input :tag_list, label: false, placeholder: "kittens, unicorns, internet of things"
